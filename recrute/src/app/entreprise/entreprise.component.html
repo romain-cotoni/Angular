@@ -1,0 +1,65 @@
+<div class="row mx-0">
+    <div class="col-3"></div>
+        <div class="col-6">
+            <h1 class="text-secondary text-center my-3">Education</h1>
+            <form [formGroup]='educationForm' novalidate class="text-center" (ngSubmit)='saveEducations()'>                
+                <div formArrayName="educations" *ngFor="let t of educations.controls; let i = index">
+                    <div [formGroupName]="i" class="mb-4 p-2 border border-light">
+                        <div class="row mx-0">
+                            <p class="lead text-start">Education {{i+1}}</p>
+                        </div>
+                        <div class="row mx-0 mb-4">
+                            <div class="col-md-6">
+                                <input formControlName='diplomeEdu' id="{{'diplomeEdu'+i}}" type="text" class="form-control" placeholder="Diplôme" />
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <!--<input formControlName='obtenu' id="{{'obtenu'+i}}" type="checkbox" class="form-control" placeholder="Diplôme obtenu" />-->
+                                <mat-checkbox formControlName="obtenuEdu" class="col-3 mt-1">Diplôme obtenu</mat-checkbox>
+                            </div>
+                        </div>
+                        <div class="row mx-0 mb-4">
+                            <div class="col-md-6">
+                                <input formControlName='lieuEdu' id="{{'lieuEdu'+i}}" type="text" class="form-control" placeholder="Lieu" />
+                            </div>
+                            <div class="col-md-6">
+                                <input formControlName='ecoleEdu' id="{{'ecoleEdu'+i}}" type="text" class="form-control" placeholder="Ecole" />
+                            </div>
+                        </div>
+                        <div class="row mx-0 mb-4">
+                            <div class="col-md-6">
+                                <input formControlName='debutEdu' id="{{'debutEdu'+i}}" type="date" class="form-control" placeholder="Date de début" />
+                            </div>
+                            <div class="col-md-6">
+                                <input formControlName='finEdu' id="{{'finEdu'+i}}" type="date" class="form-control" placeholder="Date de fin" />
+                            </div>
+                        </div>
+                        <div class="row mx-0 mb-4">
+                            <div class="col-md-12">
+                                <textarea formControlName="textAreaEdu" class="form-control" placeholder="Détails"></textarea>                                                           
+                            </div>
+                        </div>
+                        <!--<div class="row">
+                            <div class="col-md-2"> 
+                            </div>
+                            <div class="col-md-5">
+                                <div class="alert  alert-danger" *ngIf="educations.controls[i].get('diplome')!.hasError('required') && educations.controls[i].get('diplome')!.touched">Name is required</div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="alert  alert-danger" *ngIf="educations.controls[i].get('ecole')!.hasError('required') && educations.controls[i].get('ecole')!.touched">Age is</div>
+                            </div>
+                        </div>-->
+                        <div class="row mb-2">
+                            <div class="col-md-2"></div>
+                            <button mat-raised-button color="primary" class="col-4 ms-1" (click)="onDeleteEducation(i)">Effacer l'éducation</button>        
+                            <button mat-raised-button color="primary" class="col-4 ms-1" (click)='addEducation()'>Valider l'éducation</button>
+                        </div>
+                    </div>
+                </div>
+                <!--<button class="btn btn-danger ms-2" [disabled]='educationForm.invalid'>Submit</button>-->
+                <button mat-raised-button color="primary" class="mb-4" (click)='addEducation()'>Ajouter une éducation</button>
+            </form>
+        </div>
+    <div class="col-3"></div>
+</div>
+  
+  

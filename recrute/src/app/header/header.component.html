@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand">
+    <div>
+        <!--<a href="" class="navbar-brand custom-navbar-text">App</a>-->
+        <button mat-button [matMenuTriggerFor]="aboveMenu">Candidat</button>
+        <mat-menu #aboveMenu="matMenu">
+            <button mat-menu-item [routerLink]="['/candidat']">Profil</button>
+            <button mat-menu-item [routerLink]="['/candidat-ajouter']">Ajouter</button>
+            <button mat-menu-item [routerLink]="['/candidat-rechercher']">Rechercher</button>            
+        </mat-menu>
+        <button mat-button [matMenuTriggerFor]="belowMenu">Entreprise</button>
+        <mat-menu #belowMenu="matMenu">
+            <button mat-menu-item [routerLink]="['/entreprise']">Profil</button>
+            <button mat-menu-item [routerLink]="['/entreprise-ajouter']">Ajouter</button>
+            <button mat-menu-item [routerLink]="['/entreprise-rechercher']">Rechercher</button>
+        </mat-menu>
+        <button mat-button [routerLink]="['/offre']">Offre Emploi</button>
+        <button mat-button [routerLink]="['/statistique']">Statistique</button>
+    </div>
+    <ul class="navbar-nav navbar-collapse justify-content-xs-end justify-content-sm-end">
+        <li>
+            <a *ngIf="!loggedIn" class="nav-link custom-navbar-text" [routerLink]="['/login']">Sign in</a>
+            <a *ngIf="loggedIn"  class="nav-link custom-navbar-text" [routerLink]="['/login']" (click)=logout()>
+                <span>{{ username }} | Sign out</span>
+            </a>
+        </li>
+    </ul>
+</nav>
