@@ -208,23 +208,25 @@ export class CandidatComponent implements OnInit
         ({
             prenom1Cdt    : '',
             nom1Cdt       : '',
-            idCandidat    : candidat.idCandidat, 
-            prenom2Cdt    : candidat.prenom, 
-            nom2Cdt       : candidat.nom, 
-            telCdt        : '', 
-            emailCdt      : '', 
-            adresseCdt    : '', 
-            adresse2Cdt   : '', 
-            villeCdt      : '' , 
-            postalCdt     : '', 
-            mobilCdt      : '', 
-            nationCdt     : '' , 
-            situationCdt  : '', 
-            handicapCdt   : '', 
-            teletravailCdt: '', 
-            permisCdt     : '', 
-            vehiculeCdt   : '', 
-            textareaCdt   : ''
+            idCandidat    : candidat.idCandidat,
+            prenom2Cdt    : candidat.prenom,
+            nom2Cdt       : candidat.nom,
+            telCdt        : candidat.telmob,
+            emailCdt      : candidat.email,
+            adresseCdt    : candidat.adresse,
+            adresse2Cdt   : candidat.adresse2,
+            villeCdt      : candidat.ville,
+            postalCdt     : candidat.postal,
+            salaireCdt    : candidat.salaire,
+            mobilCdt      : candidat.mobilite,
+            nationCdt     : candidat.nationnal,
+            situationCdt  : candidat.situation,
+            handicapCdt   : candidat.handicap,
+            teletravailCdt: candidat.teletravail,
+            permisCdt     : candidat.permis,
+            vehiculeCdt   : candidat.vehicule,
+            dispoCdt      : candidat.dispo,
+            textareaCdt   : candidat.info
         });
     }
 
@@ -242,14 +244,16 @@ export class CandidatComponent implements OnInit
             adresseCdt    : '', 
             adresse2Cdt   : '', 
             villeCdt      : '', 
-            postalCdt     : '', 
-            nationCdt     : '', 
+            postalCdt     : '',
+            salaireCdt    : '',
+            nationCdt     : '',
+            situationCdt  : '',
             mobilCdt      : '', 
-            situationCdt  : '', 
             handicapCdt   : '', 
             teletravailCdt: '', 
             permisCdt     : '', 
-            vehiculeCdt   : '', 
+            vehiculeCdt   : '',
+            dispoCdt      : '',
             textareaCdt   : ''
         });
     }
@@ -950,7 +954,7 @@ export class CandidatComponent implements OnInit
             recruteurEtt  : ['', Validators.required],            
             missionEtt    : [null],
             contratEtt    : [null],
-            textareaEtt     : ['']
+            textareaEtt   : ['']
         })
     }
     

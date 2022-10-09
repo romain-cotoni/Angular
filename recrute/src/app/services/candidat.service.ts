@@ -20,7 +20,7 @@ export class CandidatService
 
     constructor(private httpClient: HttpClient)
     { 
-      
+        
     }
 
     getCandidats(): Observable<Candidat[]>
