@@ -102,8 +102,8 @@ export class CandidatComponent implements OnInit
                     this.removeEducationFromList(0);
                     
                     for(let i = 0; i < educations.length; i++)
-                    {
-                        this.createFilledEducationForm(educations[i]["idEducation"],educations[i]["diplome"],educations[i]["domaine"], educations[i]["lieu"], educations[i]["obtenu"], educations[i]["ecole"], educations[i]["debut"], educations[i]["fin"],educations[i]["details"]);
+                    {                                                                              
+                        this.createFilledEducationForm(educations[i]["idEducation"],educations[i]["diplome"]["label"],educations[i]["specialite"]["label"], educations[i]["lieu"], educations[i]["recu"], educations[i]["ecole"], educations[i]["debut"], educations[i]["fin"],educations[i]["info"]);
                     };
                     if(educations.length>0) this.switchFormEduEnable(false); //disabled form inputs
                 },
@@ -320,9 +320,8 @@ export class CandidatComponent implements OnInit
     }
     
     //creer un formulaire education rempli
-    createFilledEducationForm(idEducation: number | null, diplome: String | null, domaine: String | null, lieu: String | null, obtenu: boolean | null, ecole: String | null, debut: Date | null, fin: Date | null, details: String | null)
-    {
-        
+    createFilledEducationForm(idEducation: number | null, diplome: String | null, domaine: String | null, lieu: String | null, recu: boolean | null, ecole: String | null, debut: Date | null, fin: Date | null, details: String | null)
+    {       
         this.educations.push
         (
             this.fb.group
@@ -330,24 +329,23 @@ export class CandidatComponent implements OnInit
                 idEducation : [idEducation, Validators.required],
                 diplomeEdu  : [diplome    , Validators.required],
                 domaineEdu  : [domaine    , Validators.required],
-                obtenuEdu   : [obtenu     ],
-                lieuEdu     : [lieu       ],
-                ecoleEdu    : [ecole      ],
-                debutEdu    : [debut      ],
-                finEdu      : [fin        ],
-                textareaEdu : [details    ]
+                obtenuEdu   : [recu      ],
+                lieuEdu     : [lieu      ],
+                ecoleEdu    : [ecole     ],
+                debutEdu    : [debut     ],
+                finEdu      : [fin       ],
+                textareaEdu : [details   ]
             })
         )
     }
         
-    //---------a voir cette fonction----------------
+    
     //retourne la liste des formulaires education
-    get educations(): FormArray
+    get educations(): FormArray //à voir cette fonction
     {
         return <FormArray> this.formEdu.get('educations');
     }
-        
-    //créer ou modifier les formulaires education dans la db
+
     saveEducation(index: number)
     {
         if(this.educations.at(index).status == 'VALID')
@@ -355,34 +353,48 @@ export class CandidatComponent implements OnInit
             let idCandidat : number;
             let date1!     : Date;
             let date2!     : Date;
+            let strDate1!   : string;
+            let strDate2!   : string;
             let idEducation: number = this.educations.at(index).get('idEducation')?.value;
-            let formData   : any    = new FormData();
-            formData.append("diplome" , this.educations.at(index).get("diplomeEdu")?.value);
-            formData.append("domaine" , this.educations.at(index).get("domaineEdu")?.value);//"patisserie");
-            formData.append("obtenu"  , this.educations.at(index).get("obtenuEdu")?.value);
-            formData.append("lieu"    , this.educations.at(index).get("lieuEdu")?.value);
-            formData.append("ecole"   , this.educations.at(index).get("ecoleEdu")?.value);       
-            date1 = this.educations.at(index).get("debutEdu")?.value;
-            if(date1 != null) { formData.append("debut", formatDate(date1, 'yyyy-MM-dd', 'en_US')); }
-            date2 = this.educations.at(index).get("finEdu")?.value;
-            if(date2 != null) { formData.append("fin", formatDate(date2, 'yyyy-MM-dd', 'en_US')); }
-            formData.append("details" , this.educations.at(index).get("textareaEdu")?.value);
             
-            //créer et sauvegarder education
+            date1 = this.educations.at(index).get("debutEdu")?.value;
+            if(date1 != null) { strDate1 = formatDate(date1, 'yyyy-MM-dd', 'en_US'); };
+
+            date2 = this.educations.at(index).get("finEdu")?.value;
+            if(date2 != null) { strDate2 = formatDate(date2, 'yyyy-MM-dd', 'en_US'); };
+
+            let requete = 
+            {
+                "recu": this.educations.at(index).get("obtenuEdu")?.value,
+                "lieu": this.educations.at(index).get("lieuEdu")?.value,
+                "ecole": this.educations.at(index).get("ecoleEdu")?.value,               
+                "debut": strDate1,
+                "fin": strDate2,
+                "info": this.educations.at(index).get("textareaEdu")?.value,
+                "specialite": 
+                {
+                    "label": this.educations.at(index).get("domaineEdu")?.value
+                },
+                "diplome": 
+                {                    
+                    "label": this.educations.at(index).get("diplomeEdu")?.value
+                }
+            }
+
+            //create education
             if(idEducation == null) 
             {   
                 idCandidat = this.formCdt.get('idCandidat')?.value;
-                this.candidatService.createEducation(idCandidat, formData.entries())
+                this.candidatService.createEducation(idCandidat, requete)
                 .subscribe
                 ({
                     next : (response) => { console.log(response); },
                     error: (error)    => { console.log(error);    }
                 });
             }
-            else //modifier et sauvegarder education
+            else //update education
             {   
-                formData.append("idEducation", this.educations.at(index).get("idEducation"));
-                this.candidatService.updateEducation(idEducation, formData.entries())
+                this.candidatService.updateEducation(idEducation, requete)
                 .subscribe
                 ({
                     next : (response) => { console.log(response); },

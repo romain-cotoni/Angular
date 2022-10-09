@@ -1,12 +1,16 @@
+import { Diplome } from "./Diplome";
+import { Specialite } from "./Specialite";
+
 export interface Education
 {
     idEducation : number;
-    diplome     : string;
+    recu        : boolean;
     lieu        : string;
-	domaine     : string;
-    obtenu      : boolean;
     ecole       : string;
     debut       : Date;
     fin         : Date;
-    details     : string;
+    info        : string;
+    
+    diplome     : Diplome;
+    specialite  : Specialite;
 }

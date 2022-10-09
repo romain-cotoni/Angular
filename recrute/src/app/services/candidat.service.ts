@@ -52,7 +52,8 @@ export class CandidatService
     {
         const url   = this.BASE_PATH + '/candidat/' + id.toString() + '/educations';
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
-        let body    = JSON.stringify(Object.fromEntries(data)); 
+        let body    = data;//JSON.stringify(Object.fromEntries(data)); 
+        
         return this.httpClient.post<Education>(url, body, {'headers':headers});
     }
 
@@ -61,7 +62,7 @@ export class CandidatService
     {
         const url   = this.BASE_PATH + '/education/' + id.toString();
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
-        let body    = JSON.stringify(Object.fromEntries(data))
+        let body    = data;//JSON.stringify(Object.fromEntries(data))
         return this.httpClient.put<Education>(url, body, {'headers':headers});
     }
 
