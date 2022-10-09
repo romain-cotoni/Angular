@@ -4,7 +4,7 @@ export interface Candidat
     nom        : string;
 	prenom     : string;
     telfixe    : string;
-    telmob     : string;
+    mob        : string;
     email      : string;
     adresse    : string;
     adresse2   : string;
@@ -14,7 +14,7 @@ export interface Candidat
     salaire    : number;
     mobilite   : string;
     situation  : string;
-    handicap   : boolean;
+    handicape  : boolean;
     teletravail: boolean;
     permis     : boolean;
     vehicule   : boolean;

@@ -14,10 +14,10 @@
                             <input class="col-6 fs-6" formControlName="prenom1Cdt" matInput type="text" list="prenom1Cdt" name="prenom1Cdt" required/>                            
                             <mat-error>Il faut saisir un prénom</mat-error>
                             <datalist id="prenom1Cdt">
-                                <option value="Objective C">Objective C</option>
-                                <option value="C++">C++</option>
-                                <option value="C#">C#</option>
-                                <option value="Cobol">Cobol</option>
+                                <option value="Objective C">bart</option>
+                                <option value="C++">marge</option>
+                                <option value="C#">lisa</option>
+                                <option value="Cobol">omer</option>
                                 <option value="Go">Go</option>
                                 <option value="Java">Java</option>
                                 <option value="JavaScript">JavaScript</option>
@@ -65,9 +65,9 @@
                         </div>
                     </div>
                     <div class="row mx-0 mt-2">
-                        <label class="col-2 ps-1 pe-3 pt-2" for="telCdt">Téléphone</label>
+                        <label class="col-2 ps-1 pe-3 pt-2" for="telMobCdt">Téléphone</label>
                         <div class="col-4 px-0">
-                            <input formControlName="telCdt" class="form-control ps-4" type="text" id="telCdt" name="telCdt" value=""/>
+                            <input formControlName="telMobCdt" class="form-control ps-4" type="text" id="telCdt" name="telCdt" value=""/>
                         </div>
                         <label class="col-2 ps-1 pe-3 pt-2" for="emailCdt">Email</label>
                         <div class="col-4 px-0">
@@ -114,11 +114,10 @@
                         <label class="col-2 ps-1 pe-3 pt-0 pt-xxl-2" for="situationCdt">Situation familiale</label>
                         <div class="col-4 px-0">
                             <select formControlName="situationCdt" class="form-select" id="situationCdt" name="situationCdt" aria-label="situation familiale">
-                                <!--<option selected></option>-->
                                 <option value="1">Célibataire</option>
                                 <option value="2">Marié</option>
                                 <option value="3">Divorcé</option>
-                                <option value="4">Autre</option>
+                                <option value="4" selected>Autre</option>
                             </select>
                         </div>
                     </div>
@@ -131,9 +130,8 @@
                         <label class="col-2 ps-1 pe-3 pt-2" for="mobilCdt">Mobilité</label>                        
                         <div class="col-4 px-0">
                             <select formControlName="mobilCdt" class="form-select"  id="mobilCdt" name="mobilCdt" aria-label="Mobilite">
-                                <!--<option selected></option>-->
                                 <option value="1">Département</option>
-                                <option value="2">Région</option>
+                                <option value="2" selected>Région</option>
                                 <option value="3">Région proche</option>
                                 <option value="4">Pays</option>
                                 <option value="5">Europe</option>
