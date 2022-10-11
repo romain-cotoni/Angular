@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable, Subject } from 'rxjs';
 import { Candidat } from '../models/Candidat';
 import { Competence } from '../models/Competence';
-import { Doc } from '../models/Doc';
+import { Document } from '../models/Document';
 import { Education } from '../models/Education';
 import { Entretien } from '../models/Entretien';
 import { Experience } from '../models/Experience';
@@ -225,18 +225,18 @@ export class CandidatService
 
     //-------------------------DOCUMENT-----------------------------
 
-    getDocuments(id: number): Observable<Doc[]>
+    getDocuments(id: number): Observable<Document[]>
     {
         const url = this.BASE_PATH + '/candidat/' + id.toString() + '/documents';
-        return this.httpClient.get<Doc[]>(url);
+        return this.httpClient.get<Document[]>(url);
     }
 
-    createDocument(id: number, data: any): Observable<Doc>
+    createDocument(id: number, data: any): Observable<Document>
     {
         const url   = this.BASE_PATH + '/candidat/' + id.toString() + '/documents';
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
         let body    = JSON.stringify(Object.fromEntries(data)); 
-        return this.httpClient.post<Doc>(url, body, {'headers':headers});
+        return this.httpClient.post<Document>(url, body, {'headers':headers});
     }
 
     //document service
@@ -251,7 +251,7 @@ export class CandidatService
     deleteDocument(id: number)
     {
         const url = this.BASE_PATH + '/document/' + id.toString();
-        return this.httpClient.delete<Doc>(url);
+        return this.httpClient.delete<Document>(url);
     }
 
 }

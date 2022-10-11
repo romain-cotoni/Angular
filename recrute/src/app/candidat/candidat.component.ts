@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Candidat } from '../models/Candidat';
 import { CandidatService } from '../services/candidat.service';
 import { formatDate } from '@angular/common';
-import { Doc } from '../models/Doc';
+import { Document } from '../models/Document';
 
 @Component({
   selector   : 'app-candidat',
@@ -118,7 +118,7 @@ export class CandidatComponent implements OnInit
                     
                     for(let i = 0; i < experiences.length; i++)
                     {
-                        this.createFilledExperienceForm(experiences[i]["idExperience"],experiences[i]["mission"],experiences[i]["entreprise"], experiences[i]["ville"], experiences[i]["pays"], experiences[i]["debut"], experiences[i]["fin"],experiences[i]["details"]);
+                        this.createFilledExperienceForm(experiences[i]["idExperience"],experiences[i]["mission"]["profession"],experiences[i]["entreprise"]["raisonSociale"], experiences[i]["ville"]["nom"], experiences[i]["ville"]["pays"]["nom"], experiences[i]["debut"], experiences[i]["fin"],experiences[i]["info"]);
                     };
                     if(experiences.length>0) this.switchFormExpEnable(false); //disabled form inputs
                 },
@@ -260,10 +260,7 @@ export class CandidatComponent implements OnInit
 
     chercher()
     {
-        //this.candidatService.getCandidatByName(this.formSearch.get('prenom1Cdt')?.value,this.formSearch.get('nom1Cdt')?.value)
-        //this.candidatService.getCandidatByName(this.formSearch.value.prenom1Cdt,this.formSearch.value.nom1Cdt)
         console.log( this.candidatService.getCandidatByName(this.formSearch.get('prenom1Cdt')?.value,this.formSearch.get('nom1Cdt')?.value) )
-        
         this.candidatService.getCandidatByName(this.formSearch.get('prenom1Cdt')?.value,this.formSearch.get('nom1Cdt')?.value)
         .subscribe
         ({ 
