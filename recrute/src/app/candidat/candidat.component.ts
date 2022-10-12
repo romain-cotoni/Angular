@@ -125,7 +125,7 @@ export class CandidatComponent implements OnInit
                 },
             })
 
-            this.candidatService.getCompetence(this.idCandidat)
+            /*this.candidatService.getCompetence(this.idCandidat)
             .subscribe
             ({                
                 next: (competences) => 
@@ -183,7 +183,7 @@ export class CandidatComponent implements OnInit
                     };
                     if(projets.length>0) this.switchFormPrjEnable(false); //disabled form inputs
                 },
-            })
+            })*/
 
             //this.organiseDocumentsByCategorie();
         }
