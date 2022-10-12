@@ -119,7 +119,7 @@ export class CandidatComponent implements OnInit
                     for(let i = 0; i < experiences.length; i++)
                     {
                         console.log(experiences[i]);
-                        this.createFilledExperienceForm(experiences[i]["idExperience"], experiences[i]["mission"]["profession"], experiences[i]["entreprise"]["raisonSociale"],  experiences[i]["ville"]["nom"],  experiences[i]["ville"]["pays"]["nom"],  experiences[i]["debut"],  experiences[i]["fin"], experiences[i]["info"]);
+                        this.createFilledExperienceForm(experiences[i]["idExperience"], experiences[i]["mission"]["profession"], experiences[i]["entreprise"]["raisonSociale"],  /*experiences[i]["ville"]["nom"]*/null,  /*experiences[i]["ville"]["pays"]["nom"]*/null,  experiences[i]["debut"],  experiences[i]["fin"], experiences[i]["info"]);
                     };
                     if(experiences.length>0) this.switchFormExpEnable(false); //disabled form inputs
                 },
