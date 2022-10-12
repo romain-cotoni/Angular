@@ -67,14 +67,14 @@ export class CandidatComponent implements OnInit
     ngOnInit(): void 
     { 
         this.formSearch = this.fb.group({'prenom1Cdt':[''], 'nom1Cdt':['']});
-        this.formCdt    = this.createFormCandidatEmpty();
-        this.formEdu    = this.fb.group({educations : this.fb.array([this.createEmptyEducationForm()] , Validators.required)});
-        this.formExp    = this.fb.group({experiences: this.fb.array([this.createEmptyExperienceForm()], Validators.required)});
+        this.formCdt      = this.createFormCandidatEmpty();
+        this.formEdu      = this.fb.group({educations : this.fb.array([this.createEmptyEducationForm()] , Validators.required)});
+        this.formExp      = this.fb.group({experiences: this.fb.array([this.createEmptyExperienceForm()], Validators.required)});
         this.formCmp    = this.fb.group({competences: this.fb.array([this.createEmptyCompetenceForm()], Validators.required)});
-        this.formLng    = this.fb.group({langues    : this.fb.array([this.createEmptyLangueForm()]    , Validators.required)});
-        this.formEtt    = this.fb.group({entretiens : this.fb.array([this.createEmptyEntretienForm()] , Validators.required)});
-        this.formPrj    = this.fb.group({projets    : this.fb.array([this.createEmptyProjetForm()]    , Validators.required)});
-        this.formDoc    = this.fb.group({'nomDoc':[''], 'categorieDoc':['']});
+        this.formLng     = this.fb.group({langues    : this.fb.array([this.createEmptyLangueForm()]    , Validators.required)});
+        this.formEtt       = this.fb.group({entretiens : this.fb.array([this.createEmptyEntretienForm()] , Validators.required)});
+        this.formPrj       = this.fb.group({projets    : this.fb.array([this.createEmptyProjetForm()]    , Validators.required)});
+        this.formDoc     = this.fb.group({'nomDoc':[''], 'categorieDoc':['']});
         //this.formDoc    = this.fb.group({documents  : this.fb.array([this.createEmptyDocForm()]       , Validators.required)});        
         
         this.idCandidat = Number(this.route.snapshot.paramMap.get('id'))
@@ -109,7 +109,7 @@ export class CandidatComponent implements OnInit
                 },
             })
 
-            this.candidatService.getExperience(this.idCandidat)
+            this.candidatService.getExperiences(this.idCandidat)
             .subscribe
             ({                
                 next: (experiences) => 
@@ -118,7 +118,8 @@ export class CandidatComponent implements OnInit
                     
                     for(let i = 0; i < experiences.length; i++)
                     {
-                        this.createFilledExperienceForm(experiences[i]["idExperience"],experiences[i]["mission"]["profession"],experiences[i]["entreprise"]["raisonSociale"], experiences[i]["ville"]["nom"], experiences[i]["ville"]["pays"]["nom"], experiences[i]["debut"], experiences[i]["fin"],experiences[i]["info"]);
+                        console.log(experiences[i]);
+                        this.createFilledExperienceForm(experiences[i]["idExperience"], experiences[i]["mission"]["profession"], experiences[i]["entreprise"]["raisonSociale"],  experiences[i]["ville"]["nom"],  experiences[i]["ville"]["pays"]["nom"],  experiences[i]["debut"],  experiences[i]["fin"], experiences[i]["info"]);
                     };
                     if(experiences.length>0) this.switchFormExpEnable(false); //disabled form inputs
                 },
@@ -515,14 +516,14 @@ export class CandidatComponent implements OnInit
         (
             this.fb.group
             ({
-                idExperience  : [idExperience, Validators.required],
-                missionExp    : [mission     , Validators.required],
+                idExperience   : [idExperience, Validators.required],
+                missionExp     : [mission     , Validators.required],
                 entrepriseExp : [entreprise  , Validators.required],
-                villeExp      : [ville      ],
-                paysExp       : [pays       ],
-                debutExp      : [debut      ],
-                finExp        : [fin        ],
-                textareaExp   : [details    ]
+                villeExp           : [ville      ],
+                paysExp          : [pays       ],
+                debutExp        : [debut      ],
+                finExp             : [fin        ],
+                textareaExp    : [details    ]
             })
         )
     }

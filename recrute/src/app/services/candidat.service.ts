@@ -74,7 +74,7 @@ export class CandidatService
     }
 
     //-------------------------EXPERIENCE-----------------------------
-    getExperience(id: number): Observable<Experience[]>
+    getExperiences(id: number): Observable<Experience[]>
     {
         const url = this.BASE_PATH + '/candidat/' + id.toString() + '/experiences';
         return this.httpClient.get<Experience[]>(url);
@@ -84,7 +84,7 @@ export class CandidatService
     {
         const url   = this.BASE_PATH + '/candidat/' + id.toString() + '/experiences';
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
-        let body    = JSON.stringify(Object.fromEntries(data)); 
+        let body    = JSON.stringify(Object.fromEntries(data));
         return this.httpClient.post<Experience>(url, body, {'headers':headers});
     }
 
