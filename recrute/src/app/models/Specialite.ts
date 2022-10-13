@@ -1,5 +1,5 @@
 export interface Specialite
 {
     idSpecialite : number;
-    label        : string;
+    label            : string;
 }

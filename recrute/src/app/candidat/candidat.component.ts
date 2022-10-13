@@ -66,136 +66,137 @@ export class CandidatComponent implements OnInit
 
     ngOnInit(): void 
     { 
-        this.formSearch = this.fb.group({'prenom1Cdt':[''], 'nom1Cdt':['']});
-        this.formCdt      = this.createFormCandidatEmpty();
-        this.formEdu      = this.fb.group({educations : this.fb.array([this.createEmptyEducationForm()] , Validators.required)});
-        this.formExp      = this.fb.group({experiences: this.fb.array([this.createEmptyExperienceForm()], Validators.required)});
-        this.formCmp    = this.fb.group({competences: this.fb.array([this.createEmptyCompetenceForm()], Validators.required)});
-        this.formLng     = this.fb.group({langues    : this.fb.array([this.createEmptyLangueForm()]    , Validators.required)});
-        this.formEtt       = this.fb.group({entretiens : this.fb.array([this.createEmptyEntretienForm()] , Validators.required)});
-        this.formPrj       = this.fb.group({projets    : this.fb.array([this.createEmptyProjetForm()]    , Validators.required)});
-        this.formDoc     = this.fb.group({'nomDoc':[''], 'categorieDoc':['']});
-        //this.formDoc    = this.fb.group({documents  : this.fb.array([this.createEmptyDocForm()]       , Validators.required)});        
+            this.formSearch = this.fb.group({'prenom1Cdt':[''], 'nom1Cdt':['']});
+            this.formCdt      = this.createFormCandidatEmpty();
+            this.formEdu      = this.fb.group({educations : this.fb.array([this.createEmptyEducationForm()] , Validators.required)});
+            this.formExp      = this.fb.group({experiences: this.fb.array([this.createEmptyExperienceForm()], Validators.required)});
+            this.formCmp    = this.fb.group({competences: this.fb.array([this.createEmptyCompetenceForm()], Validators.required)});
+            this.formLng     = this.fb.group({langues    : this.fb.array([this.createEmptyLangueForm()]    , Validators.required)});
+            this.formEtt       = this.fb.group({entretiens : this.fb.array([this.createEmptyEntretienForm()] , Validators.required)});
+            this.formPrj       = this.fb.group({projets    : this.fb.array([this.createEmptyProjetForm()]    , Validators.required)});
+            this.formDoc     = this.fb.group({'nomDoc':[''], 'categorieDoc':['']});
+            //this.formDoc    = this.fb.group({documents  : this.fb.array([this.createEmptyDocForm()]       , Validators.required)});        
         
         this.idCandidat = Number(this.route.snapshot.paramMap.get('id'))
         if(this.idCandidat !== 0)
         {
-            this.candidatService.getCandidat(this.idCandidat)
-            .subscribe
-            ({ 
-                next : (candidat) => 
-                { 
-                    this.formCdt = this.createFormCandidatFilled(candidat); 
-                    this.switchFormCdtEnable(false); //disabled form inputs; 
-                },
-                error : () => 
-                { 
-                    this.formCdt = this.createFormCandidatEmpty() 
-                },
-            })
-            
-            this.candidatService.getEducations(this.idCandidat)
-            .subscribe
-            ({                
-                next: (educations) => 
-                { 
-                    this.removeEducationFromList(0);
-                    
-                    for(let i = 0; i < educations.length; i++)
-                    {                                                                              
-                        this.createFilledEducationForm(educations[i]["idEducation"],educations[i]["diplome"]["label"],educations[i]["specialite"]["label"], educations[i]["lieu"], educations[i]["recu"], educations[i]["ecole"], educations[i]["debut"], educations[i]["fin"],educations[i]["info"]);
-                    };
-                    if(educations.length>0) this.switchFormEduEnable(false); //disabled form inputs
-                },
-            })
+                this.candidatService.getCandidat(this.idCandidat)
+                .subscribe
+                ({ 
+                        next : (candidat) => 
+                        {                     
+                                this.formCdt = this.createFormCandidatFilled(candidat); 
+                                this.switchFormCdtEnable(false); //disabled form inputs; 
+                        },
+                        error : () => 
+                        { 
+                                this.formCdt = this.createFormCandidatEmpty() 
+                        },
+                })
+                
+                this.candidatService.getEducations(this.idCandidat)
+                .subscribe
+                ({                
+                        next: (educations) => 
+                        { 
+                                this.removeEducationFromList(0);
+                            
+                                for(let i = 0; i < educations.length; i++)
+                                {                                                                              
+                                        this.createFilledEducationForm(educations[i]["idEducation"],educations[i]["diplome"]["label"],educations[i]["specialite"]["label"], educations[i]["lieu"], educations[i]["recu"], educations[i]["ecole"], educations[i]["debut"], educations[i]["fin"],educations[i]["info"]);
+                                };
+                                if(educations.length>0) this.switchFormEduEnable(false); //disabled form inputs
+                        },
+                })
 
-            this.candidatService.getExperiences(this.idCandidat)
-            .subscribe
-            ({                
-                next: (experiences) => 
-                { 
-                    this.removeExperienceFromList(0);
-                    
-                    for(let i = 0; i < experiences.length; i++)
+                this.candidatService.getExperiences(this.idCandidat)
+                .subscribe
+                ({                
+                    next: (experiences) => 
                     {
-                        console.log(experiences[i]);
-                        this.createFilledExperienceForm(experiences[i]["idExperience"], experiences[i]["mission"]["profession"], experiences[i]["entreprise"]["raisonSociale"],  /*experiences[i]["ville"]["nom"]*/null,  /*experiences[i]["ville"]["pays"]["nom"]*/null,  experiences[i]["debut"],  experiences[i]["fin"], experiences[i]["info"]);
-                    };
-                    if(experiences.length>0) this.switchFormExpEnable(false); //disabled form inputs
-                },
-            })
+                            console.log(experiences[0]);
+                            this.removeExperienceFromList(0);
+                            
+                            for(let i = 0; i < experiences.length; i++)
+                            {                        
+                                this.createFilledExperienceForm(experiences[i]["idExperience"], experiences[i]["mission"]["profession"], experiences[i]["entreprise"]["raisonSociale"], experiences[i]["entreprise"]["ville"]["ville"],  experiences[i]["entreprise"]["ville"]["pays"]["pays"],  experiences[i]["debut"],  experiences[i]["fin"], experiences[i]["info"]);
+                            };
+                            if(experiences.length>0) this.switchFormExpEnable(false); //disabled form inputs
+                    },
+                })
 
-            /*this.candidatService.getCompetence(this.idCandidat)
-            .subscribe
-            ({                
-                next: (competences) => 
-                { 
-                    this.removeCompetenceFromList(0);
-                    
-                    for(let i = 0; i < competences.length; i++)
-                    {
-                        this.createFilledCompetenceForm(competences[i]["idCompetence"],competences[i]["competence"],competences[i]["niveau"], competences[i]["type"], competences[i]["details"]);
-                    };
-                    if(competences.length>0) this.switchFormCmpEnable(false); //disabled form inputs
-                },
-            })
+                /*this.candidatService.getCompetence(this.idCandidat)
+                .subscribe
+                ({                
+                    next: (competences) => 
+                    { 
+                        this.removeCompetenceFromList(0);
+                        
+                        for(let i = 0; i < competences.length; i++)
+                        {
+                            this.createFilledCompetenceForm(competences[i]["idCompetence"],competences[i]["competence"],competences[i]["niveau"], competences[i]["type"], competences[i]["details"]);
+                        };
+                        if(competences.length>0) this.switchFormCmpEnable(false); //disabled form inputs
+                    },
+                })
 
-            this.candidatService.getLangue(this.idCandidat)
-            .subscribe
-            ({                
-                next: (langues) => 
-                { 
-                    this.removeLangueFromList(0);
-                    
-                    for(let i = 0; i < langues.length; i++)
-                    {
-                        this.createFilledLangueForm(langues[i]["idLangue"],langues[i]["langue"],langues[i]["niveau"], langues[i]["certification"], langues[i]["details"]);
-                    };
-                    if(langues.length>0) this.switchFormLngEnable(false); //disabled form inputs
-                },
-            })
+                this.candidatService.getLangue(this.idCandidat)
+                .subscribe
+                ({                
+                    next: (langues) => 
+                    { 
+                        this.removeLangueFromList(0);
+                        
+                        for(let i = 0; i < langues.length; i++)
+                        {
+                            this.createFilledLangueForm(langues[i]["idLangue"],langues[i]["langue"],langues[i]["niveau"], langues[i]["certification"], langues[i]["details"]);
+                        };
+                        if(langues.length>0) this.switchFormLngEnable(false); //disabled form inputs
+                    },
+                })
 
-            this.candidatService.getEntretien(this.idCandidat)
-            .subscribe
-            ({                
-                next: (entretiens) => 
-                { 
-                    this.removeEntretienFromList(0);
-                    
-                    for(let i = 0; i < entretiens.length; i++)
-                    {
-                        this.createFilledEntretienForm(entretiens[i]["idEntretien"],entretiens[i]["date"],entretiens[i]["lieu"], entretiens[i]["evaluation"], entretiens[i]["recruteur"], entretiens[i]["mission"], entretiens[i]["contrat"], entretiens[i]["resume"]);
-                    };
-                    if(entretiens.length>0) this.switchFormEttEnable(false); //disabled form inputs
-                },
-            })
+                this.candidatService.getEntretien(this.idCandidat)
+                .subscribe
+                ({                
+                    next: (entretiens) => 
+                    { 
+                        this.removeEntretienFromList(0);
+                        
+                        for(let i = 0; i < entretiens.length; i++)
+                        {
+                            this.createFilledEntretienForm(entretiens[i]["idEntretien"],entretiens[i]["date"],entretiens[i]["lieu"], entretiens[i]["evaluation"], entretiens[i]["recruteur"], entretiens[i]["mission"], entretiens[i]["contrat"], entretiens[i]["resume"]);
+                        };
+                        if(entretiens.length>0) this.switchFormEttEnable(false); //disabled form inputs
+                    },
+                })
 
-            this.candidatService.getProjet(this.idCandidat)
-            .subscribe
-            ({                
-                next: (projets) => 
-                { 
-                    this.removeProjetFromList(0);
-                    
-                    for(let i = 0; i < projets.length; i++)
-                    {
-                        this.createFilledProjetForm(projets[i]["idProjet"], projets[i]["nom"], projets[i]["type"], projets[i]["domaine"], projets[i]["debut"], projets[i]["fin"], projets[i]["entreprise"], projets[i]["details"]);
-                    };
-                    if(projets.length>0) this.switchFormPrjEnable(false); //disabled form inputs
-                },
-            })*/
+                this.candidatService.getProjet(this.idCandidat)
+                .subscribe
+                ({                
+                    next: (projets) => 
+                    { 
+                        this.removeProjetFromList(0);
+                        
+                        for(let i = 0; i < projets.length; i++)
+                        {
+                            this.createFilledProjetForm(projets[i]["idProjet"], projets[i]["nom"], projets[i]["type"], projets[i]["domaine"], projets[i]["debut"], projets[i]["fin"], projets[i]["entreprise"], projets[i]["details"]);
+                        };
+                        if(projets.length>0) this.switchFormPrjEnable(false); //disabled form inputs
+                    },
+                })*/
 
-            //this.organiseDocumentsByCategorie();
+                //this.organiseDocumentsByCategorie();
         }
         else
         {
-            this.switchFormCdtEnable(true); //enabled form inputs
-            this.switchFormEduEnable(true);
-            this.switchFormExpEnable(true);
-            this.switchFormCmpEnable(true);
-            this.switchFormLngEnable(true);
-            this.switchFormEttEnable(true);
-            this.switchFormPrjEnable(true);
+                 //enabled form inputs
+                this.switchFormCdtEnable(true); 
+                this.switchFormEduEnable(true);
+                this.switchFormExpEnable(true);
+                this.switchFormCmpEnable(true);
+                this.switchFormLngEnable(true);
+                this.switchFormEttEnable(true);
+                this.switchFormPrjEnable(true);
         }
     }
 
@@ -205,71 +206,75 @@ export class CandidatComponent implements OnInit
 
     createFormCandidatFilled(candidat: Candidat): FormGroup
     {
-        return this.fb.group
-        ({
-            prenom1Cdt    : '',
-            nom1Cdt       : '',
-            idCandidat    : candidat.idCandidat,
-            prenom2Cdt    : candidat.prenom,
-            nom2Cdt       : candidat.nom,
-            telMobCdt     : candidat.mob,
-            emailCdt      : candidat.email,
-            adresseCdt    : candidat.adresse,
-            adresse2Cdt   : candidat.adresse2,
-            villeCdt      : candidat.ville,
-            postalCdt     : candidat.postal,
-            salaireCdt    : candidat.salaire,
-            mobilCdt      : candidat.mobilite,
-            nationCdt     : candidat.nationnal,
-            situationCdt  : candidat.situation,
-            handicapCdt   : candidat.handicape,
-            teletravailCdt: candidat.teletravail,
-            permisCdt     : candidat.permis,
-            vehiculeCdt   : candidat.vehicule,
-            dispoCdt      : candidat.dispo,
-            textareaCdt   : candidat.info
-        });
+        console.log(candidat);
+            return this.fb.group
+                ({                
+                    prenom1Cdt   : '',
+                    nom1Cdt        : '',
+                    idCandidat      : candidat.idCandidat,
+                    prenom2Cdt   : candidat.prenom,
+                    nom2Cdt        : candidat.nom,
+                    telMobCdt      : candidat.mob,
+                    emailCdt         : candidat.email,
+                    adresseCdt     : candidat.adresse,
+                    adresse2Cdt   : candidat.adresse2,
+                    villeCdt           : candidat.ville.ville,
+                    postalCdt        : candidat.ville.postal,
+                    salaireCdt       : candidat.salaire,
+                    res1Cdt           : "",
+                    res2Cdt           : "",
+                    mobilCdt         : candidat.mobilite.zone,
+                    nationCdt        : candidat.pays.nationnalite,
+                    situationCdt    : candidat.marital,
+                    handicapCdt   : candidat.handicape,
+                    teletravailCdt  : candidat.teletravail,
+                    permisCdt       : candidat.permis,
+                    vehiculeCdt     : candidat.vehicule,
+                    dispoCdt         : candidat.disponible,
+                    textareaCdt     : candidat.info
+            });
     }
 
     createFormCandidatEmpty(): FormGroup
     {
-        return this.fb.group
-        ({
-            prenom1Cdt    : '', 
-            nom1Cdt       : '',
-            idCandidat    : '',
-            prenom2Cdt    : '', 
-            nom2Cdt       : '',
-            telMobCdt     : '', 
-            emailCdt      : '', 
-            adresseCdt    : '', 
-            adresse2Cdt   : '', 
-            villeCdt      : '', 
-            postalCdt     : '',
-            salaireCdt    : '',
-            nationCdt     : '',
-            situationCdt  : '',
-            mobilCdt      : '', 
-            handicapCdt   : '', 
-            teletravailCdt: '', 
-            permisCdt     : '', 
-            vehiculeCdt   : '',
-            dispoCdt      : '',
-            textareaCdt   : ''
-        });
+            return this.fb.group
+            ({
+                    prenom1Cdt    : '', 
+                    nom1Cdt       : '',
+                    idCandidat    : '',
+                    prenom2Cdt    : '', 
+                    nom2Cdt       : '',
+                    telMobCdt     : '', 
+                    emailCdt      : '', 
+                    adresseCdt    : '', 
+                    adresse2Cdt   : '', 
+                    villeCdt      : '', 
+                    postalCdt     : '',
+                    salaireCdt: '',
+                    res1Cdt: "",
+                    res2Cdt: "",
+                    nationCdt     : '',
+                    situationCdt  : '',
+                    mobilCdt      : '', 
+                    handicapCdt   : '', 
+                    teletravailCdt: '', 
+                    permisCdt     : '', 
+                    vehiculeCdt   : '',
+                    dispoCdt      : '',
+                    textareaCdt   : ''
+            });
     }
 
     chercher()
     {
-        console.log( this.candidatService.getCandidatByName(this.formSearch.get('prenom1Cdt')?.value,this.formSearch.get('nom1Cdt')?.value) )
-        this.candidatService.getCandidatByName(this.formSearch.get('prenom1Cdt')?.value,this.formSearch.get('nom1Cdt')?.value)
-        .subscribe
-        ({ 
-            next    : (candidat) => { if(candidat!=null) this.router.navigate(['/candidat/' + candidat.idCandidat]).then(() => { window.location.reload(); });},
-            error   : ()         => {  },
-            complete: ()         => {  } 
-        })
-        
+            console.log( this.candidatService.getCandidatByName(this.formSearch.get('prenom1Cdt')?.value,this.formSearch.get('nom1Cdt')?.value) )
+            this.candidatService.getCandidatByName(this.formSearch.get('prenom1Cdt')?.value,this.formSearch.get('nom1Cdt')?.value)
+            .subscribe
+            ({ 
+                    next         : (candidat) => { if(candidat!=null) this.router.navigate(['/candidat/' + candidat.idCandidat]).then(() => { window.location.reload(); });},
+                    error        : ()               => {  },
+                    complete : ()               => {  } 
+            })        
     }
 
     switchFormCdtEnable(enabling?: boolean)
@@ -520,10 +525,10 @@ export class CandidatComponent implements OnInit
                 missionExp     : [mission     , Validators.required],
                 entrepriseExp : [entreprise  , Validators.required],
                 villeExp           : [ville      ],
-                paysExp          : [pays       ],
-                debutExp        : [debut      ],
+                paysExp          : [pays     ],
+                debutExp        : [debut   ],
                 finExp             : [fin        ],
-                textareaExp    : [details    ]
+                textareaExp    : [details  ]
             })
         )
     }
