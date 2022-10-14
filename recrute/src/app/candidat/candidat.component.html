@@ -3,391 +3,389 @@
     <!----------TAB INFO GENERALES---------->
 
     <mat-tab label="Général">
-            <div class="row mx-0">
-                    <div class="col-3 d-flex justify-content-center">
-                            <form class="mt-5" [formGroup]="formSearch">
-                                    <h2 class="text-secondary text-center mt-1">Recherche rapide de candidat</h2>
-                                    <div class="row mx-0 mt-3">
-                                            <mat-form-field appearance="fill">
-                                                    <mat-hint>Saisir un prénom</mat-hint>
-                                                    <mat-label class="col-6" for="prenom1Cdt">Prénom</mat-label>
-                                                    <input class="col-6 fs-6" formControlName="prenom1Cdt" matInput type="text" list="prenom1Cdt" name="prenom1Cdt" required/>                            
-                                                    <mat-error>Il faut saisir un prénom</mat-error>
-                                                    <datalist id="prenom1Cdt">
-                                                            <option value="bart">bart</option>
-                                                            <option value="marge">marge</option>
-                                                            <option value="lisa">lisa</option>                                
-                                                    </datalist>                            
-                                            </mat-form-field>
-                                    </div>
-                                    <div class="row mx-0 mt-3">
-                                            <mat-form-field appearance="fill">
-                                                    <mat-hint>Saisir un nom</mat-hint>
-                                                    <mat-label class="col-6" for="nom1Cdt">Nom</mat-label>
-                                                    <input class="col-6 fs-6" formControlName="nom1Cdt" matInput type="text" id="nom1Cdt" name="nom1Cdt" required/>                            
-                                                    <mat-error>Il faut saisir un nom</mat-error>
-                                            </mat-form-field>  
-                                    </div>
-                                    <div class="row mx-0 mt-2">
-                                            <div class=""></div>
-                                            <button class="mt-2 mx-auto" mat-raised-button color="primary" (click)=chercher()>Rechercher</button>
-                                    </div>
-                            </form>
+        <div class="row mx-0">
+            <div class="col-3 d-flex justify-content-center">
+                <form class="mt-5" [formGroup]="formSearch">
+                    <h2 class="text-secondary text-center mt-1">Recherche rapide de candidat</h2>
+                    <div class="row mx-0 mt-3">
+                        <mat-form-field appearance="fill">
+                            <mat-hint>Saisir un prénom</mat-hint>
+                            <mat-label class="col-6" for="prenom1Cdt">Prénom</mat-label>
+                            <input class="col-6 fs-6" formControlName="prenom1Cdt" matInput type="text" list="prenom1Cdt" name="prenom1Cdt" required/>                            
+                            <mat-error>Il faut saisir un prénom</mat-error>
+                            <datalist id="prenom1Cdt">
+                                <option value="bart">bart</option>
+                                <option value="marge">marge</option>
+                                <option value="lisa">lisa</option>                                
+                            </datalist>                            
+                        </mat-form-field>
                     </div>
-
-                    <div class="col-6 border-start border-secondary ">
-                            <div class="row mx-0 my-3">
-                                    <div class="col-2"></div>
-                                    <h1 class="col-10 text-center text-secondary my-0">Informations Générales</h1>
-                            </div>
-                            <form class="mt-3 text-end" [formGroup]="formCdt">
-                            
-                                    <input [hidden]="true" formControlName="idCandidat" matInput id="idCandidat" name="idCandidat"/>
-
-                                    <div class="row mx-0 mt-3">
-                                            <label class="col-2 ps-1 pe-3 pt-2" for="prenom2Cdt">Prénom</label>
-                                            <div class="col-4 px-0">
-                                                <input formControlName="prenom2Cdt" class="form-control ps-4" type="text" id="prenom2Cdt" name="prenom2Cdt" value=""/>
-                                            </div>
-                                            <label class="col-2 ps-1 pe-3 pt-2" for="nom2Cdt">Nom</label>
-                                            <div class="col-4 px-0">
-                                                    <input formControlName="nom2Cdt" class="form-control ps-4" type="text" id="nom2Cdt" name="nom2Cdt"  value=""/>
-                                            </div>
-                                    </div>
-                                    <div class="row mx-0 mt-2">
-                                            <label class="col-2 ps-1 pe-3 pt-2" for="telMobCdt">Téléphone</label>
-                                            <div class="col-4 px-0">
-                                                    <input formControlName="telMobCdt" class="form-control ps-4" type="text" id="telCdt" name="telCdt" value=""/>
-                                            </div>
-                                            <label class="col-2 ps-1 pe-3 pt-2" for="emailCdt">Email</label>
-                                            <div class="col-4 px-0">
-                                                    <input formControlName="emailCdt" class="form-control ps-4" type="text" id="emailCdt" name="emailCdt" value=""/>
-                                            </div>
-                                    </div>
-                                    <div class="row mx-0 mt-2">
-                                            <label class="col-2 ps-1 pe-3 pt-2" for="adresseCdt">Adresse</label>
-                                            <div class="col-4 px-0">
-                                                    <input formControlName="adresseCdt" class="form-control ps-4" type="text" id="adresseCdt" name="adresseCdt" value=""/>
-                                            </div>
-                                            <label class="col-2 ps-1 pe-3 pt-0 pt-xxl-2" for="adresse2Cdt">Adresse (suite)</label>
-                                            <div class="col-4 px-0">
-                                                    <input formControlName="adresse2Cdt" class="form-control ps-4" type="text" id="adresse2Cdt" name="adresse2Cdt" value=""/>
-                                            </div>
-                                    </div>
-                                    <div class="row mx-0 mt-2">
-                                            <label class="col-2 ps-1 pe-3 pt-2" for="villeCdt">Ville</label>
-                                            <div class="col-4 px-0">
-                                                    <input formControlName="villeCdt" class="form-control ps-4" type="text" id="villeCdt" name="villeCdt" value=""/>
-                                            </div>
-                                            <label class="col-2 ps-1 pe-3 pt-2" for="postalCdt">Code postal</label>
-                                            <div class="col-4 px-0">
-                                                    <input formControlName="postalCdt" class="form-control ps-4" type="text" id="postalCdt" name="postalCdt" value=""/>
-                                            </div>
-                                    </div>
-                                    <div class="row mx-0 mt-2">
-                                            <label class=" col-2 ps-1 pe-3 pt-2" for="nationCdt">Nationnalité</label>
-                                            <div class="col-4 px-0">
-                                                    <input formControlName="nationCdt" list="nationCdt" class="form-control" type="text" name="nationCdt">
-                                                    <datalist id="nationCdt">
-                                                            <option>Française</option>
-                                                            <option>talienne</option>
-                                                            <option>Britannique</option>
-                                                            <option>Espagnole</option>
-                                                            <option>Ukrainienne</option>
-                                                            <option>Allemand</option>
-                                                            <option>Marocain</option>
-                                                            <option>Algérien</option>
-                                                            <option>Sénégalais</option>
-                                                            <option>Américain</option>
-                                                    </datalist>                              
-                                            </div>
-                                            <label class="col-2 ps-1 pe-3 pt-0 pt-xxl-2" for="situationCdt">Situation familiale</label>
-                                            <div class="col-4 px-0">
-                                                    <select formControlName="situationCdt" class="form-select" id="situationCdt" name="situationCdt">
-                                                            <option value="1">Célibataire</option>
-                                                            <option value="2">Marié</option>
-                                                            <option value="3">Divorcé</option>
-                                                            <option value="4">Autre</option>
-                                                    </select>
-                                                    <!--<input formControlName="situationCdt" class="form-control" list="situationCdt" type="text" name="situationCdt">
-                                                    <datalist id="situationCdt">
-                                                            <option>Célibataire</option>
-                                                            <option>Marié</option>
-                                                            <option>Divorcé</option>
-                                                            <option>Autre</option>
-                                                    </datalist>-->
-                                            </div>
-                                    </div>                   
-                                    <div class="row mx-0 mt-2">
-                                            <label class="col-2 ps-1 pe-3 pt-2" for="linkedinCdt">Linkedin</label>
-                                            <div class="col-4 px-0">
-                                                    <input formControlName="linkedinCdt" class="form-control ps-4" type="text" id="linkedinCdt" name="linkedinCdt" value=""/>
-                                            </div>
-                                            <label class="col-2 ps-1 pe-3 pt-2" for="mobilCdt">Mobilité</label>                        
-                                            <div class="col-4 px-0">
-                                                    <select formControlName="mobilCdt" class="form-select"  id="mobilCdt" name="mobilCdt">
-                                                            <option value="1">pas de mobilité</option>
-                                                            <option value="2">localité</option>
-                                                            <option value="3">département</option>
-                                                            <option value="4">région</option>
-                                                            <option value="5">régions proches</option>
-                                                            <option value="6">France</option>
-                                                            <option value="7">Europe</option>
-                                                            <option value="8">monde</option>
-                                                            <option value="9">Autre</option>
-                                                    </select>
-                                            </div>
-                                    </div>
-                                    <div class="row mx-0 mt-2">
-                                            <label class="col-2 ps-1 pe-3 pt-2" for="githubCdt">Github</label>
-                                            <div class="col-4 px-0">
-                                                    <input formControlName="githubCdt" class="form-control ps-4" type="text" id="githubCdt" name="githubCdt" value=""/>
-                                            </div>
-                                            <div class="col-2"></div>
-                                            <div class="col-4 px-0 text-start">
-                                                    <mat-checkbox formControlName="dispoCdt" class="mt-2" id="dispoCdt" name="dispoCdt">Disponible immédiatement</mat-checkbox>
-                                            </div>
-                                    </div>
-                                    <div class="row mx-0 mt-2">
-                                            <div class="col-2"></div>
-                                            <div class="col-4 px-0 text-start">
-                                                    <mat-checkbox formControlName="handicapCdt" class="mt-2" id="handicapCdt" name="handicapCdt">Travailleur handicapé</mat-checkbox>
-                                            </div>
-                                            <div class="col-2"></div>
-                                            <div class="col-4 px-0 text-start">
-                                                    <mat-checkbox formControlName="permisCdt" class="mt-2" id="permisCdt" name="permisCdt">Permis de conduire</mat-checkbox>
-                                            </div>
-                                    </div>
-                                    <div class="row mx-0 mt-2">
-                                            <div class="col-2"></div>
-                                            <div class="col-4 px-0 text-start">
-                                                    <mat-checkbox formControlName="teletravailCdt" class="mt-2" id="teletravailCdt" name="teletravailCdt">Télétravail</mat-checkbox>
-                                            </div>
-                                            <div class="col-2"></div>
-                                            <div class="col-4 px-0 text-start">
-                                                    <mat-checkbox formControlName="vehiculeCdt" class="mt-2" id="vehiculeCdt" name="vehiculeCdt">Véhiculé</mat-checkbox>
-                                            </div>
-                                    </div>                                        
-                                    <div class="row mx-0 mt-2">
-                                            <label class="col-2 ps-1 pe-3 pt-2" for="textareaCdt">Détails</label>
-                                            <div class="col-10 px-0">
-                                                    <textarea formControlName="textareaCdt" class="form-control" id="textareaCdt" rows="3"></textarea>
-                                            </div>
-                                    </div>                    
-                                    <div class="row mx-0 my-2">
-                                            <div class="col-3"></div>
-                                            <div class="col-4 mt-2">
-                                                    <button [disabled]=isDisabledCdtForm mat-raised-button color="primary" class="col-12" type="submit">Valider</button>                                                
-                                            </div>
-                                            <div class="text-start col-5 ps-1 pt-3">
-                                                    <mat-slide-toggle [checked]="!slideCdtChecked" (change)="switchFormCdtEnable()">{{ sliderCdtTxt }}</mat-slide-toggle>
-                                            </div>
-                                    </div>                   
-                                    <div class="row mx-0 my-2">
-                                            <div class="col-4"></div>
-                                    </div>
-                            </form>
+                    <div class="row mx-0 mt-3">
+                        <mat-form-field appearance="fill">
+                            <mat-hint>Saisir un nom</mat-hint>
+                            <mat-label class="col-6" for="nom1Cdt">Nom</mat-label>
+                            <input class="col-6 fs-6" formControlName="nom1Cdt" matInput type="text" id="nom1Cdt" name="nom1Cdt" required/>                            
+                            <mat-error>Il faut saisir un nom</mat-error>
+                        </mat-form-field>  
                     </div>
-                    <div class="col-3"></div>
+                    <div class="row mx-0 mt-2">
+                        <div class=""></div>
+                        <button class="mt-2 mx-auto" mat-raised-button color="primary" (click)=chercher()>Rechercher</button>
+                    </div>
+                </form>
             </div>
+
+            <div class="col-6 border-start border-secondary ">
+                <div class="row mx-0 my-3">
+                    <div class="col-2"></div>
+                    <h1 class="col-10 text-center text-secondary my-0">Informations Générales</h1>
+                </div>
+                <form class="mt-3 text-end" [formGroup]="formCdt">
+                
+                    <input [hidden]="true" formControlName="idCandidat" matInput id="idCandidat" name="idCandidat"/>
+
+                    <div class="row mx-0 mt-3">
+                        <label class="col-2 ps-1 pe-3 pt-2" for="prenom2Cdt">Prénom</label>
+                        <div class="col-4 px-0">
+                            <input formControlName="prenom2Cdt" class="form-control ps-4" type="text" id="prenom2Cdt" name="prenom2Cdt" value=""/>
+                        </div>
+                        <label class="col-2 ps-1 pe-3 pt-2" for="nom2Cdt">Nom</label>
+                        <div class="col-4 px-0">
+                            <input formControlName="nom2Cdt" class="form-control ps-4" type="text" id="nom2Cdt" name="nom2Cdt"  value=""/>
+                        </div>
+                    </div>
+                    <div class="row mx-0 mt-2">
+                        <label class="col-2 ps-1 pe-3 pt-2" for="telMobCdt">Téléphone</label>
+                        <div class="col-4 px-0">
+                            <input formControlName="telMobCdt" class="form-control ps-4" type="text" id="telCdt" name="telCdt" value=""/>
+                        </div>
+                        <label class="col-2 ps-1 pe-3 pt-2" for="emailCdt">Email</label>
+                        <div class="col-4 px-0">
+                            <input formControlName="emailCdt" class="form-control ps-4" type="text" id="emailCdt" name="emailCdt" value=""/>
+                        </div>
+                    </div>
+                    <div class="row mx-0 mt-2">
+                        <label class="col-2 ps-1 pe-3 pt-2" for="adresseCdt">Adresse</label>
+                        <div class="col-4 px-0">
+                            <input formControlName="adresseCdt" class="form-control ps-4" type="text" id="adresseCdt" name="adresseCdt" value=""/>
+                        </div>
+                        <label class="col-2 ps-1 pe-3 pt-0 pt-xxl-2" for="adresse2Cdt">Adresse (suite)</label>
+                        <div class="col-4 px-0">
+                            <input formControlName="adresse2Cdt" class="form-control ps-4" type="text" id="adresse2Cdt" name="adresse2Cdt" value=""/>
+                        </div>
+                    </div>
+                    <div class="row mx-0 mt-2">
+                        <label class="col-2 ps-1 pe-3 pt-2" for="villeCdt">Ville</label>
+                        <div class="col-4 px-0">
+                            <input formControlName="villeCdt" class="form-control ps-4" type="text" id="villeCdt" name="villeCdt" value=""/>
+                        </div>
+                        <label class="col-2 ps-1 pe-3 pt-2" for="postalCdt">Code postal</label>
+                        <div class="col-4 px-0">
+                            <input formControlName="postalCdt" class="form-control ps-4" type="text" id="postalCdt" name="postalCdt" value=""/>
+                        </div>
+                    </div>
+                    <div class="row mx-0 mt-2">
+                        <label class=" col-2 ps-1 pe-3 pt-2" for="nationCdt">Nationnalité</label>
+                        <div class="col-4 px-0">
+                            <input formControlName="nationCdt" list="nationCdt" class="form-control ps-4" type="text" name="nationCdt">
+                            <datalist id="nationCdt">
+                                <option>Française</option>
+                                <option>talienne</option>
+                                <option>Britannique</option>
+                                <option>Espagnole</option>
+                                <option>Ukrainienne</option>
+                                <option>Allemand</option>
+                                <option>Marocain</option>
+                                <option>Algérien</option>
+                                <option>Sénégalais</option>
+                                <option>Américain</option>
+                            </datalist>                              
+                        </div>
+                        <label class="col-2 ps-1 pe-3 pt-0 pt-xxl-2" for="situationCdt">Situation familiale</label>
+                        <div class="col-4 px-0">
+                            <select formControlName="situationCdt" class="form-select ps-4" id="situationCdt" name="situationCdt">
+                                <option value="1">Célibataire</option>
+                                <option value="2">Marié</option>
+                                <option value="3">Divorcé</option>
+                                <option value="4">Autre</option>
+                            </select>
+                            <!--<input formControlName="situationCdt" class="form-control" list="situationCdt" type="text" name="situationCdt">
+                            <datalist id="situationCdt">
+                                <option>Célibataire</option>
+                                <option>Marié</option>
+                                <option>Divorcé</option>
+                                <option>Autre</option>
+                            </datalist>-->
+                        </div>
+                    </div>                   
+                    <div class="row mx-0 mt-2">
+                        <label class="col-2 ps-1 pe-3 pt-2" for="linkedinCdt">Linkedin</label>
+                        <div class="col-4 px-0">
+                            <input formControlName="linkedinCdt" class="form-control ps-4" type="text" id="linkedinCdt" name="linkedinCdt" value=""/>
+                        </div>
+                        <label class="col-2 ps-1 pe-3 pt-2" for="mobilCdt">Mobilité</label>                        
+                        <div class="col-4 px-0">
+                            <select formControlName="mobilCdt" class="form-select ps-4"  id="mobilCdt" name="mobilCdt">
+                                <option value="1">pas de mobilité</option>
+                                <option value="2">localité</option>
+                                <option value="3">département</option>
+                                <option value="4">région</option>
+                                <option value="5">régions proches</option>
+                                <option value="6">France</option>
+                                <option value="7">Europe</option>
+                                <option value="8">monde</option>
+                                <option value="9">Autre</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mx-0 mt-2">
+                        <label class="col-2 ps-1 pe-3 pt-2" for="githubCdt">Github</label>
+                        <div class="col-4 px-0">
+                            <input formControlName="githubCdt" class="form-control ps-4" type="text" id="githubCdt" name="githubCdt" value=""/>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-4 px-0 text-start">
+                            <mat-checkbox formControlName="dispoCdt" class="mt-2" id="dispoCdt" name="dispoCdt">Disponible immédiatement</mat-checkbox>
+                        </div>
+                    </div>
+                    <div class="row mx-0 mt-2">
+                        <div class="col-2"></div>
+                        <div class="col-4 px-0 text-start">
+                            <mat-checkbox formControlName="handicapCdt" class="mt-2" id="handicapCdt" name="handicapCdt">Travailleur handicapé</mat-checkbox>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-4 px-0 text-start">
+                            <mat-checkbox formControlName="permisCdt" class="mt-2" id="permisCdt" name="permisCdt">Permis de conduire</mat-checkbox>
+                        </div>
+                    </div>
+                    <div class="row mx-0 mt-2">
+                        <div class="col-2"></div>
+                        <div class="col-4 px-0 text-start">
+                            <mat-checkbox formControlName="teletravailCdt" class="mt-2" id="teletravailCdt" name="teletravailCdt">Télétravail</mat-checkbox>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-4 px-0 text-start">
+                            <mat-checkbox formControlName="vehiculeCdt" class="mt-2" id="vehiculeCdt" name="vehiculeCdt">Véhiculé</mat-checkbox>
+                        </div>
+                    </div>                                        
+                    <div class="row mx-0 mt-2">
+                        <label class="col-2 ps-1 pe-3 pt-2" for="textareaCdt">Détails</label>
+                        <div class="col-10 px-0">
+                            <textarea formControlName="textareaCdt" class="form-control" id="textareaCdt" rows="3"></textarea>
+                        </div>
+                    </div>                    
+                    <div class="row mx-0 my-2">
+                        <div class="col-3"></div>
+                        <div class="col-4 mt-2">
+                            <button [disabled]=isDisabledCdtForm mat-raised-button color="primary" class="col-12" type="submit">Valider</button>                                                
+                        </div>
+                        <div class="text-start col-5 ps-1 pt-3">
+                            <mat-slide-toggle [checked]="!slideCdtChecked" (change)="switchFormCdtEnable()">{{ sliderCdtTxt }}</mat-slide-toggle>
+                        </div>
+                    </div>                   
+                    <div class="row mx-0 my-2">
+                        <div class="col-4"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-3"></div>
+        </div>
     </mat-tab>
 
 
-    <!----------TAB EDUCATION---------->
+<!----------TAB EDUCATION---------->
 
 
     <mat-tab label="Education">
-            <div class="row mx-0">
-                    <div class="col-3"></div>
-                    <div class="col-6">
-                            <h1 class="text-secondary text-center my-3">Education</h1>
-                            <form [formGroup]='formEdu' novalidate class="text-center"> <!--(ngSubmit)='submit()'-->    
-                                    <div class="row mx-0 text-start ps-1 pb-3">
-                                            <mat-slide-toggle [checked]="!slideEduChecked" (change)="switchFormEduEnable()">{{sliderEduTxt}}</mat-slide-toggle>
-                                    </div>          
-                                    <div formArrayName="educations" *ngFor="let t of educations.controls; let i = index">
-                                            <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
-                                                    <div class="row mx-0">
-                                                            <p class="lead text-start">Education {{i+1}}</p>
-                                                    </div>
-                                                    
-                                                    <input [hidden]="true" formControlName="idEducation" matInput id="idEducation" name="idEducation"/>                                                                                    
-                                                    
-                                                    <div class="row mx-0 mt-1">
-                                                            <mat-form-field class="col-6" appearance="fill">
-                                                                    <mat-hint>Saisir un diplôme</mat-hint>
-                                                                    <mat-label for="diplomeEdu">Diplôme</mat-label>
-                                                                    <input class="fs-6" formControlName="diplomeEdu" matInput type="text" id="diplomeEdu" name="diplomeEdu"/>                            
-                                                            </mat-form-field>
-                                                            <mat-form-field class="col-6" appearance="fill">
-                                                                    <mat-hint>Saisir un domaine</mat-hint>
-                                                                    <mat-label  for="domaineEdu">Domaine</mat-label>
-                                                                    <input class="fs-6" formControlName="domaineEdu" matInput type="text" id="domaineEdu" name="domaineEdu"/>                            
-                                                            </mat-form-field>  
-                                                    </div>
-                                                    <div class="row mx-0 mt-1">
-                                                            <mat-checkbox class="col-6 my-2 ps-3 text-start fs-6" formControlName="obtenuEdu">
-                                                                    <span class="checkboxText">Diplôme obtenu</span>
-                                                            </mat-checkbox>
-                                                    </div>
-                                                    <div class="row mx-0 mt-1">
-                                                            <mat-form-field class="col-6" appearance="fill">
-                                                                    <mat-hint>Saisir un lieu</mat-hint>
-                                                                    <mat-label for="lieuEdu">Lieu</mat-label>
-                                                                    <input class="fs-6" formControlName="lieuEdu" matInput type="text" id="lieuEdu" name="lieuEdu"/>                            
-                                                            </mat-form-field>
-                                                            <mat-form-field class="col-6" appearance="fill">
-                                                                    <mat-hint>Saisir une école</mat-hint>
-                                                                    <mat-label  for="ecoleEdu">Ecole</mat-label>
-                                                                    <input class="fs-6" formControlName="ecoleEdu" matInput type="text" id="ecoleEdu" name="ecoleEdu"/>                            
-                                                            </mat-form-field>       
-                                                    </div>
-                                                    <div class="row mx-0 mt-1">
-                                                            <mat-form-field class="col-6" appearance="fill">
-                                                                    <mat-hint>Saisir une date de début</mat-hint>
-                                                                    <mat-label>Date de début</mat-label>
-                                                                    <input class="fs-6" formControlName="debutEdu" matInput [matDatepicker]="pickerDebutEdu">                                
-                                                                    <mat-datepicker-toggle matSuffix [for]="pickerDebutEdu"></mat-datepicker-toggle>
-                                                                    <mat-datepicker #pickerDebutEdu></mat-datepicker>
-                                                            </mat-form-field>
-                                                            <mat-form-field class="col-6" appearance="fill">
-                                                                    <mat-hint>Saisir une date de fin</mat-hint>
-                                                                    <mat-label>Date de fin</mat-label>
-                                                                    <input class="fs-6" formControlName="finEdu" matInput [matDatepicker]="pickerFinEdu">                                
-                                                                    <mat-datepicker-toggle matSuffix [for]="pickerFinEdu"></mat-datepicker-toggle>
-                                                                    <mat-datepicker #pickerFinEdu></mat-datepicker>
-                                                            </mat-form-field>   
-                                                    </div>
-                                                    <div class="row mx-0 mt-1">
-                                                            <mat-form-field class="col-12" appearance="fill">
-                                                                    <mat-hint>Saisir les détails</mat-hint>
-                                                                    <mat-label>Détails</mat-label>
-                                                                    <textarea class="fs-6" formControlName="textareaEdu" id="textareaEdu" name="textareaEdu" matInput placeholder="Quelques informations . . ."></textarea>                                                           
-                                                            </mat-form-field>
-                                                    </div>                  
-                                                    <div class="row mx-0 my-2">
-                                                            <div class="col-4"></div>
-                                                    </div>
-                                                    <div class="row mb-2 d-flex justify-content-center">
-                                                            <button [disabled]=isDisabledEduForm mat-raised-button color="primary" class="col-4 me-1" (click)="deleteEducation(i)">Effacer l'éducation</button>        
-                                                            <button [disabled]=isDisabledEduForm mat-raised-button color="primary" class="col-4 ms-1" (click)="saveEducation(i)">Valider l'éducation</button>
-                                                    </div>
-                                            </div>
-                                    </div>
-                                    <div class="row mx-0 my-2">
-                                            <div class="col-3"></div>
-                                            <div class="col-4 mt-2">
-                                                    <button mat-raised-button color="primary" class="col-12" (click)='addEducationFormToList()'>Ajouter un diplôme</button>                                                
-                                            </div>
-                                            <div class="text-start col-5 ps-1 pt-3">
-                                                    <mat-slide-toggle  [checked]="!slideEduChecked" (change)="switchFormEduEnable()">{{sliderEduTxt}}</mat-slide-toggle>
-                                            </div>
-                                    </div>
-                            </form>
+        <div class="row mx-0">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <h1 class="text-secondary text-center my-3">Education</h1>
+                <form [formGroup]='formEdu' novalidate class="text-center"> <!--(ngSubmit)='submit()'-->    
+                    <div class="row mx-0 text-start ps-1 pb-3">
+                        <mat-slide-toggle [checked]="!slideEduChecked" (change)="switchFormEduEnable()">{{sliderEduTxt}}</mat-slide-toggle>
+                    </div>          
+                    <div formArrayName="educations" *ngFor="let t of educations.controls; let i = index">
+                        <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
+                            <div class="row mx-0">
+                                <p class="lead text-start">Education {{i+1}}</p>
+                            </div>                           
+                            <input [hidden]="true" formControlName="idEducation" matInput id="idEducation" name="idEducation"/>                                                                                                                
+                            <div class="row mx-0 mt-1">
+                                <mat-form-field class="col-6" appearance="fill">
+                                    <mat-hint>Saisir un diplôme</mat-hint>
+                                    <mat-label for="diplomeEdu">Diplôme</mat-label>
+                                    <input class="fs-6" formControlName="diplomeEdu" matInput type="text" id="diplomeEdu" name="diplomeEdu"/>                            
+                                </mat-form-field>
+                                <mat-form-field class="col-6" appearance="fill">
+                                    <mat-hint>Saisir un domaine</mat-hint>
+                                    <mat-label  for="domaineEdu">Domaine</mat-label>
+                                    <input class="fs-6" formControlName="domaineEdu" matInput type="text" id="domaineEdu" name="domaineEdu"/>                            
+                                </mat-form-field>  
+                            </div>
+                            <div class="row mx-0 mt-1">
+                                <mat-checkbox class="col-6 my-2 ps-3 text-start fs-6" formControlName="obtenuEdu">
+                                    <span class="checkboxText">Diplôme obtenu</span>
+                                </mat-checkbox>
+                            </div>
+                            <div class="row mx-0 mt-1">
+                                <mat-form-field class="col-6" appearance="fill">
+                                    <mat-hint>Saisir un lieu</mat-hint>
+                                    <mat-label for="lieuEdu">Lieu</mat-label>
+                                    <input class="fs-6" formControlName="lieuEdu" matInput type="text" id="lieuEdu" name="lieuEdu"/>                            
+                                </mat-form-field>
+                                <mat-form-field class="col-6" appearance="fill">
+                                    <mat-hint>Saisir une école</mat-hint>
+                                    <mat-label  for="ecoleEdu">Ecole</mat-label>
+                                    <input class="fs-6" formControlName="ecoleEdu" matInput type="text" id="ecoleEdu" name="ecoleEdu"/>                            
+                                </mat-form-field>       
+                            </div>
+                            <div class="row mx-0 mt-1">
+                                <mat-form-field class="col-6" appearance="fill">
+                                    <mat-hint>Saisir une date de début</mat-hint>
+                                    <mat-label>Date de début</mat-label>
+                                    <input class="fs-6" formControlName="debutEdu" matInput [matDatepicker]="pickerDebutEdu">                                
+                                    <mat-datepicker-toggle matSuffix [for]="pickerDebutEdu"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerDebutEdu></mat-datepicker>
+                                </mat-form-field>
+                                <mat-form-field class="col-6" appearance="fill">
+                                    <mat-hint>Saisir une date de fin</mat-hint>
+                                    <mat-label>Date de fin</mat-label>
+                                    <input class="fs-6" formControlName="finEdu" matInput [matDatepicker]="pickerFinEdu">                                
+                                    <mat-datepicker-toggle matSuffix [for]="pickerFinEdu"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerFinEdu></mat-datepicker>
+                                </mat-form-field>   
+                            </div>
+                            <div class="row mx-0 mt-1">
+                                <mat-form-field class="col-12" appearance="fill">
+                                    <mat-hint>Saisir les détails</mat-hint>
+                                    <mat-label>Détails</mat-label>
+                                    <textarea class="fs-6" formControlName="textareaEdu" id="textareaEdu" name="textareaEdu" matInput placeholder="Quelques informations . . ."></textarea>                                                           
+                                </mat-form-field>
+                            </div>                  
+                            <div class="row mx-0 my-2">
+                                <div class="col-4"></div>
+                            </div>
+                            <div class="row mb-2 d-flex justify-content-center">
+                                <button [disabled]=isDisabledEduForm mat-raised-button color="primary" class="col-4 me-1" (click)="deleteEducation(i)">Effacer l'éducation</button>        
+                                <button [disabled]=isDisabledEduForm mat-raised-button color="primary" class="col-4 ms-1" (click)="saveEducation(i)">Valider l'éducation</button>
+                            </div>
+                        </div>
                     </div>
+                    <div class="row mx-0 my-2">
+                        <div class="col-3"></div>
+                        <div class="col-4 mt-2">
+                            <button mat-raised-button color="primary" class="col-12" (click)='addEducationFormToList()'>Ajouter un diplôme</button>                                                
+                        </div>
+                        <div class="text-start col-5 ps-1 pt-3">
+                            <mat-slide-toggle  [checked]="!slideEduChecked" (change)="switchFormEduEnable()">{{sliderEduTxt}}</mat-slide-toggle>
+                        </div>
+                    </div>
+                </form>
             </div>
+        </div>
     </mat-tab>
 
     <!----------TAB EXPERIENCE---------->
 
     <mat-tab label="Expérience">
-            <div class="row mx-0">
-                    <div class="col-6 mx-auto">
-                            <h1 class="text-secondary text-center my-3">Expérience professionnelle</h1>
-                            <form [formGroup]='formExp' novalidate class="text-center">
-                                    <div class="row mx-0 text-start ps-1 pb-3">
-                                            <mat-slide-toggle [checked]="!slideExpChecked" (change)="switchFormExpEnable()">{{sliderExpTxt}}</mat-slide-toggle>
-                                    </div>
-
-                                    <div formArrayName="experiences" *ngFor="let t of experiences.controls; let i = index">
-                                            <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
-                                                    <div class="row mx-0">
-                                                            <p class="lead text-start">Expérience {{i+1}}</p>
-                                                    </div>
-                                                
-                                                    <input [hidden]="true" formControlName="idExperience" matInput id="idExperience" name="idExperience"/>                                                                                    
-                                                
-                                                    <div class="row mx-0 mt-1">
-                                                            <mat-form-field class="col-6" appearance="fill">
-                                                                    <mat-hint>Saisir une mission</mat-hint>
-                                                                    <mat-label for="missionExp">Mission</mat-label>
-                                                                    <input class="fs-6" formControlName="missionExp" matInput type="text" id="missionExp" name="missionExp"/>                            
-                                                            </mat-form-field>
-                                                            <mat-form-field class="col-6" appearance="fill">
-                                                                    <mat-hint>Saisir une entreprise</mat-hint>
-                                                                    <mat-label  for="entrepriseExp">Entreprise</mat-label>
-                                                                    <input class="fs-6" formControlName="entrepriseExp" matInput type="text" id="entrepriseExp" name="entrepriseExp"/>                            
-                                                            </mat-form-field>
-                                                    </div>
-                                                
-                                                    <div class="row mx-0 mt-1">
-                                                            <mat-form-field class="col-6" appearance="fill">
-                                                                    <mat-hint>Saisir un ville</mat-hint>
-                                                                    <mat-label for="villeExp">Ville</mat-label>
-                                                                    <input class="fs-6" formControlName="villeExp" matInput type="text" id="villeExp" name="villeExp"/>                            
-                                                            </mat-form-field>
-                                                        <mat-form-field class="col-6" appearance="fill">
-                                                                <mat-hint>Saisir un pays</mat-hint>
-                                                                <mat-label  for="paysExp">Pays</mat-label>                                                                
-                                                                <input class="fs-6" formControlName="paysExp" matInput type="text" list="paysExp" name="paysExp" required />
-                                                                <datalist id="paysExp">
-                                                                        <option>France</option>
-                                                                        <option>Italie</option>
-                                                                        <option>Ukraine</option>
-                                                                        <option>Espagne</option>
-                                                                </datalist>
-                                                                <!--<select matNativeControl class="fs-6" formControlName="paysExp" id="paysExp" name="paysExp">
-                                                                        <option value="1">France</option>
-                                                                        <option value="2">Italie</option>
-                                                                        <option value="3">Ukraine</option>
-                                                                        <option value="3">Espagne</option>
-                                                                </select>-->
-                                                        </mat-form-field>                                  
-                                                    </div>
-                                                    <div class="row mx-0 mt-1">
-                                                            <mat-form-field class="col-6" appearance="fill">
-                                                                    <mat-hint>Saisir une date de début</mat-hint>
-                                                                    <mat-label>Date de début</mat-label>
-                                                                    <input class="fs-6" formControlName="debutExp" matInput [matDatepicker]="pickerDebutExp">                                
-                                                                    <mat-datepicker-toggle matSuffix [for]="pickerDebutExp"></mat-datepicker-toggle>
-                                                                    <mat-datepicker #pickerDebutExp></mat-datepicker>
-                                                            </mat-form-field>
-                                                            <mat-form-field class="col-6" appearance="fill">
-                                                                    <mat-hint>Saisir une date de fin</mat-hint>
-                                                                    <mat-label>Date de fin</mat-label>
-                                                                    <input class="fs-6" formControlName="finExp" matInput [matDatepicker]="pickerFinExp">                                
-                                                                    <mat-datepicker-toggle matSuffix [for]="pickerFinExp"></mat-datepicker-toggle>
-                                                                    <mat-datepicker #pickerFinExp></mat-datepicker>
-                                                            </mat-form-field>   
-                                                    </div>
-                                                    <div class="row mx-0 mt-1">
-                                                            <mat-form-field class="col-12" appearance="fill">
-                                                                    <mat-hint>Saisir les détails</mat-hint>
-                                                                    <mat-label>Détails</mat-label>
-                                                                    <textarea class="fs-6" formControlName="textareaExp" id="textareaExp" name="textareaExp" matInput></textarea>                                                           
-                                                            </mat-form-field>
-                                                    </div>                  
-                                                    <div class="row mx-0 my-2">
-                                                            <div class="col-4"></div>
-                                                    </div>
-                                                    <div class="row mb-2 d-flex justify-content-center">
-                                                            <button [disabled]=isDisabledExpForm mat-raised-button color="primary" class="col-4 me-1" (click)="deleteExperience(i)">Effacer l'expérience</button>        
-                                                            <button [disabled]=isDisabledExpForm mat-raised-button color="primary" class="col-4 ms-1" (click)="saveExperience(i)">Valider l'expérience</button>
-                                                    </div>
-                                            </div>
-                                    </div>
-                                    <div class="row mx-0 my-2">
-                                            <div class="col-3"></div>
-                                            <div class="col-4 mt-2">
-                                                    <button mat-raised-button color="primary" class="col-12" (click)='addExperienceFormToList()'>Ajouter une mission</button>                                                
-                                            </div>
-                                            <div class="text-start col-5 ps-1 pt-3">
-                                                    <mat-slide-toggle  [checked]="!slideExpChecked" (change)="switchFormExpEnable()">{{sliderExpTxt}}</mat-slide-toggle>
-                                            </div>
-                                    </div>
-                            </form>
+        <div class="row mx-0">
+            <div class="col-6 mx-auto">
+                <h1 class="text-secondary text-center my-3">Expérience professionnelle</h1>
+                <form [formGroup]='formExp' novalidate class="text-center">
+                    <div class="row mx-0 text-start ps-1 pb-3">
+                        <mat-slide-toggle [checked]="!slideExpChecked" (change)="switchFormExpEnable()">{{sliderExpTxt}}</mat-slide-toggle>
                     </div>
+
+                    <div formArrayName="experiences" *ngFor="let t of experiences.controls; let i = index">
+                        <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
+                            <div class="row mx-0">
+                                <p class="lead text-start">Expérience {{i+1}}</p>
+                            </div>
+                        
+                            <input [hidden]="true" formControlName="idExperience" matInput id="idExperience" name="idExperience"/>                                                                                    
+                        
+                            <div class="row mx-0 mt-1">
+                                <mat-form-field class="col-6" appearance="fill">
+                                    <mat-hint>Saisir une mission</mat-hint>
+                                    <mat-label for="missionExp">Mission</mat-label>
+                                    <input class="fs-6" formControlName="missionExp" matInput type="text" id="missionExp" name="missionExp"/>                            
+                                </mat-form-field>
+                                <mat-form-field class="col-6" appearance="fill">
+                                    <mat-hint>Saisir une entreprise</mat-hint>
+                                    <mat-label  for="entrepriseExp">Entreprise</mat-label>
+                                    <input class="fs-6" formControlName="entrepriseExp" matInput type="text" id="entrepriseExp" name="entrepriseExp"/>                            
+                                </mat-form-field>
+                            </div>
+                        
+                            <div class="row mx-0 mt-1">
+                                <mat-form-field class="col-6" appearance="fill">
+                                    <mat-hint>Saisir un ville</mat-hint>
+                                    <mat-label for="villeExp">Ville</mat-label>
+                                    <input class="fs-6" formControlName="villeExp" matInput type="text" id="villeExp" name="villeExp"/>                            
+                                </mat-form-field>
+                                <mat-form-field class="col-6" appearance="fill">
+                                    <mat-hint>Saisir un pays</mat-hint>
+                                    <mat-label  for="paysExp">Pays</mat-label>                                                                
+                                    <input class="fs-6" formControlName="paysExp" matInput type="text" list="paysExp" name="paysExp" required />
+                                    <datalist id="paysExp">
+                                        <option>France</option>
+                                        <option>Italie</option>
+                                        <option>Ukraine</option>
+                                        <option>Espagne</option>
+                                    </datalist>
+                                    <!--<select matNativeControl class="fs-6" formControlName="paysExp" id="paysExp" name="paysExp">
+                                        <option value="1">France</option>
+                                        <option value="2">Italie</option>
+                                        <option value="3">Ukraine</option>
+                                        <option value="3">Espagne</option>
+                                    </select>-->
+                                </mat-form-field>                                  
+                            </div>
+                            <div class="row mx-0 mt-1">
+                                <mat-form-field class="col-6" appearance="fill">
+                                    <mat-hint>Saisir une date de début</mat-hint>
+                                    <mat-label>Date de début</mat-label>
+                                    <input class="fs-6" formControlName="debutExp" matInput [matDatepicker]="pickerDebutExp">                                
+                                    <mat-datepicker-toggle matSuffix [for]="pickerDebutExp"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerDebutExp></mat-datepicker>
+                                </mat-form-field>
+                                <mat-form-field class="col-6" appearance="fill">
+                                    <mat-hint>Saisir une date de fin</mat-hint>
+                                    <mat-label>Date de fin</mat-label>
+                                    <input class="fs-6" formControlName="finExp" matInput [matDatepicker]="pickerFinExp">                                
+                                    <mat-datepicker-toggle matSuffix [for]="pickerFinExp"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerFinExp></mat-datepicker>
+                                </mat-form-field>   
+                            </div>
+                            <div class="row mx-0 mt-1">
+                                <mat-form-field class="col-12" appearance="fill">
+                                    <mat-hint>Saisir les détails</mat-hint>
+                                    <mat-label>Détails</mat-label>
+                                    <textarea class="fs-6" formControlName="textareaExp" id="textareaExp" name="textareaExp" matInput></textarea>                                                           
+                                </mat-form-field>
+                            </div>                  
+                            <div class="row mx-0 my-2">
+                                <div class="col-4"></div>
+                            </div>
+                            <div class="row mb-2 d-flex justify-content-center">
+                                <button [disabled]=isDisabledExpForm mat-raised-button color="primary" class="col-4 me-1" (click)="deleteExperience(i)">Effacer l'expérience</button>        
+                                <button [disabled]=isDisabledExpForm mat-raised-button color="primary" class="col-4 ms-1" (click)="saveExperience(i)">Valider l'expérience</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mx-0 my-2">
+                        <div class="col-3"></div>
+                        <div class="col-4 mt-2">
+                            <button mat-raised-button color="primary" class="col-12" (click)='addExperienceFormToList()'>Ajouter une mission</button>                                                
+                        </div>
+                        <div class="text-start col-5 ps-1 pt-3">
+                            <mat-slide-toggle  [checked]="!slideExpChecked" (change)="switchFormExpEnable()">{{sliderExpTxt}}</mat-slide-toggle>
+                        </div>
+                    </div>
+                </form>
             </div>
+        </div>
     </mat-tab>
 
     <!----------TAB COMPETENCE---------->
@@ -672,8 +670,7 @@
                                     <mat-label  for="domainePrj">Domaine</mat-label>
                                     <input class="fs-6" formControlName="domainePrj" matInput type="text" id="domainePrj" name="domainePrj"/>
                                 </mat-form-field>
-                            </div>
-                            
+                            </div>                           
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-6" appearance="fill">
                                     <mat-hint>Saisir une date de début</mat-hint>
@@ -771,53 +768,53 @@
         </div>
     </mat-tab>
     <mat-tab label="Matcher"> Matcher avec des entreprises et offres d'emplois
-         <!--<form [formGroup]='formDoc' novalidate class="text-center">
-                    <div class="row mx-0 text-start ps-1 pb-3">
-                        <mat-slide-toggle [checked]="!slideDocChecked" (change)="switchFormDocEnable()">{{sliderDocTxt}}</mat-slide-toggle>
-                    </div>          
-                    <div formArrayName="documents" *ngFor="let t of documents.controls; let i = index">
-                        <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
-                            <div class="row mx-0">
-                                <p class="lead text-start">Document {{i+1}}</p>
-                            </div>
-                            
-                            <input [hidden]="true" formControlName="idDoc" matInput id="idDoc" name="idDoc"/>
-                            
-                            <div class="row mx-0 mt-1">
-                                <mat-form-field class="col-6" appearance="fill">
-                                    <mat-hint>Saisir un nom</mat-hint>
-                                    <mat-label for="nomDoc">Nom du document</mat-label>
-                                    <input class="fs-6" formControlName="nomDoc" matInput type="text" id="nomDoc" name="nomDoc"/>
-                                </mat-form-field>
-                            </div>
+        <!--<form [formGroup]='formDoc' novalidate class="text-center">
+            <div class="row mx-0 text-start ps-1 pb-3">
+                <mat-slide-toggle [checked]="!slideDocChecked" (change)="switchFormDocEnable()">{{sliderDocTxt}}</mat-slide-toggle>
+            </div>          
+            <div formArrayName="documents" *ngFor="let t of documents.controls; let i = index">
+                <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
+                    <div class="row mx-0">
+                        <p class="lead text-start">Document {{i+1}}</p>
+                    </div>
+                    
+                    <input [hidden]="true" formControlName="idDoc" matInput id="idDoc" name="idDoc"/>
+                    
+                    <div class="row mx-0 mt-1">
+                        <mat-form-field class="col-6" appearance="fill">
+                            <mat-hint>Saisir un nom</mat-hint>
+                            <mat-label for="nomDoc">Nom du document</mat-label>
+                            <input class="fs-6" formControlName="nomDoc" matInput type="text" id="nomDoc" name="nomDoc"/>
+                        </mat-form-field>
+                    </div>
 
-                            <div class="row mx-0 mt-1">
-                                <mat-form-field class="col-6" appearance="fill">
-                                    <mat-hint>Saisir un type</mat-hint>
-                                    <mat-label for="typeDoc">Type</mat-label>
-                                    <input class="fs-6" formControlName="typeDoc" matInput type="text" id="typeDoc" name="typeDoc"/>
-                                </mat-form-field>                                
-                            </div>
-                                                        
-                            <div class="row mx-0 my-2">
-                                <div class="col-4"></div>
-                            </div>
-                            <div class="row mb-2 d-flex justify-content-center">
-                                <button [disabled]=isDisabledDocForm mat-raised-button color="primary" class="col-4 me-1" (click)="deleteDoc(i)">Effacer</button>
-                                <button [disabled]=isDisabledDocForm mat-raised-button color="primary" class="col-4 ms-1" (click)="viewDoc(i)">Afficher</button>
-                            </div>
-                        </div>
+                    <div class="row mx-0 mt-1">
+                        <mat-form-field class="col-6" appearance="fill">
+                            <mat-hint>Saisir un type</mat-hint>
+                            <mat-label for="typeDoc">Type</mat-label>
+                            <input class="fs-6" formControlName="typeDoc" matInput type="text" id="typeDoc" name="typeDoc"/>
+                        </mat-form-field>                                
                     </div>
+                                                
                     <div class="row mx-0 my-2">
-                        <div class="col-3"></div>
-                        <div class="col-4 mt-2">
-                            <button mat-raised-button color="primary" class="col-12" (click)="addDocFormToList()">Ajouter un document</button>                                                
-                        </div>
-                        <div class="text-start col-5 ps-1 pt-3">
-                            <mat-slide-toggle [checked]="!slideDocChecked" (change)="switchFormDocEnable()">{{sliderDocTxt}}</mat-slide-toggle>
-                        </div>
+                        <div class="col-4"></div>
                     </div>
-                </form>-->
+                    <div class="row mb-2 d-flex justify-content-center">
+                        <button [disabled]=isDisabledDocForm mat-raised-button color="primary" class="col-4 me-1" (click)="deleteDoc(i)">Effacer</button>
+                        <button [disabled]=isDisabledDocForm mat-raised-button color="primary" class="col-4 ms-1" (click)="viewDoc(i)">Afficher</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mx-0 my-2">
+                <div class="col-3"></div>
+                <div class="col-4 mt-2">
+                    <button mat-raised-button color="primary" class="col-12" (click)="addDocFormToList()">Ajouter un document</button>                                                
+                </div>
+                <div class="text-start col-5 ps-1 pt-3">
+                    <mat-slide-toggle [checked]="!slideDocChecked" (change)="switchFormDocEnable()">{{sliderDocTxt}}</mat-slide-toggle>
+                </div>
+            </div>
+        </form>-->
     </mat-tab>
 </mat-tab-group>
   

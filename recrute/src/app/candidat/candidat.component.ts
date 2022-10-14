@@ -5,6 +5,9 @@ import { Candidat } from '../models/Candidat';
 import { CandidatService } from '../services/candidat.service';
 import { formatDate } from '@angular/common';
 import { Document } from '../models/Document';
+import { Education } from '../models/Education';
+import { Experience } from '../models/Experience';
+import { Projet } from '../models/Projet';
 
 @Component({
   selector   : 'app-candidat',
@@ -66,137 +69,163 @@ export class CandidatComponent implements OnInit
 
     ngOnInit(): void 
     { 
-            this.formSearch = this.fb.group({'prenom1Cdt':[''], 'nom1Cdt':['']});
-            this.formCdt      = this.createFormCandidatEmpty();
-            this.formEdu      = this.fb.group({educations : this.fb.array([this.createEmptyEducationForm()] , Validators.required)});
-            this.formExp      = this.fb.group({experiences: this.fb.array([this.createEmptyExperienceForm()], Validators.required)});
-            this.formCmp    = this.fb.group({competences: this.fb.array([this.createEmptyCompetenceForm()], Validators.required)});
-            this.formLng     = this.fb.group({langues    : this.fb.array([this.createEmptyLangueForm()]    , Validators.required)});
-            this.formEtt       = this.fb.group({entretiens : this.fb.array([this.createEmptyEntretienForm()] , Validators.required)});
-            this.formPrj       = this.fb.group({projets    : this.fb.array([this.createEmptyProjetForm()]    , Validators.required)});
-            this.formDoc     = this.fb.group({'nomDoc':[''], 'categorieDoc':['']});
-            //this.formDoc    = this.fb.group({documents  : this.fb.array([this.createEmptyDocForm()]       , Validators.required)});        
-        
+        this.formSearch = this.fb.group({'prenom1Cdt':[''], 'nom1Cdt':['']});
+        this.formCdt    = this.createFormCandidatEmpty();
+        this.formEdu    = this.fb.group({educations : this.fb.array([ this.createEmptyEducationForm()  ])});
+        this.formExp    = this.fb.group({experiences: this.fb.array([ this.createEmptyExperienceForm() ])});
+        this.formCmp    = this.fb.group({competences: this.fb.array([ this.createEmptyCompetenceForm() ])});
+        this.formLng    = this.fb.group({langues    : this.fb.array([ this.createEmptyLangueForm()     ])});
+        this.formEtt    = this.fb.group({entretiens : this.fb.array([ this.createEmptyEntretienForm()  ])});
+        this.formPrj    = this.fb.group({projets    : this.fb.array([ this.createEmptyProjetForm()     ])});
+        this.formDoc    = this.fb.group({'nomDoc':[''], 'categorieDoc':['']});
+        //this.formDoc    = this.fb.group({documents  : this.fb.array([this.createEmptyDocForm()]       , Validators.required)});        
+    
         this.idCandidat = Number(this.route.snapshot.paramMap.get('id'))
         if(this.idCandidat !== 0)
         {
-                this.candidatService.getCandidat(this.idCandidat)
-                .subscribe
-                ({ 
-                        next : (candidat) => 
-                        {                     
-                                this.formCdt = this.createFormCandidatFilled(candidat); 
-                                this.switchFormCdtEnable(false); //disabled form inputs; 
-                        },
-                        error : () => 
-                        { 
-                                this.formCdt = this.createFormCandidatEmpty() 
-                        },
-                })
-                
-                this.candidatService.getEducations(this.idCandidat)
-                .subscribe
-                ({                
-                        next: (educations) => 
-                        { 
-                                this.removeEducationFromList(0);
-                            
-                                for(let i = 0; i < educations.length; i++)
-                                {                                                                              
-                                        this.createFilledEducationForm(educations[i]["idEducation"],educations[i]["diplome"]["label"],educations[i]["specialite"]["label"], educations[i]["lieu"], educations[i]["recu"], educations[i]["ecole"], educations[i]["debut"], educations[i]["fin"],educations[i]["info"]);
-                                };
-                                if(educations.length>0) this.switchFormEduEnable(false); //disabled form inputs
-                        },
-                })
-
-                this.candidatService.getExperiences(this.idCandidat)
-                .subscribe
-                ({                
-                    next: (experiences) => 
+            this.candidatService.getCandidat(this.idCandidat)
+            .subscribe
+            ({ 
+                next : (candidat) => 
+                {                     
+                    this.formCdt = this.createFormCandidatFilled(candidat); 
+                    this.switchFormCdtEnable(false); //disabled les inputs du formulaire
+                    
+                    if(candidat.educations.length > 0) 
                     {
-                            console.log(experiences[0]);
-                            this.removeExperienceFromList(0);
-                            
-                            for(let i = 0; i < experiences.length; i++)
-                            {                        
-                                this.createFilledExperienceForm(experiences[i]["idExperience"], experiences[i]["mission"]["profession"], experiences[i]["entreprise"]["raisonSociale"], experiences[i]["entreprise"]["ville"]["ville"],  experiences[i]["entreprise"]["ville"]["pays"]["pays"],  experiences[i]["debut"],  experiences[i]["fin"], experiences[i]["info"]);
-                            };
-                            if(experiences.length>0) this.switchFormExpEnable(false); //disabled form inputs
-                    },
-                })
-
-                /*this.candidatService.getCompetence(this.idCandidat)
-                .subscribe
-                ({                
-                    next: (competences) => 
-                    { 
-                        this.removeCompetenceFromList(0);
-                        
-                        for(let i = 0; i < competences.length; i++)
+                        this.removeEducationFromList(0); //supprimer le formulaire vide
+                        for(let i = 0; i < candidat.educations.length; i++)
                         {
-                            this.createFilledCompetenceForm(competences[i]["idCompetence"],competences[i]["competence"],competences[i]["niveau"], competences[i]["type"], competences[i]["details"]);
-                        };
-                        if(competences.length>0) this.switchFormCmpEnable(false); //disabled form inputs
-                    },
-                })
+                            this.createFilledEducationForm(candidat.educations[i]);
+                        }
+                        this.switchFormEduEnable(false); //disabled les inputs du formulaire
+                    }
 
-                this.candidatService.getLangue(this.idCandidat)
-                .subscribe
-                ({                
-                    next: (langues) => 
-                    { 
-                        this.removeLangueFromList(0);
-                        
-                        for(let i = 0; i < langues.length; i++)
+                    if(candidat.experiences.length > 0) 
+                    {
+                        this.removeExperienceFromList(0); //supprimer le formulaire vide
+                        for(let i = 0; i < candidat.experiences.length; i++)
                         {
-                            this.createFilledLangueForm(langues[i]["idLangue"],langues[i]["langue"],langues[i]["niveau"], langues[i]["certification"], langues[i]["details"]);
-                        };
-                        if(langues.length>0) this.switchFormLngEnable(false); //disabled form inputs
-                    },
-                })
+                            this.createFilledExperienceForm(candidat.experiences[i]);
+                        }
+                        this.switchFormExpEnable(false); //disabled les inputs du formulaire
+                    }
 
-                this.candidatService.getEntretien(this.idCandidat)
-                .subscribe
-                ({                
-                    next: (entretiens) => 
-                    { 
-                        this.removeEntretienFromList(0);
-                        
-                        for(let i = 0; i < entretiens.length; i++)
+                    if(candidat.projets.length > 0) 
+                    {
+                        this.removeProjetFromList(0); //supprimer le formulaire vide
+                        for(let i = 0; i < candidat.projets.length; i++)
                         {
-                            this.createFilledEntretienForm(entretiens[i]["idEntretien"],entretiens[i]["date"],entretiens[i]["lieu"], entretiens[i]["evaluation"], entretiens[i]["recruteur"], entretiens[i]["mission"], entretiens[i]["contrat"], entretiens[i]["resume"]);
-                        };
-                        if(entretiens.length>0) this.switchFormEttEnable(false); //disabled form inputs
-                    },
-                })
+                            this.createFilledProjetForm(candidat.projets[i]);
+                        }
+                        this.switchFormPrjEnable(false); //disabled les inputs du formulaire
+                    }    
+                },
+                error : () => { },
+            })
+            
+            /*this.candidatService.getEducations(this.idCandidat)
+            .subscribe
+            ({                
+                next: (educations) => 
+                { 
+                    this.removeEducationFromList(0);
+                
+                    for(let i = 0; i < educations.length; i++)
+                    {
+                        this.createFilledEducationForm(educations[i]);
+                    };
+                    if(educations.length>0) this.switchFormEduEnable(false); //disabled form inputs
+                },
+            })
 
-                this.candidatService.getProjet(this.idCandidat)
-                .subscribe
-                ({                
-                    next: (projets) => 
-                    { 
-                        this.removeProjetFromList(0);
-                        
-                        for(let i = 0; i < projets.length; i++)
-                        {
-                            this.createFilledProjetForm(projets[i]["idProjet"], projets[i]["nom"], projets[i]["type"], projets[i]["domaine"], projets[i]["debut"], projets[i]["fin"], projets[i]["entreprise"], projets[i]["details"]);
-                        };
-                        if(projets.length>0) this.switchFormPrjEnable(false); //disabled form inputs
-                    },
-                })*/
+            this.candidatService.getExperiences(this.idCandidat)
+            .subscribe
+            ({                
+                next: (experiences) => 
+                {
+                    this.removeExperienceFromList(0);
+                    
+                    for(let i = 0; i < experiences.length; i++)
+                    {   
+                        this.createFilledExperienceForm(experiences[i]);
+                    };
+                    if(experiences.length>0) this.switchFormExpEnable(false); //disabled form inputs
+                },
+            })*/
 
-                //this.organiseDocumentsByCategorie();
+            /*this.candidatService.getCompetence(this.idCandidat)
+            .subscribe
+            ({                
+                next: (competences) => 
+                { 
+                    this.removeCompetenceFromList(0);
+                    
+                    for(let i = 0; i < competences.length; i++)
+                    {
+                        this.createFilledCompetenceForm(competences[i]["idCompetence"],competences[i]["competence"],competences[i]["niveau"], competences[i]["type"], competences[i]["details"]);
+                    };
+                    if(competences.length>0) this.switchFormCmpEnable(false); //disabled form inputs
+                },
+            })
+
+            this.candidatService.getLangue(this.idCandidat)
+            .subscribe
+            ({                
+                next: (langues) => 
+                { 
+                    this.removeLangueFromList(0);
+                    
+                    for(let i = 0; i < langues.length; i++)
+                    {
+                        this.createFilledLangueForm(langues[i]["idLangue"],langues[i]["langue"],langues[i]["niveau"], langues[i]["certification"], langues[i]["details"]);
+                    };
+                    if(langues.length>0) this.switchFormLngEnable(false); //disabled form inputs
+                },
+            })
+
+            this.candidatService.getEntretien(this.idCandidat)
+            .subscribe
+            ({                
+                next: (entretiens) => 
+                { 
+                    this.removeEntretienFromList(0);
+                    
+                    for(let i = 0; i < entretiens.length; i++)
+                    {
+                        this.createFilledEntretienForm(entretiens[i]["idEntretien"],entretiens[i]["date"],entretiens[i]["lieu"], entretiens[i]["evaluation"], entretiens[i]["recruteur"], entretiens[i]["mission"], entretiens[i]["contrat"], entretiens[i]["resume"]);
+                    };
+                    if(entretiens.length>0) this.switchFormEttEnable(false); //disabled form inputs
+                },
+            })
+
+            this.candidatService.getProjet(this.idCandidat)
+            .subscribe
+            ({                
+                next: (projets) => 
+                { 
+                    this.removeProjetFromList(0);
+                    
+                    for(let i = 0; i < projets.length; i++)
+                    {
+                        this.createFilledProjetForm(projets[i]["idProjet"], projets[i]["nom"], projets[i]["type"], projets[i]["domaine"], projets[i]["debut"], projets[i]["fin"], projets[i]["entreprise"], projets[i]["details"]);
+                    };
+                    if(projets.length>0) this.switchFormPrjEnable(false); //disabled form inputs
+                },
+            })*/
+
+            //this.organiseDocumentsByCategorie();
         }
         else
         {
-                 //enabled form inputs
-                this.switchFormCdtEnable(true); 
-                this.switchFormEduEnable(true);
-                this.switchFormExpEnable(true);
-                this.switchFormCmpEnable(true);
-                this.switchFormLngEnable(true);
-                this.switchFormEttEnable(true);
-                this.switchFormPrjEnable(true);
+            //enabled form inputs
+            this.switchFormCdtEnable(true); 
+            this.switchFormEduEnable(true);
+            this.switchFormExpEnable(true);
+            this.switchFormCmpEnable(true);
+            this.switchFormLngEnable(true);
+            this.switchFormEttEnable(true);
+            this.switchFormPrjEnable(true);
         }
     }
 
@@ -207,81 +236,79 @@ export class CandidatComponent implements OnInit
     createFormCandidatFilled(candidat: Candidat): FormGroup
     {
         console.log(candidat);
-            return this.fb.group
-                ({                
-                    prenom1Cdt   : '',
-                    nom1Cdt        : '',
-                    idCandidat      : candidat.idCandidat,
-                    prenom2Cdt   : candidat.prenom,
-                    nom2Cdt        : candidat.nom,
-                    telMobCdt      : candidat.mob,
-                    emailCdt         : candidat.email,
-                    adresseCdt     : candidat.adresse,
-                    adresse2Cdt   : candidat.adresse2,
-                    villeCdt           : candidat.ville.ville,
-                    postalCdt        : candidat.ville.postal,
-                    salaireCdt       : candidat.salaire,
-                    linedinCdt       : "",
-                    githubCdt       : "",
-                    mobilCdt         : candidat.mobilite.zone,
-                    nationCdt        : candidat.pays.nationnalite,
-                    situationCdt    : candidat.marital,
-                    handicapCdt   : candidat.handicape,
-                    teletravailCdt  : candidat.teletravail,
-                    permisCdt       : candidat.permis,
-                    vehiculeCdt     : candidat.vehicule,
-                    dispoCdt         : candidat.disponible,
-                    textareaCdt     : candidat.info
-            });
+        return this.fb.group
+        ({                
+            prenom1Cdt    : '',
+            nom1Cdt       : '',
+            idCandidat    : candidat.idCandidat,
+            prenom2Cdt    : candidat.prenom,
+            nom2Cdt       : candidat.nom,
+            telMobCdt     : candidat.mob,
+            emailCdt      : candidat.email,
+            adresseCdt    : candidat.adresse,
+            adresse2Cdt   : candidat.adresse2,
+            villeCdt      : candidat.ville.ville,
+            postalCdt     : candidat.ville.postal,
+            salaireCdt    : candidat.salaire,
+            linkedinCdt   : candidat.pseudos[0].pseudo,
+            githubCdt     : candidat.pseudos[1].pseudo,
+            mobilCdt      : candidat.mobilite.zone,
+            nationCdt     : candidat.pays.nationnalite,
+            situationCdt  : candidat.marital,
+            handicapCdt   : candidat.handicape,
+            teletravailCdt: candidat.teletravail,
+            permisCdt     : candidat.permis,
+            vehiculeCdt   : candidat.vehicule,
+            dispoCdt      : candidat.disponible,
+            textareaCdt   : candidat.info
+        });
     }
 
     createFormCandidatEmpty(): FormGroup
     {
-            return this.fb.group
-            ({
-                    prenom1Cdt    : '', 
-                    nom1Cdt         : '',
-                    idCandidat      : '',
-                    prenom2Cdt   : '', 
-                    nom2Cdt        : '',
-                    telMobCdt     : '', 
-                    emailCdt        : '', 
-                    adresseCdt     : '', 
-                    adresse2Cdt   : '', 
-                    villeCdt          : '', 
-                    postalCdt       : '',
-                    salaireCdt      : '',
-                    linkedinCdt    : '',
-                    githubCdt      : '',
-                    nationCdt      : '',
-                    situationCdt  : '',
-                    mobilCdt       : '', 
-                    handicapCdt : '', 
-                    teletravailCdt: '', 
-                    permisCdt     : '', 
-                    vehiculeCdt   : '',
-                    dispoCdt       : '',
-                    textareaCdt   : ''
-            });
+        return this.fb.group
+        ({
+            prenom1Cdt    : '', 
+            nom1Cdt       : '',
+            idCandidat    : '',
+            prenom2Cdt    : '', 
+            nom2Cdt       : '',
+            telMobCdt     : '', 
+            emailCdt      : '', 
+            adresseCdt    : '', 
+            adresse2Cdt   : '', 
+            villeCdt      : '', 
+            postalCdt     : '',
+            salaireCdt    : '',
+            linkedinCdt   : '',
+            githubCdt     : '',
+            nationCdt     : '', 
+            situationCdt  : '',
+            mobilCdt      : '', 
+            handicapCdt   : '', 
+            teletravailCdt: '', 
+            permisCdt     : '', 
+            vehiculeCdt   : '',
+            dispoCdt      : '',
+            textareaCdt   : ''
+        });
     }
 
     chercher()
     {
-            console.log( this.candidatService.getCandidatByName(this.formSearch.get('prenom1Cdt')?.value,this.formSearch.get('nom1Cdt')?.value) )
-            this.candidatService.getCandidatByName(this.formSearch.get('prenom1Cdt')?.value,this.formSearch.get('nom1Cdt')?.value)
-            .subscribe
-            ({ 
-                    next         : (candidat) => { if(candidat!=null) this.router.navigate(['/candidat/' + candidat.idCandidat]).then(() => { window.location.reload(); });},
-                    error        : ()               => {  },
-                    complete : ()               => {  } 
-            })        
+        this.candidatService.getCandidatByName(this.formSearch.get('prenom1Cdt')?.value,this.formSearch.get('nom1Cdt')?.value)
+        .subscribe
+        ({ 
+            next     : (candidat) => { if(candidat!=null) this.router.navigate(['/candidat/' + candidat.idCandidat]).then(() => { window.location.reload(); });},
+            error    : ()         => {  },
+            complete : ()         => {  } 
+        })        
     }
 
     switchFormCdtEnable(enabling?: boolean)
     {
         if(enabling == false || this.isDisabledCdtForm == false)
-        {
-            //console.log("disabling");               
+        {            
             for (let j = 0; j < this.fb.group.length; j++)
             {
                 Object.keys(this.formCdt.controls).forEach(key => { this.formCdt.controls[key].disable(); });
@@ -290,8 +317,7 @@ export class CandidatComponent implements OnInit
             this.sliderCdtTxt = 'formulaire non modifiable';
         }
         else
-        {
-            //console.log("enabling");                
+        {             
             for (let j = 0; j < this.fb.group.length; j++)
             {
                 Object.keys(this.formCdt.controls).forEach(key => { this.formCdt.controls[key].enable(); });
@@ -310,34 +336,34 @@ export class CandidatComponent implements OnInit
     {   
         return this.fb.group
         ({
-            idEducation : [null],
-            diplomeEdu  : ['', Validators.required],
-            domaineEdu  : ['', Validators.required],
-            obtenuEdu   : [false],
-            lieuEdu     : [''],
-            ecoleEdu    : [''],
-            debutEdu    : [null],
-            finEdu      : [null],
-            textareaEdu : ['']
+            idEducation : null,
+            diplomeEdu  : '',
+            domaineEdu  : '',
+            obtenuEdu   : false,
+            lieuEdu     : '',
+            ecoleEdu    : '',
+            debutEdu    : null,
+            finEdu      : null,
+            textareaEdu : ''
         })
     }
     
     //creer un formulaire education rempli
-    createFilledEducationForm(idEducation: number | null, diplome: String | null, domaine: String | null, lieu: String | null, recu: boolean | null, ecole: String | null, debut: Date | null, fin: Date | null, details: String | null)
+    createFilledEducationForm(education : Education)
     {       
         this.educations.push
         (
             this.fb.group
             ({
-                idEducation : [idEducation, Validators.required],
-                diplomeEdu  : [diplome    , Validators.required],
-                domaineEdu  : [domaine    , Validators.required],
-                obtenuEdu   : [recu      ],
-                lieuEdu     : [lieu      ],
-                ecoleEdu    : [ecole     ],
-                debutEdu    : [debut     ],
-                finEdu      : [fin       ],
-                textareaEdu : [details   ]
+                idEducation : [education.idEducation     , Validators.required],
+                diplomeEdu  : [education.diplome.label   , Validators.required],
+                domaineEdu  : [education.specialite.label, Validators.required],
+                obtenuEdu   : [education.recu                                 ],
+                lieuEdu     : [education.lieu                                 ],
+                ecoleEdu    : [education.ecole                                ],
+                debutEdu    : [education.debut                                ],
+                finEdu      : [education.fin                                  ],
+                textareaEdu : [education.info                                 ]
             })
         )
     }
@@ -356,8 +382,8 @@ export class CandidatComponent implements OnInit
             let idCandidat : number;
             let date1!     : Date;
             let date2!     : Date;
-            let strDate1!   : string;
-            let strDate2!   : string;
+            let strDate1!  : string;
+            let strDate2!  : string;
             let idEducation: number = this.educations.at(index).get('idEducation')?.value;
             
             date1 = this.educations.at(index).get("debutEdu")?.value;
@@ -366,20 +392,17 @@ export class CandidatComponent implements OnInit
             date2 = this.educations.at(index).get("finEdu")?.value;
             if(date2 != null) { strDate2 = formatDate(date2, 'yyyy-MM-dd', 'en_US'); };
 
-            let requete = 
-            {
-                "recu": this.educations.at(index).get("obtenuEdu")?.value,
-                "lieu": this.educations.at(index).get("lieuEdu")?.value,
-                "ecole": this.educations.at(index).get("ecoleEdu")?.value,               
-                "debut": strDate1,
-                "fin": strDate2,
-                "info": this.educations.at(index).get("textareaEdu")?.value,
-                "specialite": 
-                {
+            let requete = {
+                "recu"      : this.educations.at(index).get("obtenuEdu")?.value,
+                "lieu"      : this.educations.at(index).get("lieuEdu")?.value,
+                "ecole"     : this.educations.at(index).get("ecoleEdu")?.value,               
+                "debut"     : strDate1,
+                "fin"       : strDate2,
+                "info"      : this.educations.at(index).get("textareaEdu")?.value,
+                "specialite": {
                     "label": this.educations.at(index).get("domaineEdu")?.value
                 },
-                "diplome": 
-                {                    
+                "diplome": {                    
                     "label": this.educations.at(index).get("diplomeEdu")?.value
                 }
             }
@@ -395,7 +418,8 @@ export class CandidatComponent implements OnInit
                     error: (error)    => { console.log(error);    }
                 });
             }
-            else //update education
+            //update education
+            else
             {   
                 this.candidatService.updateEducation(idEducation, requete)
                 .subscribe
@@ -423,9 +447,9 @@ export class CandidatComponent implements OnInit
         {
             this.candidatService.deleteEducation(id).subscribe
             ({
-                next    : ()      => {  this.removeEducationFromList(index);},
+                next    : ()      => { this.removeEducationFromList(index);},
                 error   : (error) => { console.log(error) },
-                complete: ()      => { /*console.log("index: " + index + " - id: " + id);*/  }
+                complete: ()      => { }
             })
         }
         this.removeEducationFromList(index);
@@ -453,9 +477,7 @@ export class CandidatComponent implements OnInit
         }
 
         if(switchOn == false)
-        {
-            //console.log(this.isDisabledEduForm);
-            //console.log("disabling");
+        {            
             for (let i = 0; i < this.educations.length; i++)
             {                
                 for (let j = 0; j < this.fb.group.length; j++)
@@ -467,9 +489,7 @@ export class CandidatComponent implements OnInit
             this.sliderEduTxt = 'formulaire non modifiable';
         }
         else
-        {
-            //console.log(this.isDisabledEduForm);
-            //console.log("enabling");
+        {            
             for (let i = 0; i < this.educations.length; i++)
             {                
                 for (let j = 0; j < this.fb.group.length; j++)
@@ -502,33 +522,32 @@ export class CandidatComponent implements OnInit
     {   
         return this.fb.group
         ({
-            idExperience : [null],
-            missionExp   : ['', Validators.required],
-            entrepriseExp: ['', Validators.required],
-            villeExp     : [''],
-            paysExp      : [''],            
-            debutExp     : [null],
-            finExp       : [null],
-            textareaExp  : ['']
+            idExperience : null,
+            missionExp   : '',
+            entrepriseExp: '',
+            villeExp     : '',
+            paysExp      : '',            
+            debutExp     : null,
+            finExp       : null,
+            textareaExp  : ''
         })
     }
     
     //creer un formulaire experience rempli
-    createFilledExperienceForm(idExperience: number | null, mission: String | null, entreprise: String | null, ville: String | null, pays: String | null, debut: Date | null, fin: Date | null, details: String | null)
-    {
-        
+    createFilledExperienceForm(experience : Experience)
+    {      
         this.experiences.push
         (
             this.fb.group
             ({
-                idExperience   : [idExperience, Validators.required],
-                missionExp     : [mission     , Validators.required],
-                entrepriseExp : [entreprise  , Validators.required],
-                villeExp           : [ville      ],
-                paysExp          : [pays     ],
-                debutExp        : [debut   ],
-                finExp             : [fin        ],
-                textareaExp    : [details  ]
+                idExperience  : [experience.idExperience            , Validators.required],
+                missionExp    : [experience.mission.profession      , Validators.required],
+                entrepriseExp : [experience.entreprise.raisonSociale, Validators.required],
+                villeExp      : [experience.entreprise.ville.ville                       ],
+                paysExp       : [experience.entreprise.ville.pays.pays                   ],
+                debutExp      : [experience.debut                                        ],
+                finExp        : [experience.fin                                          ],
+                textareaExp   : [experience.info                                         ]
             })
         )
     }
@@ -545,11 +564,11 @@ export class CandidatComponent implements OnInit
     {
         if(this.experiences.at(index).status == 'VALID')
         {
-            let idCandidat  : number;
-            let date1!      : Date;
-            let date2!      : Date;
-            let idExperience: number = this.experiences.at(index).get('idExperience')?.value;
-            let formData    : any    = new FormData();
+            let idCandidat   : number;
+            let date1!       : Date;
+            let date2!       : Date;
+            let idExperience : number = this.experiences.at(index).get('idExperience')?.value;
+            let formData     : any    = new FormData();
             formData.append("mission"   , this.experiences.at(index).get("missionExp")?.value);
             formData.append("entreprise", this.experiences.at(index).get("entrepriseExp")?.value);
             formData.append("ville"     , this.experiences.at(index).get("villeExp")?.value);
@@ -577,7 +596,8 @@ export class CandidatComponent implements OnInit
                     error: (error)    => { console.log(error);    }
                 });
             }
-            else //modifier et sauvegarder experience
+            //modifier et sauvegarder experience
+            else 
             {
                 formData.append("idExperience", this.experiences.at(index).get("idExperience"));
                 this.candidatService.updateExperience(idExperience, formData.entries())
@@ -606,9 +626,9 @@ export class CandidatComponent implements OnInit
         {
             this.candidatService.deleteExperience(id).subscribe
             ({
-                next    : ()      => {  this.removeExperienceFromList(index);},
+                next    : ()      => { this.removeExperienceFromList(index); },
                 error   : (error) => { console.log(error) },
-                complete: ()      => { /*console.log("index: " + index + " - id: " + id);*/  }
+                complete: ()      => { }
             })
         }
         this.removeExperienceFromList(index);
@@ -1122,32 +1142,33 @@ export class CandidatComponent implements OnInit
     {   
         return this.fb.group
         ({
-            idProjet     : [null],
-            nomPrj       : ['', Validators.required],
-            typePrj      : [''],
-            domainePrj   : [''],
-            debutPrj     : [null],            
-            finPrj       : [null],
-            entreprisePrj: [''],
-            textareaPrj  : ['']
+            idProjet     : null,
+            nomPrj       : '',
+            typePrj      : '',
+            domainePrj   : '',
+            debutPrj     : null,            
+            finPrj       : null,
+            entreprisePrj: '',
+            textareaPrj  : ''
         })
     }
     
     //creer un formulaire projet rempli
-    createFilledProjetForm(idProjet: number | null, nom: String | null, type: String | null, domaine: String | null, debut: Date | null, fin: Date | null, entreprise: String | null, details: String | null)
+    //createFilledProjetForm(idProjet: number | null, nom: String | null, type: String | null, domaine: String | null, debut: Date | null, fin: Date | null, entreprise: String | null, details: String | null)
+    createFilledProjetForm(projet : Projet)
     {        
         this.projets.push
         (
             this.fb.group
             ({
-                idProjet      : [idProjet, Validators.required],
-                nomPrj        : [nom     , Validators.required],
-                typePrj       : [type],
-                domainePrj    : [domaine],
-                debutPrj      : [debut],            
-                finPrj        : [fin],
-                entreprisePrj : [entreprise],
-                textareaPrj   : [details]
+                idProjet      : [projet.idProjet, Validators.required],
+                nomPrj        : [projet.nom     , Validators.required],
+                typePrj       : [projet.type                         ],
+                domainePrj    : [projet.activite.nom                 ],
+                debutPrj      : [projet.debut                        ],            
+                finPrj        : [projet.fin                          ],
+                entreprisePrj : [projet.entreprise                   ],
+                textareaPrj   : [projet.info                         ]
             })
         )
     }
@@ -1175,12 +1196,12 @@ export class CandidatComponent implements OnInit
             date1 = this.projets.at(index).get("debutPrj")?.value;
             if(date1 != null) 
             { 
-                formData.append("debut", formatDate(date1, 'yyyy-MM-dd', 'en_US')); 
+                formData.append("debut", formatDate(date1, 'yyyy-MM-dd', 'en_US'));
             }
             date2 = this.projets.at(index).get("finPrj")?.value;
             if(date2 != null) 
             { 
-                formData.append("fin", formatDate(date2, 'yyyy-MM-dd', 'en_US')); 
+                formData.append("fin", formatDate(date2, 'yyyy-MM-dd', 'en_US'));
             }               
             formData.append("perso"     , this.projets.at(index).get("persoPrj")?.value);
             formData.append("pro"       , this.projets.at(index).get("proPrj")?.value);
@@ -1188,7 +1209,7 @@ export class CandidatComponent implements OnInit
             formData.append("details"   , this.projets.at(index).get("textareaPrj")?.value);
 
             //créer et sauvegarder projet
-            if(idProjet == null) 
+            if(idProjet == null)
             {   
                 idCandidat = this.formCdt.get('idCandidat')?.value;
                 this.candidatService.createProjet(idCandidat, formData.entries())
@@ -1287,18 +1308,17 @@ export class CandidatComponent implements OnInit
     documents: [string, string[]] [] = [
         ["categorie 1",["document 1","document 2","document 3"]], 
         ["categorie 2",["document 4","document 5","document 6"]],
-        ["categorie 3",["document 7","document 8","document 9"]]
-        ]
+        ["categorie 3",["document 7","document 8","document 9"]]]
     
     organiseDocumentsByCategorie()
     {
-        let resultats : string[][]=
-               [["categorie 1","document 1"],
-                ["categorie 1","document 2"],
-                ["categorie 1","document 3"],
-                ["categorie 2","document 4"],
-                ["categorie 2","document 5"],
-                ["categorie 2","document 6"]];
+        let resultats : string[][] = [
+            ["categorie 1","document 1"],
+            ["categorie 1","document 2"],
+            ["categorie 1","document 3"],
+            ["categorie 2","document 4"],
+            ["categorie 2","document 5"],
+            ["categorie 2","document 6"]];
 
         var cat = "";
         for(let i=0; i<resultats.length; i++)
