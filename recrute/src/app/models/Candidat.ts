@@ -1,5 +1,8 @@
+import { Competence } from "./Competence";
 import { Education } from "./Education";
+import { Entretien } from "./Entretien";
 import { Experience } from "./Experience";
+import { Langue } from "./Langue";
 import { Mobilite } from "./Mobilite";
 import { Pays } from "./Pays";
 import { Projet } from "./Projet";
@@ -33,4 +36,8 @@ export interface Candidat
     educations  : Array<Education>;
     experiences : Array<Experience>;
     projets     : Array<Projet>;
+    entretiens  : Array<Entretien>;
+    competences : Array<Competence>;
+    langues     : Array<Langue>;
+    documents   : Array<Document>;
 }

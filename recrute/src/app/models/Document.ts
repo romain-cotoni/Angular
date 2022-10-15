@@ -3,7 +3,8 @@ import { Categorie } from "./Categorie";
 export interface Document
 {
     idDocument: number;
-    label     : string;
+    nom       : string;
 	path      : string;
+    type      : string;
     categorie : Categorie;
 }

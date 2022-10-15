@@ -22,25 +22,22 @@ export class CandidatRechercherComponent implements OnInit
     ngOnInit(): void 
     {
         this.formSearchCdt = this.fbSearchCdt.group
-        ({'prenomSearchCdt'     : [''],
-          'nomSearchCdt'        : [''], 
-          'telSearchCdt'        : [''],
-          'emailSearchCdt'      : [''],
-          'villeSearchCdt'      : [''],
-          'linkedinSearchCdt'   : [''],
-          'diplomeSearchCdt'    : [''], 
-          'competenceSearchCdt' : [''],
-          'langueSearchCdt'     : [''],
-          'entrepriseSearchCdt' : [''],
-          'handicapeSearchCdt'  : [''],
-          'dispoSearchCdt'      : [''],
-          'teletravailSearchCdt': [''],
-          'mobiliteSearchCdt'   : [''],
+        ({'prenomSearchCdt'     : '',
+          'nomSearchCdt'        : '', 
+          'telSearchCdt'        : '',
+          'emailSearchCdt'      : '',
+          'villeSearchCdt'      : '',
+          'linkedinSearchCdt'   : '',
+          'diplomeSearchCdt'    : '',
+          'domaineSearchCdt'    : '',
+          'competenceSearchCdt' : '',
+          'langueSearchCdt'     : '',
+          'entrepriseSearchCdt' : '',
+          'handicapeSearchCdt'  : '',
+          'dispoSearchCdt'      : '',
+          'teletravailSearchCdt': '',
+          'mobiliteSearchCdt'   : ''
         });
         this.candidatService.getCandidats().subscribe(reponse => { this.candidats = reponse; })
     }
-
-
-
-
 }

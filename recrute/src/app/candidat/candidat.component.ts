@@ -8,6 +8,9 @@ import { Document } from '../models/Document';
 import { Education } from '../models/Education';
 import { Experience } from '../models/Experience';
 import { Projet } from '../models/Projet';
+import { Entretien } from '../models/Entretien';
+import { Competence } from '../models/Competence';
+import { Langue } from '../models/Langue';
 
 @Component({
   selector   : 'app-candidat',
@@ -78,7 +81,7 @@ export class CandidatComponent implements OnInit
         this.formEtt    = this.fb.group({entretiens : this.fb.array([ this.createEmptyEntretienForm()  ])});
         this.formPrj    = this.fb.group({projets    : this.fb.array([ this.createEmptyProjetForm()     ])});
         this.formDoc    = this.fb.group({'nomDoc':[''], 'categorieDoc':['']});
-        //this.formDoc    = this.fb.group({documents  : this.fb.array([this.createEmptyDocForm()]       , Validators.required)});        
+        //this.formDoc    = this.fb.group({documents  : this.fb.array([ this.createEmptyDocForm()])});        
     
         this.idCandidat = Number(this.route.snapshot.paramMap.get('id'))
         if(this.idCandidat !== 0)
@@ -119,102 +122,40 @@ export class CandidatComponent implements OnInit
                             this.createFilledProjetForm(candidat.projets[i]);
                         }
                         this.switchFormPrjEnable(false); //disabled les inputs du formulaire
-                    }    
+                    }
+
+                    if(candidat.entretiens.length > 0) 
+                    {
+                        this.removeEntretienFromList(0); //supprimer le formulaire vide
+                        for(let i = 0; i < candidat.entretiens.length; i++)
+                        {
+                            this.createFilledEntretienForm(candidat.entretiens[i]);
+                        }
+                        this.switchFormEttEnable(false); //disabled les inputs du formulaire
+                    }
+
+                    if(candidat.competences.length > 0) 
+                    {
+                        this.removeCompetenceFromList(0); //supprimer le formulaire vide
+                        for(let i = 0; i < candidat.competences.length; i++)
+                        {
+                            this.createFilledCompetenceForm(candidat.competences[i]);
+                        }
+                        this.switchFormCmpEnable(false); //disabled les inputs du formulaire
+                    }
+
+                    if(candidat.langues.length > 0) 
+                    {
+                        this.removeLangueFromList(0); //supprimer le formulaire vide
+                        for(let i = 0; i < candidat.langues.length; i++)
+                        {
+                            this.createFilledLangueForm(candidat.langues[i]);
+                        }
+                        this.switchFormLngEnable(false); //disabled les inputs du formulaire
+                    }
                 },
                 error : () => { },
             })
-            
-            /*this.candidatService.getEducations(this.idCandidat)
-            .subscribe
-            ({                
-                next: (educations) => 
-                { 
-                    this.removeEducationFromList(0);
-                
-                    for(let i = 0; i < educations.length; i++)
-                    {
-                        this.createFilledEducationForm(educations[i]);
-                    };
-                    if(educations.length>0) this.switchFormEduEnable(false); //disabled form inputs
-                },
-            })
-
-            this.candidatService.getExperiences(this.idCandidat)
-            .subscribe
-            ({                
-                next: (experiences) => 
-                {
-                    this.removeExperienceFromList(0);
-                    
-                    for(let i = 0; i < experiences.length; i++)
-                    {   
-                        this.createFilledExperienceForm(experiences[i]);
-                    };
-                    if(experiences.length>0) this.switchFormExpEnable(false); //disabled form inputs
-                },
-            })*/
-
-            /*this.candidatService.getCompetence(this.idCandidat)
-            .subscribe
-            ({                
-                next: (competences) => 
-                { 
-                    this.removeCompetenceFromList(0);
-                    
-                    for(let i = 0; i < competences.length; i++)
-                    {
-                        this.createFilledCompetenceForm(competences[i]["idCompetence"],competences[i]["competence"],competences[i]["niveau"], competences[i]["type"], competences[i]["details"]);
-                    };
-                    if(competences.length>0) this.switchFormCmpEnable(false); //disabled form inputs
-                },
-            })
-
-            this.candidatService.getLangue(this.idCandidat)
-            .subscribe
-            ({                
-                next: (langues) => 
-                { 
-                    this.removeLangueFromList(0);
-                    
-                    for(let i = 0; i < langues.length; i++)
-                    {
-                        this.createFilledLangueForm(langues[i]["idLangue"],langues[i]["langue"],langues[i]["niveau"], langues[i]["certification"], langues[i]["details"]);
-                    };
-                    if(langues.length>0) this.switchFormLngEnable(false); //disabled form inputs
-                },
-            })
-
-            this.candidatService.getEntretien(this.idCandidat)
-            .subscribe
-            ({                
-                next: (entretiens) => 
-                { 
-                    this.removeEntretienFromList(0);
-                    
-                    for(let i = 0; i < entretiens.length; i++)
-                    {
-                        this.createFilledEntretienForm(entretiens[i]["idEntretien"],entretiens[i]["date"],entretiens[i]["lieu"], entretiens[i]["evaluation"], entretiens[i]["recruteur"], entretiens[i]["mission"], entretiens[i]["contrat"], entretiens[i]["resume"]);
-                    };
-                    if(entretiens.length>0) this.switchFormEttEnable(false); //disabled form inputs
-                },
-            })
-
-            this.candidatService.getProjet(this.idCandidat)
-            .subscribe
-            ({                
-                next: (projets) => 
-                { 
-                    this.removeProjetFromList(0);
-                    
-                    for(let i = 0; i < projets.length; i++)
-                    {
-                        this.createFilledProjetForm(projets[i]["idProjet"], projets[i]["nom"], projets[i]["type"], projets[i]["domaine"], projets[i]["debut"], projets[i]["fin"], projets[i]["entreprise"], projets[i]["details"]);
-                    };
-                    if(projets.length>0) this.switchFormPrjEnable(false); //disabled form inputs
-                },
-            })*/
-
-            //this.organiseDocumentsByCategorie();
         }
         else
         {
@@ -502,9 +443,6 @@ export class CandidatComponent implements OnInit
         }
     }
     
-    /*
-    console.log((<FormArray>this.formEdu.get('educations')).at(index).get('diplomeEdu')?.value);
-    
     getAllEducations()
     {
         for (let i = 0; i < this.educations.length; i++)
@@ -512,7 +450,6 @@ export class CandidatComponent implements OnInit
             console.log(this.educations.at(i).get('diplomeEdu')?.value);
         }
     }
-    */
 
     
     //--------------------TAB EXPERIENCE--------------------
@@ -552,7 +489,6 @@ export class CandidatComponent implements OnInit
         )
     }
         
-    //---------a voir cette fonction----------------
     //retourne la liste des formulaires expérience
     get experiences(): FormArray
     {
@@ -640,7 +576,7 @@ export class CandidatComponent implements OnInit
         (<FormArray>this.formExp.get('experiences')).removeAt(index);
     }
 
-    //disable/enable la liste des formulaires experience
+    //disable-enable la liste des formulaires experience
     switchFormExpEnable(enabling?: boolean)
     {
         let switchOn! : boolean;
@@ -690,31 +626,30 @@ export class CandidatComponent implements OnInit
     {   
         return this.fb.group
         ({
-            idCompetence : [null],
-            competenceCmp: ['', Validators.required],
-            niveauCmp    : [''],
-            typeCmp      : [''],
-            textareaCmp  : ['']
+            idCompetence : null,
+            competenceCmp: '',
+            niveauCmp    : '',
+            typeCmp      : '',
+            textareaCmp  : ''
         })
     }
     
     //creer un formulaire compétence rempli
-    createFilledCompetenceForm(idCompetence: number | null, competence: String | null, niveau: String | null, type: String | null, details: String | null)
+    createFilledCompetenceForm(competence : Competence)
     {     
         this.competences.push
         (
             this.fb.group
             ({
-                idCompetence : [idCompetence, Validators.required],
-                competenceCmp: [competence  , Validators.required],
-                niveauCmp    : [niveau],
-                typeCmp      : [type],
-                textareaCmp  : [details]
+                idCompetence : [competence.idCompetence, Validators.required],
+                competenceCmp: [competence.nom         , Validators.required],
+                niveauCmp    : [competence.niveau                           ],
+                typeCmp      : [competence.type                             ],
+                textareaCmp  : [competence.info                             ]
             })
         )
     }
         
-    //---------a voir cette fonction----------------
     //retourne la liste des formulaires compétence
     get competences(): FormArray
     {
@@ -745,7 +680,8 @@ export class CandidatComponent implements OnInit
                     error: (error)    => { console.log(error);    }
                 });
             }
-            else //modifier et sauvegarder compétence
+            //modifier et sauvegarder compétence
+            else
             {
                 formData.append("idCompetence", this.competences.at(index).get("idCompetence"));
                 this.candidatService.updateCompetence(idCompetence, formData.entries())
@@ -788,7 +724,7 @@ export class CandidatComponent implements OnInit
         (<FormArray>this.formCmp.get('competences')).removeAt(index);
     }
 
-    //disable/enable la liste des formulaires compétence
+    //disable-enable la liste des formulaires compétence
     switchFormCmpEnable(enabling?: boolean)
     {
         let switchOn! : boolean;
@@ -836,31 +772,30 @@ export class CandidatComponent implements OnInit
     {   
         return this.fb.group
         ({
-            idLangue         : [null],
-            langueLng        : ['', Validators.required],
-            niveauLng        : [''],
-            certificationLng : [''],
-            textareaLng      : ['']
+            idLangue         : null,
+            langueLng        : '',
+            niveauLng        : '',
+            certificationLng : '',
+            textareaLng      : ''
         })
     }
     
     //creer un formulaire langue rempli
-    createFilledLangueForm(idLangue: number | null, langue: String | null, niveau: String | null, certification: String | null, details: String | null)
+    createFilledLangueForm(langue : Langue)
     {     
         this.langues.push
         (
             this.fb.group
             ({
-                idLangue         : [idLangue, Validators.required],
-                langueLng        : [langue  , Validators.required],
-                niveauLng        : [niveau],
-                certificationLng : [certification],
-                textareaLng      : [details]
+                idLangue         : [langue.idLangue, Validators.required],
+                langueLng        : [langue.nom     , Validators.required],
+                niveauLng        : [langue.niveau                       ],
+                certificationLng : [langue.certification                ],
+                textareaLng      : [langue.info                         ]
             })
         )
     }
         
-    //---------a voir cette fonction----------------
     //retourne la liste des formulaires langue
     get langues(): FormArray
     {
@@ -934,7 +869,7 @@ export class CandidatComponent implements OnInit
         (<FormArray>this.formLng.get('langues')).removeAt(index);
     }
 
-    //disable/enable la liste des formulaires langue
+    //disable-enable la liste des formulaires langue
     switchFormLngEnable(enabling?: boolean)
     {
         let switchOn! : boolean;
@@ -982,37 +917,38 @@ export class CandidatComponent implements OnInit
     {   
         return this.fb.group
         ({
-            idEntretien   : [null],
-            dateEtt       : ['', Validators.required],
-            lieuEtt       : [''],
-            evaluationEtt : [''],
-            recruteurEtt  : ['', Validators.required],            
-            missionEtt    : [null],
-            contratEtt    : [null],
-            textareaEtt   : ['']
+            idEntretien   : null,
+            dateEtt       : '',
+            lieuEtt       : '',
+            evaluationEtt : '',
+            nomRctrEtt    : '',
+            prenomRctrEtt : '',           
+            missionEtt    : null,
+            contratEtt    : null,
+            textareaEtt   : ''
         })
     }
     
     //creer un formulaire entretien rempli
-    createFilledEntretienForm(idEntretien: number | null, date: Date | null, lieu: String | null, evaluation: String | null, recruteur: String | null, mission: String | null, contrat: String | null, resume: String | null)
+    createFilledEntretienForm(entretien : Entretien)
     {        
         this.entretiens.push
         (
             this.fb.group
             ({
-                idEntretien   : [idEntretien, Validators.required],
-                dateEtt       : [date, Validators.required],
-                lieuEtt       : [lieu],
-                evaluationEtt : [evaluation],
-                recruteurEtt  : [recruteur, Validators.required],
-                missionEtt    : [mission],
-                contratEtt    : [contrat],
-                textareaEtt   : [resume]
+                idEntretien   : [entretien.idEntretien     , Validators.required],
+                dateEtt       : [entretien.date            , Validators.required],
+                lieuEtt       : [entretien.lieu                                 ],
+                evaluationEtt : [entretien.evaluation                           ],
+                nomRctrEtt    : [entretien.recruteur.nom   , Validators.required],
+                prenomRctrEtt : [entretien.recruteur.prenom, Validators.required],
+                missionEtt    : [entretien.poste                                ],
+                contratEtt    : [entretien.contrat                              ],
+                textareaEtt   : [entretien.resume                               ]
             })
         )
     }
         
-    //---------a voir cette fonction----------------
     //retourne la liste des formulaires entretien
     get entretiens(): FormArray
     {
@@ -1082,7 +1018,7 @@ export class CandidatComponent implements OnInit
             ({
                 next    : ()      => {  this.removeEntretienFromList(index);},
                 error   : (error) => { console.log(error) },
-                complete: ()      => { /*console.log("index: " + index + " - id: " + id);*/  }
+                complete: ()      => {  }
             })
         }
         this.removeEntretienFromList(index);
@@ -1094,7 +1030,7 @@ export class CandidatComponent implements OnInit
         (<FormArray>this.formEtt.get('entretiens')).removeAt(index);
     }
 
-    //disable/enable la liste des formulaires entretien
+    //disable-enable la liste des formulaires entretiens
     switchFormEttEnable(enabling?: boolean)
     {
         let switchOn! : boolean;
@@ -1154,7 +1090,6 @@ export class CandidatComponent implements OnInit
     }
     
     //creer un formulaire projet rempli
-    //createFilledProjetForm(idProjet: number | null, nom: String | null, type: String | null, domaine: String | null, debut: Date | null, fin: Date | null, entreprise: String | null, details: String | null)
     createFilledProjetForm(projet : Projet)
     {        
         this.projets.push
@@ -1173,7 +1108,6 @@ export class CandidatComponent implements OnInit
         )
     }
         
-    //---------a voir cette fonction----------------
     //retourne la liste des formulaires projet
     get projets(): FormArray
     {
@@ -1262,7 +1196,7 @@ export class CandidatComponent implements OnInit
         (<FormArray>this.formPrj.get('projets')).removeAt(index);
     }
 
-    //disable/enable la liste des formulaires projet
+    //disable-enable la liste des formulaires projet
     switchFormPrjEnable(enabling?: boolean)
     {
         let switchOn! : boolean;
@@ -1325,14 +1259,11 @@ export class CandidatComponent implements OnInit
         {
             if(cat != resultats[i][0]) 
             {
-                //console.log(resultats[i][0]);
                 this.documents[i].push(resultats[i][0]); console.log(resultats[i][0]);
             }
             //this.documents[i][1].push(resultats[i][1]); console.log(resultats[i][1]);
         }
-
     }
-
 
     //ajouter un document à la liste documents
     addDocument()
@@ -1351,38 +1282,36 @@ export class CandidatComponent implements OnInit
 
     }
 
-
-    /*
-    //creer un formulaire document vide
+    
+    /*//creer un formulaire document vide
     createEmptyDocForm(): FormGroup
     {   
         return this.fb.group
         ({
-            idDoc        : [null],
-            nomDoc       : ['', Validators.required],
-            typeDoc      : [''],
-            categorieDoc : [''],
-            cheminDoc    : ['', Validators.required],            
+            idDoc        : null,
+            nomDoc       : '',
+            pathDoc      : '',
+            typeDoc      : '',
+            categorieDoc : '',            
         })
     }
     
     //creer un formulaire document rempli
-    createFilledDocForm(idDoc: number | null, nom: String | null, type: String | null, categorie: String | null, chemin: String | null)
+    createFilledDocForm(document : Document)
     {        
         this.documents.push
         (
             this.fb.group
             ({
-                idDoc        : [idDoc, Validators.required],
-                nomDoc       : [nom  , Validators.required],
-                typeDoc      : [type],
-                categorieDoc : [categorie],
-                cheminDoc    : [chemin],
+                idDoc        : [document.idDocument, Validators.required],
+                nomDoc       : [document.nom       , Validators.required],
+                pathDoc      : [document.path                           ],
+                typeDoc      : [document.type                           ],
+                categorieDoc : [document.categorie.label                ]
             })
         )
     }
         
-    //---------a voir cette fonction----------------
     //retourne la liste des formulaires document
     get documents(): FormArray
     {
@@ -1413,7 +1342,8 @@ export class CandidatComponent implements OnInit
                     error: (error)    => { console.log(error);    }
                 });
             }
-            else //modifier et sauvegarder document
+            //modifier et sauvegarder document
+            else 
             {
                 formData.append("idDoc", this.documents.at(index).get("idDoc"));
                 this.candidatService.updateDocument(idDoc, formData.entries())
@@ -1425,8 +1355,6 @@ export class CandidatComponent implements OnInit
             }
         }
     }
-
-    
 
     //ajouter un formulaire document à la liste documents
     addDocFormToList()
@@ -1456,9 +1384,7 @@ export class CandidatComponent implements OnInit
         (<FormArray>this.formDoc.get('documents')).removeAt(index);
     }
 
-    
-
-    //disable/enable la liste des formulaires projet
+    //disable-enable la liste des formulaires projet
     switchFormDocEnable(enabling?: boolean)
     {
         let switchOn! : boolean;
@@ -1498,6 +1424,8 @@ export class CandidatComponent implements OnInit
             this.sliderDocTxt = 'formulaire modifiable';
         }
     }*/
+
+    
     
     //--------------------TAB MATCHER-----------------------
 }

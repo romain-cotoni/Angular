@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector   : 'app-entreprise',
@@ -8,7 +8,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 })
 export class EntrepriseComponent implements OnInit 
 {
-    educationForm!: FormGroup;
+    formEtp!: FormGroup;
 
   constructor(private fb: FormBuilder) 
   { 
@@ -17,60 +17,48 @@ export class EntrepriseComponent implements OnInit
 
   ngOnInit(): void 
   {
-      this.educationForm = this.fb.group
-      ({
-          educations:this.fb.array([this.createEducation()],Validators.required)
-      })
+    this.formEtp    = this.createEmptyEntrepriseForm();
   }
 
-  saveEducations() 
+  createEmptyEntrepriseForm()
   {
-
-      if(this.educationForm.status == 'VALID')
-      {
-          console.log(this.educationForm.value);
-      }
+    return this.fb.group
+    ({
+        idEntreprise  : '',
+        raisonEtp     : '',
+        recruteEtp    : true, 
+        lieuEtp       : '',
+        siretEtp      : '', 
+        infoEtp       : '', 
+        emailEtp      : '', 
+    })
   }
 
-  createEducation(): FormGroup
+  saveEntreprises() 
   {
-      return this.fb.group
-      ({
-          diplomeEdu  : [null, Validators.required],
-          obtenuEdu   : [null, Validators.required],
-          lieuEdu     : [null, Validators.required],
-          ecoleEdu    : [null, Validators.required],
-          debutEdu    : [null, Validators.required],
-          finEdu      : [null, Validators.required],
-          textAreaEdu : [null, Validators.required]
-      })
+
+      
   }
 
-  get educations(): FormArray
+  createEntreprise()
   {
-      return <FormArray> this.educationForm.get('educations');
+      
   }
 
 
-  addEducation() 
+
+  addEntreprise() 
   {
-      this.educations.push(this.createEducation());
+     
   }
 
-  onDeleteEducation(index: number)
+  onDeleteEntreprise()
   {
-    console.log(index);
-    console.log((<FormArray>this.educationForm.get('educations')).at(index).get('diplomeEdu')?.value);
-    console.log((<FormArray>this.educationForm.get('educations')).at(index).get('ecoleEdu')?.value); 
-    //this.getAllEducations();
-    (<FormArray>this.educationForm.get('educations')).removeAt(index);
+   
   }
   
-  getAllEducations()
+  getAllEntreprises()
   {
-    for (let i = 0; i < this.educations.length; i++)
-    {
-        console.log(this.educations.at(i).get('diplomeEdu')?.value);
-    }
+    
   }
 }

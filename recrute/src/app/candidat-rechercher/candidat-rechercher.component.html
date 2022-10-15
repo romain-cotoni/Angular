@@ -43,7 +43,6 @@
                     <input formControlName="emailSearchCdt" class="form-control ps-4" type="text" id="emailSearchCdt" name="emailSearchCdt"/>
                 </div>
             </div>
-
             <div class="row mx-0 mt-1">
                 <label class="col-2 ps-1 pe-3 pt-2" for="villeSearchCdt">Ville</label>
                 <div class="col-4 px-0">
@@ -54,14 +53,16 @@
                     <input formControlName="linkedinSearchCdt" class="form-control ps-4" type="text" id="linkedinSearchCdt" name="linkedinSearchCdt"/>
                 </div>
             </div>
-
             <div class="row mx-0 mt-3">
                 <label class="col-2 ps-1 pe-3 pt-2" for="diplomeSearchCdt">Diplômes</label>
-                <div class="col-10 px-0">
-                    <input formControlName="diplomeSearchCdt" class="form-control ps-4" type="text" id="diplomeSearchCdt" name="diplomeSearchCdt" placeholder="diplome1 diplome2 ..."/>
-                </div>                
+                <div class="col-4 px-0">
+                    <input formControlName="diplomeSearchCdt" class="form-control ps-4" type="text" id="diplomeSearchCdt" name="diplomeSearchCdt" placeholder="diplome1, diplome2 ..."/>
+                </div>
+                <label class="col-2 ps-1 pe-3 pt-2" for="domaineSearchCdt">Domaines</label>
+                <div class="col-4 px-0">
+                    <input formControlName="domaineSearchCdt" class="form-control ps-4" type="text" id="domaineSearchCdt" name="domaineSearchCdt" placeholder="domaine1, domaine2 ..."/>
+                </div>
             </div>
-
             <!--<div class="row mx-0 mt-1">
                 <label class="col-2 ps-1 pe-3 pt-2" for="adresseSearchCdt">Certifications</label>
                 <div class="col-10 px-0">
@@ -75,7 +76,6 @@
                     <input formControlName="adresseSearchCdt" class="form-control ps-4" type="text" id="adresseSearchCdt" name="adresseSearchCdt"/>
                 </div>                
             </div>-->
-
             <div class="row mx-0 mt-1">
                 <label class="col-2 ps-1 pe-3 pt-2" for="competenceSearchCdt">Compétences</label>
                 <div class="col-10 px-0">
@@ -102,11 +102,11 @@
                 <label class="col-2 ps-1 pe-3 pt-2" for="mobiliteSearchCdt">Mobilité</label>
                 <div class="col-4 px-0">
                     <select formControlName="mobiliteSearchCdt" class="form-select"  id="mobiliteSearchCdt" name="mobiliteSearchCdt" aria-label="Mobilite">
-                        <!--<option selected></option>-->
+                        <option value="0"></option>
                         <option value="1">Département</option>
                         <option value="2">Région</option>
-                        <option value="3">Région proche</option>
-                        <option value="4">Pays</option>
+                        <option value="3">Régions proches</option>
+                        <option value="4">France</option>
                         <option value="5">Europe</option>
                         <option value="6">Monde</option>
                         <option value="7">Autre</option>                                

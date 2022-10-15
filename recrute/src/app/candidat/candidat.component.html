@@ -108,14 +108,7 @@
                                 <option value="2">Marié</option>
                                 <option value="3">Divorcé</option>
                                 <option value="4">Autre</option>
-                            </select>
-                            <!--<input formControlName="situationCdt" class="form-control" list="situationCdt" type="text" name="situationCdt">
-                            <datalist id="situationCdt">
-                                <option>Célibataire</option>
-                                <option>Marié</option>
-                                <option>Divorcé</option>
-                                <option>Autre</option>
-                            </datalist>-->
+                            </select>                            
                         </div>
                     </div>                   
                     <div class="row mx-0 mt-2">
@@ -200,7 +193,7 @@
         <div class="row mx-0">
             <div class="col-3"></div>
             <div class="col-6">
-                <h1 class="text-secondary text-center my-3">Education</h1>
+                <h1 class="text-secondary text-center my-3">Educations</h1>
                 <form [formGroup]='formEdu' novalidate class="text-center"> <!--(ngSubmit)='submit()'-->    
                     <div class="row mx-0 text-start ps-1 pb-3">
                         <mat-slide-toggle [checked]="!slideEduChecked" (change)="switchFormEduEnable()">{{sliderEduTxt}}</mat-slide-toggle>
@@ -291,7 +284,7 @@
     <mat-tab label="Expérience">
         <div class="row mx-0">
             <div class="col-6 mx-auto">
-                <h1 class="text-secondary text-center my-3">Expérience professionnelle</h1>
+                <h1 class="text-secondary text-center my-3">Expériences professionnelles</h1>
                 <form [formGroup]='formExp' novalidate class="text-center">
                     <div class="row mx-0 text-start ps-1 pb-3">
                         <mat-slide-toggle [checked]="!slideExpChecked" (change)="switchFormExpEnable()">{{sliderExpTxt}}</mat-slide-toggle>
@@ -402,10 +395,8 @@
                         <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
                             <div class="row mx-0">
                                 <p class="lead text-start">Compétence {{i+1}}</p>
-                            </div>
-                            
-                            <input [hidden]="true" formControlName="idCompetence" matInput id="idCompetence" name="idCompetence"/>                                                                                    
-                            
+                            </div>                           
+                            <input [hidden]="true" formControlName="idCompetence" matInput id="idCompetence" name="idCompetence"/>
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-6" appearance="fill">
                                     <mat-hint>Saisir une compétence</mat-hint>
@@ -420,10 +411,10 @@
                                         <option value="2">Intermédiaire</option>
                                         <option value="3">Avancé</option>
                                         <option value="4">Maitrise</option>
+                                        <option value="5">Autre</option>
                                     </select>
                                 </mat-form-field>
-                            </div>
-                            
+                            </div>                            
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-6" appearance="fill">
                                     <mat-hint>Saisir un type</mat-hint>
@@ -436,7 +427,6 @@
                                     </select>
                                 </mat-form-field>
                             </div>
-
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-12" appearance="fill">
                                     <mat-hint>Saisir les détails</mat-hint>
@@ -444,7 +434,6 @@
                                     <textarea class="fs-6" formControlName="textareaCmp" id="textareaCmp" name="textareaCmp" matInput placeholder="Quelques informations sur la compétence . . ."></textarea>                                                           
                                 </mat-form-field>
                             </div>
-
                             <div class="row mx-0 my-2">
                                 <div class="col-4"></div>
                             </div>
@@ -479,10 +468,8 @@
                         <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
                             <div class="row mx-0">
                                 <p class="lead text-start">Langues {{i+1}}</p>
-                            </div>
-                            
-                            <input [hidden]="true" formControlName="idLangue" matInput id="idLangue" name="idLangue"/>                                                                                    
-                            
+                            </div>                            
+                            <input [hidden]="true" formControlName="idLangue" matInput id="idLangue" name="idLangue"/>
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-6" appearance="fill">
                                     <mat-hint>Saisir une langue</mat-hint>
@@ -497,23 +484,23 @@
                                         <option value="2">Intermédiaire</option>
                                         <option value="3">Avancé</option>
                                         <option value="4">Maitrise</option>
+                                        <option value="5">Autre</option>
                                     </select>
                                 </mat-form-field>
                             </div>
-                            
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-6" appearance="fill">
                                     <mat-hint>Saisir une certification</mat-hint>
-                                    <mat-label for="typeCmp">Certification</mat-label>                                                                                                  
+                                    <mat-label for="typeCmp">Certification</mat-label>
                                     <select matNativeControl class="fs-6" formControlName="certificationLng" id="certificationLng" name="certificationLng">
                                         <option value="1">Tofl</option>
                                         <option value="2">Toei</option>
                                         <option value="3">Cambridge</option>
                                         <option value="4">Oxford</option>
+                                        <option value="5">Autre</option>
                                     </select>
                                 </mat-form-field>
                             </div>
-
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-12" appearance="fill">
                                     <mat-hint>Saisir les détails</mat-hint>
@@ -521,12 +508,11 @@
                                     <textarea class="fs-6" formControlName="textareaLng" id="textareaLng" name="textareaLng" matInput placeholder="Une aptitude à faire ..."></textarea>
                                 </mat-form-field>
                             </div>
-
                             <div class="row mx-0 my-2">
                                 <div class="col-4"></div>
                             </div>
                             <div class="row mb-2 d-flex justify-content-center">
-                                <button [disabled]=isDisabledLngForm mat-raised-button color="primary" class="col-4 me-1" (click)="deleteLangue(i)">Effacer la langue</button>        
+                                <button [disabled]=isDisabledLngForm mat-raised-button color="primary" class="col-4 me-1" (click)="deleteLangue(i)">Effacer la langue</button>
                                 <button [disabled]=isDisabledLngForm mat-raised-button color="primary" class="col-4 ms-1" (click)="saveLangue(i)">Valider la langue</button>
                             </div>
                         </div>
@@ -534,7 +520,7 @@
                     <div class="row mx-0 my-2">
                         <div class="col-3"></div>
                         <div class="col-4 mt-2">
-                            <button mat-raised-button color="primary" class="col-12" (click)='addLangueFormToList()'>Ajouter une langue</button>                                                
+                            <button mat-raised-button color="primary" class="col-12" (click)='addLangueFormToList()'>Ajouter une langue</button>
                         </div>
                         <div class="text-start col-5 ps-1 pt-3">
                             <mat-slide-toggle  [checked]="!slideLngChecked" (change)="switchFormLngEnable()">{{sliderLngTxt}}</mat-slide-toggle>
@@ -551,43 +537,44 @@
                 <form [formGroup]='formEtt' novalidate class="text-center">
                     <div class="row mx-0 text-start ps-1 pb-3">
                         <mat-slide-toggle [checked]="!slideEttChecked" (change)="switchFormEttEnable()">{{sliderEttTxt}}</mat-slide-toggle>
-                    </div>          
+                    </div>
                     <div formArrayName="entretiens" *ngFor="let t of entretiens.controls; let i = index">
                         <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
                             <div class="row mx-0">
                                 <p class="lead text-start">Entretien {{i+1}}</p>
                             </div>
-                            
-                            <input [hidden]="true" formControlName="idEntretien" matInput id="idEntretien" name="idEntretien"/>                                                                                    
-                            
+                            <input [hidden]="true" formControlName="idEntretien" matInput id="idEntretien" name="idEntretien"/>
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-6" appearance="fill">
-                                    <mat-hint>Saisir une date</mat-hint>
+                                    <mat-hint>Saisir une date d'entretien</mat-hint>
                                     <mat-label for="dateEtt">Date</mat-label>
                                     <input class="fs-6" formControlName="dateEtt" matInput [matDatepicker]="pickerDateEtt" id="dateEtt" name="dateEtt"/>
                                     <mat-datepicker-toggle matSuffix [for]="pickerDateEtt"></mat-datepicker-toggle>
                                     <mat-datepicker #pickerDateEtt></mat-datepicker>
                                 </mat-form-field>
                                 <mat-form-field class="col-6" appearance="fill">
-                                    <mat-hint>Saisir un lieu</mat-hint>
+                                    <mat-hint>Saisir un lieu d'entretien</mat-hint>
                                     <mat-label  for="lieuEtt">Lieu</mat-label>
-                                    <input class="fs-6" formControlName="lieuEtt" matInput type="text" id="lieuEtt" name="lieuEtt"/>                            
+                                    <input class="fs-6" formControlName="lieuEtt" matInput type="text" id="lieuEtt" name="lieuEtt"/>
                                 </mat-form-field>
                             </div>
-
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-6" appearance="fill">
-                                    <mat-hint>Saisir un recruteur</mat-hint>
-                                    <mat-label for="recruteurEtt">Recruteur</mat-label>
-                                    <input class="fs-6" formControlName="recruteurEtt" matInput type="text" id="recruteurEtt" name="recruteurEtt"/>                            
+                                    <mat-hint>Saisir un prénom de recruteur</mat-hint>
+                                    <mat-label for="prenomRctrEtt">Prénom du recruteur</mat-label>
+                                    <input class="fs-6" formControlName="prenomRctrEtt" matInput type="text" id="prenomRctrEtt" name="prenomRctrEtt"/>
+                                </mat-form-field>
+                                <mat-form-field class="col-6" appearance="fill">
+                                    <mat-hint>Saisir un nom de recruteur</mat-hint>
+                                    <mat-label for="nomRctrEtt">Nom du recruteur</mat-label>
+                                    <input class="fs-6" formControlName="nomRctrEtt" matInput type="text" id="nomRctrEtt" name="nomRctrEtt"/>
                                 </mat-form-field>
                             </div>
-                            
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-6" appearance="fill">
                                     <mat-hint>Saisir une mission</mat-hint>
                                     <mat-label for="missionEtt">Mission</mat-label>
-                                    <input class="fs-6" formControlName="missionEtt" matInput type="text" id="missionEtt" name="missionEtt"/>                            
+                                    <input class="fs-6" formControlName="missionEtt" matInput type="text" id="missionEtt" name="missionEtt"/>
                                 </mat-form-field>
                                 <mat-form-field class="col-6" appearance="fill">
                                     <mat-hint>Saisir un contrat</mat-hint>
@@ -601,7 +588,7 @@
                                         <option value="6">Cui</option>
                                         <option value="7">Cae</option>
                                       </select>
-                                </mat-form-field>                                  
+                                </mat-form-field>
                             </div>
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-12" appearance="fill">
@@ -609,7 +596,7 @@
                                     <mat-label>Résumé</mat-label>
                                     <textarea class="fs-6" formControlName="textareaEtt" id="textareaEtt" name="textareaEtt" matInput placeholder="Déroulement de l'entretien..."></textarea>
                                 </mat-form-field>
-                            </div>                  
+                            </div>
                             <div class="row mx-0 my-2">
                                 <div class="col-4"></div>
                             </div>
@@ -639,15 +626,13 @@
                 <form [formGroup]='formPrj' novalidate class="text-center">
                     <div class="row mx-0 text-start ps-1 pb-3">
                         <mat-slide-toggle [checked]="!slidePrjChecked" (change)="switchFormPrjEnable()">{{sliderPrjTxt}}</mat-slide-toggle>
-                    </div>          
+                    </div>
                     <div formArrayName="projets" *ngFor="let t of projets.controls; let i = index">
                         <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
                             <div class="row mx-0">
                                 <p class="lead text-start">Projet {{i+1}}</p>
-                            </div>
-                            
-                            <input [hidden]="true" formControlName="idProjet" matInput id="idProjet" name="idProjet"/>
-                            
+                            </div>                            
+                            <input [hidden]="true" formControlName="idProjet" matInput id="idProjet" name="idProjet"/>                            
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-6" appearance="fill">
                                     <mat-hint>Saisir un nom</mat-hint>
@@ -655,7 +640,6 @@
                                     <input class="fs-6" formControlName="nomPrj" matInput type="text" id="nomPrj" name="nomPrj"/>
                                 </mat-form-field>
                             </div>
-
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-6" appearance="fill">
                                     <mat-hint>Saisir un type</mat-hint>
@@ -719,8 +703,7 @@
 
     <mat-tab label="Document">
         <div class="row mx-0">
-            <div class="col-4 mt-1 d-flex justify-content-center">
-                
+            <div class="col-4 mt-1 d-flex justify-content-center">              
                 <form [formGroup]='formDoc'>
                     <div class="row mx-0 mt-3">
                         <mat-form-field appearance="fill">
@@ -767,54 +750,9 @@
             </div>
         </div>
     </mat-tab>
-    <mat-tab label="Matcher"> Matcher avec des entreprises et offres d'emplois
-        <!--<form [formGroup]='formDoc' novalidate class="text-center">
-            <div class="row mx-0 text-start ps-1 pb-3">
-                <mat-slide-toggle [checked]="!slideDocChecked" (change)="switchFormDocEnable()">{{sliderDocTxt}}</mat-slide-toggle>
-            </div>          
-            <div formArrayName="documents" *ngFor="let t of documents.controls; let i = index">
-                <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
-                    <div class="row mx-0">
-                        <p class="lead text-start">Document {{i+1}}</p>
-                    </div>
-                    
-                    <input [hidden]="true" formControlName="idDoc" matInput id="idDoc" name="idDoc"/>
-                    
-                    <div class="row mx-0 mt-1">
-                        <mat-form-field class="col-6" appearance="fill">
-                            <mat-hint>Saisir un nom</mat-hint>
-                            <mat-label for="nomDoc">Nom du document</mat-label>
-                            <input class="fs-6" formControlName="nomDoc" matInput type="text" id="nomDoc" name="nomDoc"/>
-                        </mat-form-field>
-                    </div>
 
-                    <div class="row mx-0 mt-1">
-                        <mat-form-field class="col-6" appearance="fill">
-                            <mat-hint>Saisir un type</mat-hint>
-                            <mat-label for="typeDoc">Type</mat-label>
-                            <input class="fs-6" formControlName="typeDoc" matInput type="text" id="typeDoc" name="typeDoc"/>
-                        </mat-form-field>                                
-                    </div>
-                                                
-                    <div class="row mx-0 my-2">
-                        <div class="col-4"></div>
-                    </div>
-                    <div class="row mb-2 d-flex justify-content-center">
-                        <button [disabled]=isDisabledDocForm mat-raised-button color="primary" class="col-4 me-1" (click)="deleteDoc(i)">Effacer</button>
-                        <button [disabled]=isDisabledDocForm mat-raised-button color="primary" class="col-4 ms-1" (click)="viewDoc(i)">Afficher</button>
-                    </div>
-                </div>
-            </div>
-            <div class="row mx-0 my-2">
-                <div class="col-3"></div>
-                <div class="col-4 mt-2">
-                    <button mat-raised-button color="primary" class="col-12" (click)="addDocFormToList()">Ajouter un document</button>                                                
-                </div>
-                <div class="text-start col-5 ps-1 pt-3">
-                    <mat-slide-toggle [checked]="!slideDocChecked" (change)="switchFormDocEnable()">{{sliderDocTxt}}</mat-slide-toggle>
-                </div>
-            </div>
-        </form>-->
+    <mat-tab label="Matcher"> Matcher avec des entreprises et offres d'emplois
+        <!---->
     </mat-tab>
 </mat-tab-group>
   

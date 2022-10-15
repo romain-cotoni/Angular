@@ -1,8 +1,8 @@
 export interface Langue
 {
     idLangue      : number;
-    langue        : string;
+    nom           : string;
 	niveau        : string;
-    certification : string
-    details       : string
+    certification : string;
+    info          : string;
 }

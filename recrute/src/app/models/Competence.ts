@@ -1,9 +1,9 @@
 export interface Competence
 {
     idCompetence  : number;
-    competence    : string;
+    nom           : string;
     niveau        : string;
 	type          : string;
     certification : string;
-    details       : string;
+    info          : string;
 }

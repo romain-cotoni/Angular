@@ -1,11 +1,13 @@
+import { Recruteur } from "./Recruteur";
+
 export interface Entretien
 {
     idEntretien : number;
-    date       : Date;
+    date        : Date;
     lieu        : string;
     evaluation  : string;
-	recruteur   : string;
-    mission     : string;
+	recruteur   : Recruteur;
+    poste       : string;
     contrat     : string;
     resume      : string
 }
