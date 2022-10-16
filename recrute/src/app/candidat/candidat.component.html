@@ -5,28 +5,29 @@
     <mat-tab label="Général">
         <div class="row mx-0">
             <div class="col-3 d-flex justify-content-center">
-                <form class="mt-5" [formGroup]="formSearch">
+                <form class="mt-5" [formGroup]="formSearch">                   
                     <h2 class="text-secondary text-center mt-1">Recherche rapide de candidat</h2>
                     <div class="row mx-0 mt-3">
                         <mat-form-field appearance="fill">
                             <mat-hint>Saisir un prénom</mat-hint>
                             <mat-label class="col-6" for="prenom1Cdt">Prénom</mat-label>
-                            <input class="col-6 fs-6" formControlName="prenom1Cdt" matInput type="text" list="prenom1Cdt" name="prenom1Cdt" required/>                            
+                            <input class="col-6 fs-6" formControlName="prenom1Cdt" matInput type="text" list="prenom1Cdt" name="prenom1Cdt" required/>
                             <mat-error>Il faut saisir un prénom</mat-error>
                             <datalist id="prenom1Cdt">
-                                <option value="bart">bart</option>
-                                <option value="marge">marge</option>
-                                <option value="lisa">lisa</option>                                
-                            </datalist>                            
+                                <option *ngFor="let prenom of prenomsListe" value="{{ prenom }}">{{ prenom }}</option>
+                            </datalist>
                         </mat-form-field>
                     </div>
                     <div class="row mx-0 mt-3">
                         <mat-form-field appearance="fill">
                             <mat-hint>Saisir un nom</mat-hint>
                             <mat-label class="col-6" for="nom1Cdt">Nom</mat-label>
-                            <input class="col-6 fs-6" formControlName="nom1Cdt" matInput type="text" id="nom1Cdt" name="nom1Cdt" required/>                            
+                            <input class="col-6 fs-6" formControlName="nom1Cdt" matInput type="text" list="nom1Cdt" name="nom1Cdt" required/>
                             <mat-error>Il faut saisir un nom</mat-error>
-                        </mat-form-field>  
+                            <datalist id="nom1Cdt">
+                                <option *ngFor="let nom of nomsListe" value="{{ nom }}">{{ nom }}</option>
+                            </datalist>
+                        </mat-form-field>
                     </div>
                     <div class="row mx-0 mt-2">
                         <div class=""></div>
@@ -41,7 +42,10 @@
                     <h1 class="col-10 text-center text-secondary my-0">Informations Générales</h1>
                 </div>
                 <form class="mt-3 text-end" [formGroup]="formCdt">
-                
+                    <div class="row mx-0 text-start ps-1 pb-3">
+                        <mat-slide-toggle [checked]="!slideCdtChecked" (change)="switchFormCdtEnable()">{{ sliderCdtTxt }}</mat-slide-toggle>
+                    </div>
+
                     <input [hidden]="true" formControlName="idCandidat" matInput id="idCandidat" name="idCandidat"/>
 
                     <div class="row mx-0 mt-3">
@@ -99,7 +103,7 @@
                                 <option>Algérien</option>
                                 <option>Sénégalais</option>
                                 <option>Américain</option>
-                            </datalist>                              
+                            </datalist>
                         </div>
                         <label class="col-2 ps-1 pe-3 pt-0 pt-xxl-2" for="situationCdt">Situation familiale</label>
                         <div class="col-4 px-0">
@@ -108,17 +112,18 @@
                                 <option value="2">Marié</option>
                                 <option value="3">Divorcé</option>
                                 <option value="4">Autre</option>
-                            </select>                            
+                            </select>
                         </div>
-                    </div>                   
+                    </div>
                     <div class="row mx-0 mt-2">
                         <label class="col-2 ps-1 pe-3 pt-2" for="linkedinCdt">Linkedin</label>
                         <div class="col-4 px-0">
                             <input formControlName="linkedinCdt" class="form-control ps-4" type="text" id="linkedinCdt" name="linkedinCdt" value=""/>
                         </div>
-                        <label class="col-2 ps-1 pe-3 pt-2" for="mobilCdt">Mobilité</label>                        
+                        <label class="col-2 ps-1 pe-3 pt-2" for="mobilCdt">Mobilité</label>
                         <div class="col-4 px-0">
-                            <select formControlName="mobilCdt" class="form-select ps-4"  id="mobilCdt" name="mobilCdt">
+                            <select formControlName="mobilCdt" class="form-select ps-4" id="mobilCdt" name="mobilCdt">
+                                <option value="0"></option>
                                 <option value="1">pas de mobilité</option>
                                 <option value="2">localité</option>
                                 <option value="3">département</option>

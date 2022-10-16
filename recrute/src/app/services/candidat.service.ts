@@ -29,6 +29,7 @@ export class CandidatService
         return this.httpClient.get<Candidat[]>(url/*,{ withCredentials: true }*/);
     }
 
+
     getCandidat(id: number): Observable<Candidat>
     {
         const url = this.BASE_PATH + '/candidat/' + id.toString();
@@ -40,6 +41,26 @@ export class CandidatService
         const url   = this.BASE_PATH + '/candidat/rechercher';
         var body    = { prenom, nom };
         return this.httpClient.post<Candidat>(url, body);
+    }
+
+    getCandidatsPrenoms(): Observable<String[]>
+    {
+        const url = this.BASE_PATH + '/candidats/prenoms';
+        return this.httpClient.get<String[]>(url);
+    }
+
+    getCandidatsNoms(): Observable<String[]>
+    {
+        const url = this.BASE_PATH + '/candidats/noms';
+        return this.httpClient.get<String[]>(url);
+    }
+
+    createCandidat(data: any): Observable<Candidat>
+    {
+        const url   = this.BASE_PATH + '/candidat/';
+        var headers = new HttpHeaders({ 'content-type': 'application/json'});
+        let body    = data; //JSON.stringify(Object.fromEntries(data));         
+        return this.httpClient.post<Candidat>(url, body, {'headers':headers});
     }
 
     getEducations(id: number): Observable<Education[]>

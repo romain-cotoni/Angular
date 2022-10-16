@@ -19,6 +19,9 @@ import { Langue } from '../models/Langue';
 })
 export class CandidatComponent implements OnInit 
 { 
+    prenomsListe : String[] = [];
+    nomsListe    : String[] = [];
+
     formSearch! : FormGroup;
     formCdt!    : FormGroup;
     formEdu!    : FormGroup;
@@ -29,41 +32,42 @@ export class CandidatComponent implements OnInit
     formPrj!    : FormGroup
     formDoc!    : FormGroup
 
+    txt = 'formulaire modifiable';
+
     candidat!         : Candidat;
     idCandidat!       : number;
     isDisabledCdtForm!: boolean;
     slideCdtChecked!  : boolean;
-    sliderCdtTxt!     : String;
+    sliderCdtTxt      = this.txt;
 
     isDisabledEduForm!: boolean;
     slideEduChecked!  : boolean;
-    sliderEduTxt!     : String;
+    sliderEduTxt      = this.txt;
 
     isDisabledExpForm!: boolean;
     slideExpChecked!  : boolean;
-    sliderExpTxt!     : String;
+    sliderExpTxt      = this.txt;
 
     isDisabledCmpForm!: boolean;
     slideCmpChecked!  : boolean;
-    sliderCmpTxt!     : String;
+    sliderCmpTxt      = this.txt;
 
     isDisabledLngForm!: boolean;
     slideLngChecked!  : boolean;
-    sliderLngTxt!     : String;
+    sliderLngTxt      = this.txt;
 
     isDisabledEttForm!: boolean;
     slideEttChecked!  : boolean;
-    sliderEttTxt!     : String;
+    sliderEttTxt      = this.txt;
 
     isDisabledPrjForm!: boolean;
     slidePrjChecked!  : boolean;
-    sliderPrjTxt!     : String;
+    sliderPrjTxt      = this.txt;
 
     isDisabledDocForm!: boolean;
     slideDocChecked!  : boolean;
-    sliderDocTxt!     : String;
-    
-    
+    sliderDocTxt      = this.txt;
+     
 
     constructor(private fb: FormBuilder, private candidatService: CandidatService, private route: ActivatedRoute, private router: Router) 
     { 
@@ -102,7 +106,7 @@ export class CandidatComponent implements OnInit
                             this.createFilledEducationForm(candidat.educations[i]);
                         }
                         this.switchFormEduEnable(false); //disabled les inputs du formulaire
-                    }
+                    }                    
 
                     if(candidat.experiences.length > 0) 
                     {
@@ -168,6 +172,10 @@ export class CandidatComponent implements OnInit
             this.switchFormEttEnable(true);
             this.switchFormPrjEnable(true);
         }
+
+        this.candidatService.getCandidatsPrenoms().subscribe(reponse => { this.prenomsListe = reponse; })
+        this.candidatService.getCandidatsNoms().subscribe(reponse => { this.nomsListe = reponse; })
+ 
     }
 
 
@@ -176,9 +184,32 @@ export class CandidatComponent implements OnInit
 
     createFormCandidatFilled(candidat: Candidat): FormGroup
     {
-        console.log(candidat);
+        //console.log(candidat);
+        
+        let ville = '';
+        let postal = '';
+        if(candidat.ville != null) 
+        {
+            ville = candidat.ville.ville;
+            postal = candidat.ville.postal;
+        }
+
+        let linkedin = '';
+        let github = '';
+        if(candidat.pseudos.length > 0)
+        {            
+            linkedin = candidat.pseudos[0].pseudo;
+            github = candidat.pseudos[1].pseudo;
+        }
+
+        let mobilite = 0;
+        if(candidat.mobilite != null) mobilite = candidat.mobilite.zone;
+        
+        let nationnalite = '';
+        if(candidat.pays != null) nationnalite = candidat.pays.nationnalite;
+
         return this.fb.group
-        ({                
+        ({
             prenom1Cdt    : '',
             nom1Cdt       : '',
             idCandidat    : candidat.idCandidat,
@@ -188,13 +219,13 @@ export class CandidatComponent implements OnInit
             emailCdt      : candidat.email,
             adresseCdt    : candidat.adresse,
             adresse2Cdt   : candidat.adresse2,
-            villeCdt      : candidat.ville.ville,
-            postalCdt     : candidat.ville.postal,
+            villeCdt      : ville,
+            postalCdt     : postal,
             salaireCdt    : candidat.salaire,
-            linkedinCdt   : candidat.pseudos[0].pseudo,
-            githubCdt     : candidat.pseudos[1].pseudo,
-            mobilCdt      : candidat.mobilite.zone,
-            nationCdt     : candidat.pays.nationnalite,
+            linkedinCdt   : linkedin,
+            githubCdt     : github,
+            mobilCdt      : mobilite,
+            nationCdt     : nationnalite,
             situationCdt  : candidat.marital,
             handicapCdt   : candidat.handicape,
             teletravailCdt: candidat.teletravail,

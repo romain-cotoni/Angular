@@ -10,7 +10,6 @@ import { CandidatService } from '../services/candidat.service';
 })
 export class CandidatRechercherComponent implements OnInit 
 {
-
     formSearchCdt!: FormGroup;
     candidats     : Candidat[] = [];
 

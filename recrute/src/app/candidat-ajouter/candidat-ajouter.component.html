@@ -1,1 +1,161 @@
-<p>candidat-ajouter</p>
+
+<div class="login d-flex flex-column justify-content-center align-items-center">
+    <h2 class="lead text-secondary">Ajouter un candidat</h2>
+    <div class="row mx-0 mt-3 w-25">
+        <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>Prénom</mat-label>
+            <input matInput type="text" [(ngModel)]="prenom" placeholder="Saisir un prénom">
+        </mat-form-field>
+    </div>
+    <div class="row mx-0 mt-3 w-25">
+        <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>Nom</mat-label>
+            <input matInput type="text" [(ngModel)]="nom" placeholder="Saisir un nom">               
+        </mat-form-field>
+    </div>
+    <div class="row mx-0 mt-3 w-25">
+        <div class="w-25"></div>
+        <button mat-raised-button color="primary" class="w-50" (click)=addCandidat()>Ajouter</button>
+    </div>        
+</div>
+   
+
+<!--<div class="col-6 border-start border-secondary ">
+    <div class="row mx-0 my-3">
+        <div class="col-2"></div>
+        <h1 class="col-10 text-center text-secondary my-0">Informations Générales</h1>
+    </div>
+    <form class="mt-3 text-end" [formGroup]="formCdt">
+    
+        <input [hidden]="true" formControlName="idCandidat" matInput id="idCandidat" name="idCandidat"/>
+
+        <div class="row mx-0 mt-3">
+            <label class="col-2 ps-1 pe-3 pt-2" for="prenom2Cdt">Prénom</label>
+            <div class="col-4 px-0">
+                <input formControlName="prenom2Cdt" class="form-control ps-4" type="text" id="prenom2Cdt" name="prenom2Cdt" value=""/>
+            </div>
+            <label class="col-2 ps-1 pe-3 pt-2" for="nom2Cdt">Nom</label>
+            <div class="col-4 px-0">
+                <input formControlName="nom2Cdt" class="form-control ps-4" type="text" id="nom2Cdt" name="nom2Cdt"  value=""/>
+            </div>
+        </div>
+        <div class="row mx-0 mt-2">
+            <label class="col-2 ps-1 pe-3 pt-2" for="telMobCdt">Téléphone</label>
+            <div class="col-4 px-0">
+                <input formControlName="telMobCdt" class="form-control ps-4" type="text" id="telCdt" name="telCdt" value=""/>
+            </div>
+            <label class="col-2 ps-1 pe-3 pt-2" for="emailCdt">Email</label>
+            <div class="col-4 px-0">
+                <input formControlName="emailCdt" class="form-control ps-4" type="text" id="emailCdt" name="emailCdt" value=""/>
+            </div>
+        </div>
+        <div class="row mx-0 mt-2">
+            <label class="col-2 ps-1 pe-3 pt-2" for="adresseCdt">Adresse</label>
+            <div class="col-4 px-0">
+                <input formControlName="adresseCdt" class="form-control ps-4" type="text" id="adresseCdt" name="adresseCdt" value=""/>
+            </div>
+            <label class="col-2 ps-1 pe-3 pt-0 pt-xxl-2" for="adresse2Cdt">Adresse (suite)</label>
+            <div class="col-4 px-0">
+                <input formControlName="adresse2Cdt" class="form-control ps-4" type="text" id="adresse2Cdt" name="adresse2Cdt" value=""/>
+            </div>
+        </div>
+        <div class="row mx-0 mt-2">
+            <label class="col-2 ps-1 pe-3 pt-2" for="villeCdt">Ville</label>
+            <div class="col-4 px-0">
+                <input formControlName="villeCdt" class="form-control ps-4" type="text" id="villeCdt" name="villeCdt" value=""/>
+            </div>
+            <label class="col-2 ps-1 pe-3 pt-2" for="postalCdt">Code postal</label>
+            <div class="col-4 px-0">
+                <input formControlName="postalCdt" class="form-control ps-4" type="text" id="postalCdt" name="postalCdt" value=""/>
+            </div>
+        </div>
+        <div class="row mx-0 mt-2">
+            <label class=" col-2 ps-1 pe-3 pt-2" for="nationCdt">Nationnalité</label>
+            <div class="col-4 px-0">
+                <input formControlName="nationCdt" list="nationCdt" class="form-control ps-4" type="text" name="nationCdt">
+                <datalist id="nationCdt">
+                    <option>Française</option>
+                    <option>talienne</option>
+                    <option>Britannique</option>
+                    <option>Espagnole</option>
+                    <option>Ukrainienne</option>
+                    <option>Allemand</option>
+                    <option>Marocain</option>
+                    <option>Algérien</option>
+                    <option>Sénégalais</option>
+                    <option>Américain</option>
+                </datalist>                              
+            </div>
+            <label class="col-2 ps-1 pe-3 pt-0 pt-xxl-2" for="situationCdt">Situation familiale</label>
+            <div class="col-4 px-0">
+                <select formControlName="situationCdt" class="form-select ps-4" id="situationCdt" name="situationCdt">
+                    <option value="1">Célibataire</option>
+                    <option value="2">Marié</option>
+                    <option value="3">Divorcé</option>
+                    <option value="4">Autre</option>
+                </select>                            
+            </div>
+        </div>                   
+        <div class="row mx-0 mt-2">
+            <label class="col-2 ps-1 pe-3 pt-2" for="linkedinCdt">Linkedin</label>
+            <div class="col-4 px-0">
+                <input formControlName="linkedinCdt" class="form-control ps-4" type="text" id="linkedinCdt" name="linkedinCdt" value=""/>
+            </div>
+            <label class="col-2 ps-1 pe-3 pt-2" for="mobilCdt">Mobilité</label>                        
+            <div class="col-4 px-0">
+                <select formControlName="mobilCdt" class="form-select ps-4"  id="mobilCdt" name="mobilCdt">
+                    <option value="1">pas de mobilité</option>
+                    <option value="2">localité</option>
+                    <option value="3">département</option>
+                    <option value="4">région</option>
+                    <option value="5">régions proches</option>
+                    <option value="6">France</option>
+                    <option value="7">Europe</option>
+                    <option value="8">monde</option>
+                    <option value="9">Autre</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mx-0 mt-2">
+            <label class="col-2 ps-1 pe-3 pt-2" for="githubCdt">Github</label>
+            <div class="col-4 px-0">
+                <input formControlName="githubCdt" class="form-control ps-4" type="text" id="githubCdt" name="githubCdt" value=""/>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-4 px-0 text-start">
+                <mat-checkbox formControlName="dispoCdt" class="mt-2" id="dispoCdt" name="dispoCdt">Disponible immédiatement</mat-checkbox>
+            </div>
+        </div>
+        <div class="row mx-0 mt-2">
+            <div class="col-2"></div>
+            <div class="col-4 px-0 text-start">
+                <mat-checkbox formControlName="handicapCdt" class="mt-2" id="handicapCdt" name="handicapCdt">Travailleur handicapé</mat-checkbox>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-4 px-0 text-start">
+                <mat-checkbox formControlName="permisCdt" class="mt-2" id="permisCdt" name="permisCdt">Permis de conduire</mat-checkbox>
+            </div>
+        </div>
+        <div class="row mx-0 mt-2">
+            <div class="col-2"></div>
+            <div class="col-4 px-0 text-start">
+                <mat-checkbox formControlName="teletravailCdt" class="mt-2" id="teletravailCdt" name="teletravailCdt">Télétravail</mat-checkbox>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-4 px-0 text-start">
+                <mat-checkbox formControlName="vehiculeCdt" class="mt-2" id="vehiculeCdt" name="vehiculeCdt">Véhiculé</mat-checkbox>
+            </div>
+        </div>                                        
+        <div class="row mx-0 mt-2">
+            <label class="col-2 ps-1 pe-3 pt-2" for="textareaCdt">Détails</label>
+            <div class="col-10 px-0">
+                <textarea formControlName="textareaCdt" class="form-control" id="textareaCdt" rows="3"></textarea>
+            </div>
+        </div>                                          
+        <div class="row mx-0 my-2">
+            <div class="col-4"></div>
+        </div>
+    </form>
+</div>
+<div class="col-3"></div>
+</div>-->
