@@ -38,5 +38,16 @@ export class CandidatRechercherComponent implements OnInit
           'mobiliteSearchCdt'   : ''
         });
         this.candidatService.getCandidats().subscribe(reponse => { this.candidats = reponse; })
-    }
+  }
+  
+  rechercher()
+  {
+    this.candidatService.getCandidatsByParams(this.formSearchCdt)
+      .subscribe
+      ({
+        next         : (reponse) => {  this.candidats = reponse },
+        error        : () => { },
+        complete : () => { }
+      })        
+  }
 }

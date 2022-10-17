@@ -43,6 +43,13 @@ export class CandidatService
         return this.httpClient.post<Candidat>(url, body);
     }
 
+    getCandidatsByParams(data: any): Observable<Candidat>
+    {
+        const url = this.BASE_PATH + '/candidats/rechercher/parametres';
+        var body = data;
+        return this.httpClient.post<Candidat>(url, body);
+    }
+
     getCandidatsPrenoms(): Observable<String[]>
     {
         const url = this.BASE_PATH + '/candidats/prenoms';
