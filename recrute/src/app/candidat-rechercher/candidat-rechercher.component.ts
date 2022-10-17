@@ -42,12 +42,18 @@ export class CandidatRechercherComponent implements OnInit
   
   rechercher()
   {
-    this.candidatService.getCandidatsByParams(this.formSearchCdt)
-      .subscribe
-      ({
-        next         : (reponse) => {  this.candidats = reponse },
-        error        : () => { },
-        complete : () => { }
-      })        
+    let requete = {
+      "prenom": this.formSearchCdt.get("prenomSearchCdt")?.value,
+      "nom"   : this.formSearchCdt.get("nomSearchCdt")?.value
+    }
+    
+    console.log(requete);
+    this.candidatService.getCandidatsByParams(requete)
+    .subscribe
+    ({
+      next         : (reponse) => { console.log("reponse : "+reponse);  this.candidats = reponse },
+      error        : () => { console.log("erreur")},
+      complete : () => { }
+    })        
   }
 }
