@@ -42,9 +42,20 @@ export class CandidatRechercherComponent implements OnInit
   
   rechercher()
   {
+    let diplome;
+    if (this.formSearchCdt.get("diplomeSearchCdt") != null) diplome = this.formSearchCdt.get("diplomeSearchCdt")?.value;
+    else diplome = null;
+
+    let specialites;
+    if (this.formSearchCdt.get("domaineSearchCdt") != null) specialites = this.formSearchCdt.get("domaineSearchCdt")?.value;
+    else specialites = null;
+
     let requete = {
-      "prenom": this.formSearchCdt.get("prenomSearchCdt")?.value,
-      "nom"   : this.formSearchCdt.get("nomSearchCdt")?.value
+      "prenom"     : this.formSearchCdt.get("prenomSearchCdt")?.value,
+      "nom"          : this.formSearchCdt.get("nomSearchCdt")?.value,
+      "diplomes"   : this.formSearchCdt.get("diplomeSearchCdt")?.value,
+      "specialites" : this.formSearchCdt.get("domaineSearchCdt")?.value,
+      "teletravail"  : this.formSearchCdt.get("teletravailSearchCdt")?.value,
     }
     
     console.log(requete);
