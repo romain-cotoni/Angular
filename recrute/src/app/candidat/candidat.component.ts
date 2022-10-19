@@ -351,12 +351,12 @@ export class CandidatComponent implements OnInit
     {
         if(this.educations.at(index).status == 'VALID')
         {
-            let idCandidat : number;
-            let date1!     : Date;
-            let date2!     : Date;
-            let strDate1!  : string;
-            let strDate2!  : string;
-            let idEducation: number = this.educations.at(index).get('idEducation')?.value;
+            let idCandidat  : number;
+            let date1!      : Date;
+            let date2!      : Date;
+            let strDate1!   : string;
+            let strDate2!   : string;
+            let idEducation : number = this.educations.at(index).get('idEducation')?.value;
             
             date1 = this.educations.at(index).get("debutEdu")?.value;
             if(date1 != null) { strDate1 = formatDate(date1, 'yyyy-MM-dd', 'en_US'); };
@@ -490,14 +490,13 @@ export class CandidatComponent implements OnInit
     {   
         return this.fb.group
         ({
-            idExperience : null,
-            missionExp   : '',
-            entrepriseExp: '',
-            villeExp     : '',
-            paysExp      : '',            
-            debutExp     : null,
-            finExp       : null,
-            textareaExp  : ''
+            idExperience  : null,
+            debutExp      : null,
+            finExp        : null,
+            lieuExp       : '',
+            missionExp    : '',
+            entrepriseExp : '',
+            textareaExp   : ''
         })
     }
     
@@ -509,12 +508,11 @@ export class CandidatComponent implements OnInit
             this.fb.group
             ({
                 idExperience  : [experience.idExperience            , Validators.required],
-                missionExp    : [experience.mission.profession      , Validators.required],
-                entrepriseExp : [experience.entreprise.raisonSociale, Validators.required],
-                villeExp      : [experience.entreprise.ville.ville                       ],
-                paysExp       : [experience.entreprise.ville.pays.pays                   ],
                 debutExp      : [experience.debut                                        ],
                 finExp        : [experience.fin                                          ],
+                lieuExp       : [experience.lieu                                         ],
+                missionExp    : [experience.mission.profession      , Validators.required],
+                entrepriseExp : [experience.entreprise.raisonSociale, Validators.required],
                 textareaExp   : [experience.info                                         ]
             })
         )
@@ -532,42 +530,51 @@ export class CandidatComponent implements OnInit
         if(this.experiences.at(index).status == 'VALID')
         {
             let idCandidat   : number;
-            let date1!       : Date;
-            let date2!       : Date;
+            let debutStr!    : string;
+            let finStr!      : string;
+            let debut        : Date   = this.experiences.at(index).get("debutExp")?.value;
+            let fin          : Date   = this.experiences.at(index).get("finExp")?.value;
             let idExperience : number = this.experiences.at(index).get('idExperience')?.value;
-            let formData     : any    = new FormData();
-            formData.append("mission"   , this.experiences.at(index).get("missionExp")?.value);
-            formData.append("entreprise", this.experiences.at(index).get("entrepriseExp")?.value);
-            formData.append("ville"     , this.experiences.at(index).get("villeExp")?.value);
-            formData.append("pays"      , this.experiences.at(index).get("paysExp")?.value);
-            date1 = this.experiences.at(index).get("debutExp")?.value;
-            if(date1 != null) 
+
+            if(debut != null) 
             { 
-                formData.append("debut", formatDate(date1, 'yyyy-MM-dd', 'en_US')); 
-            }
-            date2 = this.experiences.at(index).get("finExp")?.value;
-            if(date2 != null)
+                debutStr = formatDate(debut, 'yyyy-MM-dd', 'en_US');
+            };
+        
+            if(fin != null) 
             { 
-                formData.append("fin", formatDate(date2, 'yyyy-MM-dd', 'en_US'));
-            }
-            formData.append("details" , this.experiences.at(index).get("textareaExp")?.value);
-            
+                finStr = formatDate(fin, 'yyyy-MM-dd', 'en_US');
+            };
+
+            let requete = {
+                "debut": debutStr,
+                "fin"  : finStr,
+                "lieu" : this.experiences.at(index).get("lieuExp")?.value,
+                "info" : this.experiences.at(index).get("textareaExp")?.value,
+                "mission": {
+                    "profession": this.experiences.at(index).get("missionExp")?.value,
+                },
+                "entreprise": {
+                    "raisonSociale": this.experiences.at(index).get("entrepriseExp")?.value,
+                }
+            } 
+
             //créer et sauvegarder experience
             if(idExperience == null) 
             {   
                 idCandidat = this.formCdt.get('idCandidat')?.value;
-                this.candidatService.createExperience(idCandidat, formData.entries())
+                this.candidatService.createExperience(idCandidat, requete)
                 .subscribe
                 ({
                     next : (response) => { console.log(response); },
                     error: (error)    => { console.log(error);    }
                 });
             }
+
             //modifier et sauvegarder experience
             else 
             {
-                formData.append("idExperience", this.experiences.at(index).get("idExperience"));
-                this.candidatService.updateExperience(idExperience, formData.entries())
+                this.candidatService.updateExperience(idExperience, requete)
                 .subscribe
                 ({
                     next : (response) => { console.log(response); },
