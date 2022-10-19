@@ -4,67 +4,75 @@ import { Candidat } from '../models/Candidat';
 import { CandidatService } from '../services/candidat.service';
 
 @Component({
-  selector   : 'app-candidat-rechercher',
+  selector: 'app-candidat-rechercher',
   templateUrl: './candidat-rechercher.component.html',
-  styleUrls  : ['./candidat-rechercher.component.scss']
+  styleUrls: ['./candidat-rechercher.component.scss']
 })
-export class CandidatRechercherComponent implements OnInit 
-{
-    formSearchCdt!: FormGroup;
-    candidats     : Candidat[] = [];
+export class CandidatRechercherComponent implements OnInit {
+  formSearchCdt!: FormGroup;
+  candidats: Candidat[] = [];
 
-    constructor(public fbSearchCdt: FormBuilder,private candidatService: CandidatService) 
-    { 
+  constructor(public fbSearchCdt: FormBuilder, private candidatService: CandidatService) {
 
-    }
-
-    ngOnInit(): void 
-    {
-        this.formSearchCdt = this.fbSearchCdt.group
-        ({'prenomSearchCdt'     : '',
-          'nomSearchCdt'        : '', 
-          'telSearchCdt'        : '',
-          'emailSearchCdt'      : '',
-          'villeSearchCdt'      : '',
-          'linkedinSearchCdt'   : '',
-          'diplomeSearchCdt'    : '',
-          'domaineSearchCdt'    : '',
-          'competenceSearchCdt' : '',
-          'langueSearchCdt'     : '',
-          'entrepriseSearchCdt' : '',
-          'handicapeSearchCdt'  : '',
-          'dispoSearchCdt'      : '',
-          'teletravailSearchCdt': '',
-          'mobiliteSearchCdt'   : ''
-        });
-        this.candidatService.getCandidats().subscribe(reponse => { this.candidats = reponse; })
   }
-  
+
+  ngOnInit(): void {
+    this.formSearchCdt = this.fbSearchCdt.group
+    ({
+        'prenomSearchCdt'         : '',
+        'nomSearchCdt'              : '',
+        'telSearchCdt'                 : '',
+        'emailSearchCdt'             : '',
+        'handicapeSearchCdt'    : '',
+        'dispoSearchCdt'            : '',
+        'teletravailSearchCdt'     : '',
+        'linkedinSearchCdt'        : '',
+        'diplomeSearchCdt'        : '',
+        'domaineSearchCdt'       : '',
+        'competenceSearchCdt' : '',
+        'langueSearchCdt'          : '',
+        'missionSearchCdt'         : '',
+        'entrepriseSearchCdt'     : '',
+        'villeSearchCdt'               : '',
+        'mobiliteSearchCdt'        : ''
+    });
+    this.candidatService.getCandidats().subscribe(reponse => { this.candidats = reponse; })
+  }
+
   rechercher()
   {
-    let diplome;
-    if (this.formSearchCdt.get("diplomeSearchCdt") != null) diplome = this.formSearchCdt.get("diplomeSearchCdt")?.value;
-    else diplome = null;
-
-    let specialites;
-    if (this.formSearchCdt.get("domaineSearchCdt") != null) specialites = this.formSearchCdt.get("domaineSearchCdt")?.value;
-    else specialites = null;
-
     let requete = {
-      "prenom"     : this.formSearchCdt.get("prenomSearchCdt")?.value,
-      "nom"          : this.formSearchCdt.get("nomSearchCdt")?.value,
-      "diplomes"   : this.formSearchCdt.get("diplomeSearchCdt")?.value,
-      "specialites" : this.formSearchCdt.get("domaineSearchCdt")?.value,
-      "teletravail"  : this.formSearchCdt.get("teletravailSearchCdt")?.value,
+      "prenom":          this.formSearchCdt.get("prenomSearchCdt")?.value,
+      "nom":               this.formSearchCdt.get("nomSearchCdt")?.value,
+      "telephone":      this.formSearchCdt.get("telSearchCdt")?.value,
+      "email":              this.formSearchCdt.get("emailSearchCdt")?.value,
+      "teletravail":       this.formSearchCdt.get("teletravailSearchCdt")?.value,
+      "handicape":      this.formSearchCdt.get("handicapeSearchCdt")?.value,
+      "disponible":      this.formSearchCdt.get("dispoSearchCdt")?.value,
+      
+      "diplomes":        this.formSearchCdt.get("diplomeSearchCdt")?.value,
+      "specialites":      this.formSearchCdt.get("domaineSearchCdt")?.value,
+      
+      "missions":         this.formSearchCdt.get("missionSearchCdt")?.value,
+      "entreprises":     this.formSearchCdt.get("entrepriseSearchCdt")?.value,
+      
+      "competences": this.formSearchCdt.get("competenceSearchCdt")?.value,
+      "langues":          this.formSearchCdt.get("langueSearchCdt")?.value,
+      
+      "pseudos":        this.formSearchCdt.get("linkedinSearchCdt")?.value,
+      
+      "ville":               this.formSearchCdt.get("villeSearchCdt")?.value,
+      
+      "mobilite":        this.formSearchCdt.get("mobiliteSearchCdt")?.value,
     }
-    
+
     console.log(requete);
     this.candidatService.getCandidatsByParams(requete)
-    .subscribe
-    ({
-      next         : (reponse) => { console.log("reponse : "+reponse);  this.candidats = reponse },
-      error        : () => { console.log("erreur")},
-      complete : () => { }
-    })        
+      .subscribe
+      ({
+        next: (reponse) => { this.candidats = reponse;  console.log("reponse : " + reponse); },
+        error: (erreur)   => { console.log("erreur : " + erreur); },
+        complete: ()     => { }
+      })
   }
 }
