@@ -175,17 +175,12 @@ export class CandidatComponent implements OnInit
 
         this.candidatService.getCandidatsPrenoms().subscribe(reponse => { this.prenomsListe = reponse; })
         this.candidatService.getCandidatsNoms().subscribe(reponse => { this.nomsListe = reponse; })
- 
     }
-
-
 
     //--------------------TAB CANDIDAT----------------------
 
     createFormCandidatFilled(candidat: Candidat): FormGroup
     {
-        //console.log(candidat);
-        
         let ville = '';
         let postal = '';
         if(candidat.ville != null) 
@@ -224,7 +219,7 @@ export class CandidatComponent implements OnInit
             salaireCdt    : candidat.salaire,
             linkedinCdt   : linkedin,
             githubCdt     : github,
-            mobilCdt      : mobilite,
+            mobiliteCdt   : mobilite,
             nationCdt     : nationnalite,
             situationCdt  : candidat.marital,
             handicapCdt   : candidat.handicape,
@@ -256,7 +251,7 @@ export class CandidatComponent implements OnInit
             githubCdt     : '',
             nationCdt     : '', 
             situationCdt  : '',
-            mobilCdt      : '', 
+            mobiliteCdt   : '', 
             handicapCdt   : '', 
             teletravailCdt: '', 
             permisCdt     : '', 
@@ -264,6 +259,71 @@ export class CandidatComponent implements OnInit
             dispoCdt      : '',
             textareaCdt   : ''
         });
+    }
+
+    saveCandidat(index: number)
+    {
+        
+        let idCandidat: number = this.formCdt.get('idCandidat')?.value;
+
+        let requete = {                        
+            "prenom": this.formCdt.get('prenom2Cdt')?.value,
+            "nom": this.formCdt.get('nom2Cdt')?.value,
+            "naissance": null,
+            "email": this.formCdt.get('emailCdt')?.value,
+            "fixe": null,
+            "mob": this.formCdt.get('telMobCdt')?.value,
+            "adresse": this.formCdt.get('adresseCdt')?.value,
+            "adresse2": this.formCdt.get('adresse2Cdt')?.value,
+            "ville": 
+            {
+                "ville": this.formCdt.get('villeCdt')?.value,
+                "postal": this.formCdt.get('postalCdt')?.value
+            },
+            "pays": 
+            {
+                "nationnalite": this.formCdt.get('nationCdt')?.value,
+            },
+            "mobilite": 
+            {
+                "zone": this.formCdt.get('mobiliteCdt')?.value,
+            },
+            "pseudos": 
+            [
+                {                   
+                    "pseudo": this.formCdt.get('linkedinCdt')?.value,
+                    "reseau":{
+                        "reseau": "Linkedin"
+                    }
+                },
+                {
+                    "pseudo": this.formCdt.get('githubCdt')?.value,
+                    "reseau": {                     
+                        "reseau": "Github"
+                    }
+                }
+            ],
+            "salaire": null,
+            "marital": this.formCdt.get('situationCdt')?.value,
+            "handicape": this.formCdt.get('handicapCdt')?.value,
+            "permis": this.formCdt.get('permisCdt')?.value,
+            "vehicule": this.formCdt.get('vehiculeCdt')?.value,
+            "teletravail": this.formCdt.get('teletravailCdt')?.value,
+            "disponible": this.formCdt.get('dispoCdt')?.value,
+            "info": this.formCdt.get('textareaCdt')?.value,
+        } 
+
+        //créer et sauvegarder experience
+        if(idCandidat != null) 
+        {               
+            this.candidatService.updateCandidat(idCandidat, requete)
+            .subscribe
+            ({
+                next : (response) => { console.log(response); },
+                error: (error)    => { console.log(error);    }
+            });
+        }
+        
     }
 
     chercher()
@@ -342,7 +402,7 @@ export class CandidatComponent implements OnInit
         
     
     //retourne la liste des formulaires education
-    get educations(): FormArray //à voir cette fonction
+    get educations(): FormArray
     {
         return <FormArray> this.formEdu.get('educations');
     }
@@ -524,7 +584,7 @@ export class CandidatComponent implements OnInit
         return <FormArray> this.formExp.get('experiences');
     }
         
-    //créer ou modifier les formulaires expérience dans la db
+    //créer ou modifier les formulaires expérience dans la base de données
     saveExperience(index: number)
     {
         if(this.experiences.at(index).status == 'VALID')
@@ -658,7 +718,6 @@ export class CandidatComponent implements OnInit
 
     //--------------------TAB COMPETENCE--------------------
 
-
     //creer un formulaire compétence vide
     createEmptyCompetenceForm(): FormGroup
     {   
@@ -694,35 +753,37 @@ export class CandidatComponent implements OnInit
         return <FormArray> this.formCmp.get('competences');
     }
         
-    //créer ou modifier les formulaires compétence dans la db
+    //créer ou modifier les formulaires compétence dans la base de données
     saveCompetence(index: number)
     {
         if(this.competences.at(index).status == 'VALID')
         {
-            let idCandidat  : number;
-            let idCompetence: number = this.competences.at(index).get('idCompetence')?.value;
-            let formData    : any    = new FormData();
-            formData.append("competence", this.competences.at(index).get("competenceCmp")?.value);
-            formData.append("niveau"    , this.competences.at(index).get("niveauCmp")?.value);
-            formData.append("type"      , this.competences.at(index).get("typeCmp")?.value);
-            formData.append("details"   , this.competences.at(index).get("textareaCmp")?.value);
+            let idCandidat   : number;           
+            let idCompetence : number = this.competences.at(index).get('idCompetence')?.value;
+
+            let requete = {
+                "nom":  this.competences.at(index).get("Cmp")?.value,
+                "niveau": this.competences.at(index).get("Cmp")?.value,
+                "type": this.competences.at(index).get("Cmp")?.value,
+                "info": this.competences.at(index).get("Cmp")?.value
+            }
             
-            //créer et sauvegarder compétence
+            //créer et sauvegarder une competence
             if(idCompetence == null) 
             {   
                 idCandidat = this.formCdt.get('idCandidat')?.value;
-                this.candidatService.createExperience(idCandidat, formData.entries())
+                this.candidatService.createCompetence(idCandidat, requete)
                 .subscribe
                 ({
                     next : (response) => { console.log(response); },
                     error: (error)    => { console.log(error);    }
                 });
             }
-            //modifier et sauvegarder compétence
-            else
+            
+            //modifier et sauvegarder une competence
+            else 
             {
-                formData.append("idCompetence", this.competences.at(index).get("idCompetence"));
-                this.candidatService.updateCompetence(idCompetence, formData.entries())
+                this.candidatService.updateCompetence(idCompetence, requete)
                 .subscribe
                 ({
                     next : (response) => { console.log(response); },
@@ -750,7 +811,7 @@ export class CandidatComponent implements OnInit
             ({
                 next    : ()      => {  this.removeCompetenceFromList(index);},
                 error   : (error) => { console.log(error) },
-                complete: ()      => { /*console.log("index: " + index + " - id: " + id);*/  }
+                complete: ()      => { }
             })
         }
         this.removeCompetenceFromList(index);
@@ -840,43 +901,46 @@ export class CandidatComponent implements OnInit
         return <FormArray> this.formLng.get('langues');
     }
         
-    //créer ou modifier les formulaires langue dans la db
+    //créer ou modifier les formulaires langue dans la base de données
     saveLangue(index: number)
     {
         if(this.langues.at(index).status == 'VALID')
         {
             let idCandidat : number;
             let idLangue   : number = this.langues.at(index).get('idLangue')?.value;
-            let formData   : any    = new FormData();
-            formData.append("langue"       , this.langues.at(index).get("langueLng")?.value);
-            formData.append("niveau"       , this.langues.at(index).get("niveauLng")?.value);
-            formData.append("certification", this.langues.at(index).get("certificationLng")?.value);
-            formData.append("details"      , this.langues.at(index).get("textareaLng")?.value);
-            
-            //créer et sauvegarder langue
+
+            let requete = {
+                "nom"          : this.langues.at(index).get('langueLng')?.value,
+                "niveau"       : this.langues.at(index).get('niveauLng')?.value,
+                "certification": this.langues.at(index).get('certificationLng')?.value,
+                "info"         : this.langues.at(index).get('textareaLng')?.value
+            }
+
+            //créer et sauvegarder une langue
             if(idLangue == null) 
             {   
                 idCandidat = this.formCdt.get('idCandidat')?.value;
-                this.candidatService.createLangue(idCandidat, formData.entries())
+                this.candidatService.createLangue(idCandidat, requete)
                 .subscribe
                 ({
                     next : (response) => { console.log(response); },
                     error: (error)    => { console.log(error);    }
                 });
             }
-            else //modifier et sauvegarder langue
+
+            //modifier et sauvegarder une langue
+            else 
             {
-                formData.append("idLangue", this.langues.at(index).get("idLangue"));
-                this.candidatService.updateLangue(idLangue, formData.entries())
+                this.candidatService.updateLangue(idLangue, requete)
                 .subscribe
                 ({
                     next : (response) => { console.log(response); },
                     error: (error)    => { console.log(error);    }
                 });
             }
+
         }
     }
-
 
     //ajouter un formulaire langue à la liste langues
     addLangueFormToList()
@@ -895,7 +959,7 @@ export class CandidatComponent implements OnInit
             ({
                 next    : ()      => {  this.removeLangueFromList(index);},
                 error   : (error) => { console.log(error) },
-                complete: ()      => { /*console.log("index: " + index + " - id: " + id);*/  }
+                complete: ()      => {  }
             })
         }
         this.removeLangueFromList(index);
@@ -958,7 +1022,6 @@ export class CandidatComponent implements OnInit
             idEntretien   : null,
             dateEtt       : '',
             lieuEtt       : '',
-            evaluationEtt : '',
             nomRctrEtt    : '',
             prenomRctrEtt : '',           
             missionEtt    : null,
@@ -977,7 +1040,6 @@ export class CandidatComponent implements OnInit
                 idEntretien   : [entretien.idEntretien     , Validators.required],
                 dateEtt       : [entretien.date            , Validators.required],
                 lieuEtt       : [entretien.lieu                                 ],
-                evaluationEtt : [entretien.evaluation                           ],
                 nomRctrEtt    : [entretien.recruteur.nom   , Validators.required],
                 prenomRctrEtt : [entretien.recruteur.prenom, Validators.required],
                 missionEtt    : [entretien.poste                                ],
@@ -993,50 +1055,58 @@ export class CandidatComponent implements OnInit
         return <FormArray> this.formEtt.get('entretiens');
     }
         
-    //créer ou modifier les formulaires entretien dans la db
+    //créer ou modifier les formulaires entretien dans la base de données
     saveEntretien(index: number)
     {
         if(this.entretiens.at(index).status == 'VALID')
         {
             let idCandidat  : number;
-            let date1       : Date;
-            let idEntretien : number = this.entretiens.at(index).get('idEntretien')?.value;
-            let formData    : any    = new FormData();
-            date1 = this.experiences.at(index).get("dateEtt")?.value;
-            if(date1 != null) 
-            { 
-                formData.append("date", formatDate(date1, 'yyyy-MM-dd', 'en_US')); 
-            }            
-            formData.append("lieu"      , this.entretiens.at(index).get("lieuEtt")?.value);
-            formData.append("evaluation", this.entretiens.at(index).get("evaluationEtt")?.value);
-            formData.append("recruteur" , this.entretiens.at(index).get("recruteurEtt")?.value);
-            formData.append("mission"   , this.entretiens.at(index).get("missionEtt")?.value);
-            formData.append("contrat"   , this.entretiens.at(index).get("contratEtt")?.value);
-            formData.append("resume"    , this.entretiens.at(index).get("textareaEtt")?.value);
+            let dateStr!    : string;
+            let date        : Date   = this.entretiens.at(index).get("dateEtt")?.value;
+            let idEntretien : number = this.entretiens.at(index).get('idEntretien')?.value;            
             
-            //créer et sauvegarder entretien
+            if(date != null) 
+            { 
+                dateStr = formatDate(date, 'yyyy-MM-dd', 'en_US');
+            }            
+                
+            let requete = {
+                "date"     : dateStr,
+                "lieu"     : this.entretiens.at(index).get("lieuEtt")?.value,
+                "poste"    : this.entretiens.at(index).get("missionEtt")?.value,
+                "contrat"  : this.entretiens.at(index).get("contratEtt")?.value,
+                "resume"   : this.entretiens.at(index).get("textareaEtt")?.value,
+                "recruteur": {
+                    "prenom": this.entretiens.at(index).get("prenomRctrEtt")?.value,               
+                    "nom"   : this.entretiens.at(index).get("nomRctrEtt")?.value,
+                }
+            }
+
+            //créer et sauvegarder experience
             if(idEntretien == null) 
             {   
                 idCandidat = this.formCdt.get('idCandidat')?.value;
-                this.candidatService.createEntretien(idCandidat, formData.entries())
+                this.candidatService.createEntretien(idCandidat, requete)
                 .subscribe
                 ({
                     next : (response) => { console.log(response); },
                     error: (error)    => { console.log(error);    }
                 });
             }
-            else //modifier et sauvegarder entretien
+
+            //modifier et sauvegarder experience
+            else 
             {
-                formData.append("idEntretien", this.entretiens.at(index).get("idEntretien"));
-                this.candidatService.updateEntretien(idEntretien, formData.entries())
+                this.candidatService.updateEntretien(idEntretien, requete)
                 .subscribe
                 ({
                     next : (response) => { console.log(response); },
                     error: (error)    => { console.log(error);    }
                 });
             }
+
         }
-    }
+    }    
 
 
     //ajouter un formulaire entretien à la liste entretiens
@@ -1122,7 +1192,6 @@ export class CandidatComponent implements OnInit
             domainePrj   : '',
             debutPrj     : null,            
             finPrj       : null,
-            entreprisePrj: '',
             textareaPrj  : ''
         })
     }
@@ -1139,8 +1208,7 @@ export class CandidatComponent implements OnInit
                 typePrj       : [projet.type                         ],
                 domainePrj    : [projet.activite.nom                 ],
                 debutPrj      : [projet.debut                        ],            
-                finPrj        : [projet.fin                          ],
-                entreprisePrj : [projet.entreprise                   ],
+                finPrj        : [projet.fin                          ],                
                 textareaPrj   : [projet.info                         ]
             })
         )
@@ -1152,49 +1220,55 @@ export class CandidatComponent implements OnInit
         return <FormArray> this.formPrj.get('projets');
     }
         
-    //créer ou modifier les formulaires projet dans la db
+    //créer ou modifier les formulaires projet dans la base de données
     saveProjet(index: number)
     {
         if(this.projets.at(index).status == 'VALID')
         {
-            let idCandidat  : number;
-            let date1       : Date;
-            let date2       : Date;
-            let idProjet    : number = this.projets.at(index).get('idProjet')?.value;
-            let formData    : any    = new FormData();
-            formData.append("nom"       , this.projets.at(index).get("nomPrj")?.value);
-            formData.append("type"      , this.projets.at(index).get("typePrj")?.value);
-            formData.append("domaine"   , this.projets.at(index).get("domainePrj")?.value);
-            date1 = this.projets.at(index).get("debutPrj")?.value;
-            if(date1 != null) 
-            { 
-                formData.append("debut", formatDate(date1, 'yyyy-MM-dd', 'en_US'));
-            }
-            date2 = this.projets.at(index).get("finPrj")?.value;
-            if(date2 != null) 
-            { 
-                formData.append("fin", formatDate(date2, 'yyyy-MM-dd', 'en_US'));
-            }               
-            formData.append("perso"     , this.projets.at(index).get("persoPrj")?.value);
-            formData.append("pro"       , this.projets.at(index).get("proPrj")?.value);
-            formData.append("entreprise", this.projets.at(index).get("entreprisePrj")?.value);
-            formData.append("details"   , this.projets.at(index).get("textareaPrj")?.value);
+            let idCandidat : number;
+            let debutStr!  : string;
+            let finStr!    : string;
+            let debut      : Date   = this.projets.at(index).get("debutPrj")?.value;
+            let fin        : Date   = this.projets.at(index).get("finPrj")?.value;
+            let idProjet   : number = this.projets.at(index).get("idProjet")?.value;
 
-            //créer et sauvegarder projet
-            if(idProjet == null)
+            if(debut != null) 
+            { 
+                debutStr = formatDate(debut, 'yyyy-MM-dd', 'en_US');
+            };
+        
+            if(fin != null) 
+            { 
+                finStr = formatDate(fin, 'yyyy-MM-dd', 'en_US');
+            };
+
+            let requete = {
+                "nom"  : this.projets.at(index).get("nomPrj")?.value,
+                "type" : this.projets.at(index).get("typePrj")?.value,
+                "debut": debutStr,
+                "fin"  : finStr,
+                "info" : this.projets.at(index).get("textareaPrj")?.value,
+                "activite": {
+                    "nom": this.projets.at(index).get("domainePrj")?.value,
+                }
+            }        
+
+            //créer et sauvegarder un projet
+            if(idProjet == null) 
             {   
                 idCandidat = this.formCdt.get('idCandidat')?.value;
-                this.candidatService.createProjet(idCandidat, formData.entries())
+                this.candidatService.createProjet(idCandidat, requete)
                 .subscribe
                 ({
                     next : (response) => { console.log(response); },
                     error: (error)    => { console.log(error);    }
                 });
             }
-            else //modifier et sauvegarder projet
+
+            //modifier et sauvegarder un projet
+            else 
             {
-                formData.append("idProjet", this.projets.at(index).get("idProjet"));
-                this.candidatService.updateProjet(idProjet, formData.entries())
+                this.candidatService.updateProjet(idProjet, requete)
                 .subscribe
                 ({
                     next : (response) => { console.log(response); },
@@ -1222,7 +1296,7 @@ export class CandidatComponent implements OnInit
             ({
                 next    : ()      => { this.removeProjetFromList(index);},
                 error   : (error) => { console.log(error) },
-                complete: ()      => { /*console.log("index: " + index + " - id: " + id);*/  }
+                complete: ()      => { }
             })
         }
         this.removeProjetFromList(index);

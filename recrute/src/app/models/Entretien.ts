@@ -5,9 +5,9 @@ export interface Entretien
     idEntretien : number;
     date        : Date;
     lieu        : string;
-    evaluation  : string;
-	recruteur   : Recruteur;
     poste       : string;
-    contrat     : string;
-    resume      : string
+    contrat     : number;
+    resume      : string;
+
+    recruteur   : Recruteur;
 }

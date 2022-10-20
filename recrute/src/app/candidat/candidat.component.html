@@ -94,7 +94,7 @@
                             <input formControlName="nationCdt" list="nationCdt" class="form-control ps-4" type="text" name="nationCdt">
                             <datalist id="nationCdt">
                                 <option>Française</option>
-                                <option>talienne</option>
+                                <option>Italienne</option>
                                 <option>Britannique</option>
                                 <option>Espagnole</option>
                                 <option>Ukrainienne</option>
@@ -120,9 +120,9 @@
                         <div class="col-4 px-0">
                             <input formControlName="linkedinCdt" class="form-control ps-4" type="text" id="linkedinCdt" name="linkedinCdt" value=""/>
                         </div>
-                        <label class="col-2 ps-1 pe-3 pt-2" for="mobilCdt">Mobilité</label>
+                        <label class="col-2 ps-1 pe-3 pt-2" for="mobiliteCdt">Mobilité</label>
                         <div class="col-4 px-0">
-                            <select formControlName="mobilCdt" class="form-select ps-4" id="mobilCdt" name="mobilCdt">
+                            <select formControlName="mobiliteCdt" class="form-select ps-4" id="mobiliteCdt" name="mobiliteCdt">
                                 <option value="0"></option>
                                 <option value="1">pas de mobilité</option>
                                 <option value="2">localité</option>
@@ -294,15 +294,12 @@
                     <div class="row mx-0 text-start ps-1 pb-3">
                         <mat-slide-toggle [checked]="!slideExpChecked" (change)="switchFormExpEnable()">{{sliderExpTxt}}</mat-slide-toggle>
                     </div>
-
                     <div formArrayName="experiences" *ngFor="let t of experiences.controls; let i = index">
                         <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
                             <div class="row mx-0">
                                 <p class="lead text-start">Expérience {{i+1}}</p>
-                            </div>
-                        
+                            </div>                       
                             <input [hidden]="true" formControlName="idExperience" matInput id="idExperience" name="idExperience"/>                                                                                    
-                        
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-6" appearance="fill">
                                     <mat-hint>Saisir une mission</mat-hint>
@@ -314,8 +311,7 @@
                                     <mat-label  for="entrepriseExp">Entreprise</mat-label>
                                     <input class="fs-6" formControlName="entrepriseExp" matInput type="text" id="entrepriseExp" name="entrepriseExp"/>                            
                                 </mat-form-field>
-                            </div>
-                        
+                            </div>                        
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-6" appearance="fill">
                                     <mat-hint>Saisir un lieu</mat-hint>
@@ -478,7 +474,7 @@
                             <div class="row mx-0 mt-1">
                                 <mat-form-field class="col-6" appearance="fill">
                                     <mat-hint>Saisir une langue</mat-hint>
-                                    <mat-label for="langueLng">Langue</mat-label>
+                                    <mat-label for="langueLng">Langues</mat-label>
                                     <input class="fs-6" formControlName="langueLng" matInput type="text" id="langueLng" name="langueLng"/>
                                 </mat-form-field>
                                 <mat-form-field class="col-6" appearance="fill">
@@ -538,7 +534,7 @@
     <mat-tab label="Entretien">
         <div class="row mx-0">
             <div class="col-6 mx-auto">
-                <h1 class="text-secondary text-center my-3">Entretien</h1>
+                <h1 class="text-secondary text-center my-3">Entretiens</h1>
                 <form [formGroup]='formEtt' novalidate class="text-center">
                     <div class="row mx-0 text-start ps-1 pb-3">
                         <mat-slide-toggle [checked]="!slideEttChecked" (change)="switchFormEttEnable()">{{sliderEttTxt}}</mat-slide-toggle>
@@ -627,7 +623,7 @@
     <mat-tab label="Projet">
         <div class="row mx-0">
             <div class="col-6 mx-auto">
-                <h1 class="text-secondary text-center my-3">Projet</h1>
+                <h1 class="text-secondary text-center my-3">Projets</h1>
                 <form [formGroup]='formPrj' novalidate class="text-center">
                     <div class="row mx-0 text-start ps-1 pb-3">
                         <mat-slide-toggle [checked]="!slidePrjChecked" (change)="switchFormPrjEnable()">{{sliderPrjTxt}}</mat-slide-toggle>
@@ -740,7 +736,7 @@
             </div>
             <div class="col-8 row border-start border-secondary">
                 <div class="col-6 mx-auto pb-5">
-                    <h1 class="text-secondary text-center my-3">Document</h1>
+                    <h1 class="text-secondary text-center my-3">Documents</h1>
                     <div *ngFor="let doc of documents">
                         <h2 class="text-secondary text-start my-2">{{ doc[0] }}</h2>
                         <div class="row mx-0 my-2 text-center" *ngFor="let nom of doc[1]; let j = index">
@@ -756,8 +752,12 @@
         </div>
     </mat-tab>
 
-    <mat-tab label="Matcher"> Matcher avec des entreprises et offres d'emplois
-        <!---->
+    <mat-tab label="Matcher">
+        <div class="row mx-0">
+            <div class="col-6 mx-auto">
+                <h1 class="text-secondary text-center my-3">Match candidats, entreprises et offres d'emplois</h1>
+            </div>
+        </div>
     </mat-tab>
 </mat-tab-group>
   

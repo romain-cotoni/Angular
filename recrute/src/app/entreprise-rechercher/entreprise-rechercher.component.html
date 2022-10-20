@@ -1,1 +1,47 @@
-<p>entreprise-rechercher</p>
+<div class="row mx-0">
+    <div class="col-3"></div>
+        <div class="col-6">
+            <h1 class="text-secondary text-center my-3">Entreprise</h1>
+            <form  novalidate class="text-center" >                
+                <div>
+                    <div class="mb-4 p-2 border border-light">
+                        <div class="row mx-0">
+                            <p class="lead text-start">Entreprise</p>
+                        </div>
+                        <div class="row mx-0 mb-4">
+                            <div class="col-md-6">
+                                <input formControlName='raisonEtp' id="{{'raisonEtp'}}" type="text" class="form-control" placeholder="Raison sociale" />
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <mat-checkbox formControlName="recruteEtp" class="col-3 mt-1">Recrute activement</mat-checkbox>
+                            </div>
+                        </div>
+                        <div class="row mx-0 mb-4">
+                            <div class="col-md-6">
+                                <input formControlName='lieuEtp' id="{{'lieuEtp'}}" type="text" class="form-control" placeholder="Lieu" />
+                            </div>
+                            <div class="col-md-6">
+                                <input formControlName='siretEtp' id="{{'siretEtp'}}" type="text" class="form-control" placeholder="Siret" />
+                            </div>
+                        </div>                    
+                        <div class="row mx-0 mb-4">
+                            <div class="col-md-12">
+                                <textarea formControlName="infoEtp" class="form-control" placeholder="Détails"></textarea>                                                           
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-2"></div>
+                            <button mat-raised-button color="primary" class="col-4 ms-1" >Valider l'entreprise</button>
+                            <button mat-raised-button color="primary" class="col-4 ms-1" >Effacer l'entreprise</button>        
+                        </div>
+                    </div>
+                </div>
+                <!--<button class="btn btn-danger ms-2" [disabled]='educationForm.invalid'>Submit</button>-->
+                <!--<button mat-raised-button color="primary" class="mb-4" (click)='addEducation()'>Ajouter une éducation</button>-->
+            </form>
+        </div>
+    <div class="col-3"></div>
+</div>
+  
+  
+

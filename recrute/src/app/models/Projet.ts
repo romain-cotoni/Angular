@@ -7,7 +7,6 @@ export interface Projet
     type         : string;
 	debut        : Date;
     fin          : Date;
-    entreprise   : string;
     info         : string;
     
     activite     : Activite;

@@ -70,6 +70,15 @@ export class CandidatService
         return this.httpClient.post<Candidat>(url, body, {'headers':headers});
     }
 
+    updateCandidat(id: number, data: any)
+    {
+        const url   = this.BASE_PATH + '/candidat/' + id.toString();
+        var headers = new HttpHeaders({ 'content-type': 'application/json'});
+        let body    = data;
+        return this.httpClient.put<Candidat>(url, body, {'headers':headers});
+    }
+
+    //-------------------------EDUCATION------------------------------
     getEducations(id: number): Observable<Education[]>
     {
         const url = this.BASE_PATH + '/candidat/' + id.toString() + '/educations';
@@ -80,7 +89,7 @@ export class CandidatService
     {
         const url   = this.BASE_PATH + '/candidat/' + id.toString() + '/educations';
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
-        let body    = data;//JSON.stringify(Object.fromEntries(data));         
+        let body    = data;
         return this.httpClient.post<Education>(url, body, {'headers':headers});
     }
 
@@ -141,7 +150,7 @@ export class CandidatService
     {
         const url   = this.BASE_PATH + '/candidat/' + id.toString() + '/competences';
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
-        let body    = JSON.stringify(Object.fromEntries(data)); 
+        let body    = data;
         return this.httpClient.post<Competence>(url, body, {'headers':headers});
     }
 
@@ -150,7 +159,7 @@ export class CandidatService
     {
         const url   = this.BASE_PATH + '/competence/' + id.toString();
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
-        let body    = JSON.stringify(Object.fromEntries(data))
+        let body    = data;
         return this.httpClient.put<Competence>(url, body, {'headers':headers});
     }
 
@@ -201,7 +210,7 @@ export class CandidatService
     {
         const url   = this.BASE_PATH + '/candidat/' + id.toString() + '/entretiens';
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
-        let body    = JSON.stringify(Object.fromEntries(data)); 
+        let body    = data; 
         return this.httpClient.post<Entretien>(url, body, {'headers':headers});
     }
 
@@ -210,7 +219,7 @@ export class CandidatService
     {
         const url   = this.BASE_PATH + '/entretien/' + id.toString();
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
-        let body    = JSON.stringify(Object.fromEntries(data))
+        let body    = data;
         return this.httpClient.put<Entretien>(url, body, {'headers':headers});
     }
 
@@ -231,7 +240,7 @@ export class CandidatService
     {
         const url   = this.BASE_PATH + '/candidat/' + id.toString() + '/projets';
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
-        let body    = JSON.stringify(Object.fromEntries(data)); 
+        let body    = data;
         return this.httpClient.post<Projet>(url, body, {'headers':headers});
     }
 
@@ -240,7 +249,7 @@ export class CandidatService
     {
         const url   = this.BASE_PATH + '/projet/' + id.toString();
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
-        let body    = JSON.stringify(Object.fromEntries(data))
+        let body    = data;
         return this.httpClient.put<Projet>(url, body, {'headers':headers});
     }
 
