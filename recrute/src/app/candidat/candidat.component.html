@@ -35,7 +35,6 @@
                     </div>
                 </form>
             </div>
-
             <div class="col-6 border-start border-secondary full-height-tab-custom">
                 <div class="row mx-0 my-3">
                     <div class="col-2"></div>
@@ -45,9 +44,7 @@
                     <div class="row mx-0 text-start ps-1 pb-3">
                         <mat-slide-toggle [checked]="!slideCdtChecked" (change)="switchFormCdtEnable()">{{ sliderCdtTxt }}</mat-slide-toggle>
                     </div>
-
                     <input [hidden]="true" formControlName="idCandidat" matInput id="idCandidat" name="idCandidat"/>
-
                     <div class="row mx-0 mt-3">
                         <label class="col-2 ps-1 pe-3 pt-2" for="prenom2Cdt">Prénom</label>
                         <div class="col-4 px-0">
@@ -93,7 +90,8 @@
                         <div class="col-4 px-0">
                             <input formControlName="nationCdt" list="nationCdt" class="form-control ps-4" type="text" name="nationCdt">
                             <datalist id="nationCdt">
-                                <option>Française</option>
+                                <option *ngFor="let nation of nationsListe" value="{{ nation }}">{{ nation }}</option>
+                                <!--<option>Française</option>
                                 <option>Italienne</option>
                                 <option>Britannique</option>
                                 <option>Espagnole</option>
@@ -102,7 +100,7 @@
                                 <option>Marocain</option>
                                 <option>Algérien</option>
                                 <option>Sénégalais</option>
-                                <option>Américain</option>
+                                <option>Américain</option>-->
                             </datalist>
                         </div>
                         <label class="col-2 ps-1 pe-3 pt-0 pt-xxl-2" for="situationCdt">Situation familiale</label>
@@ -175,7 +173,7 @@
                     <div class="row mx-0 my-2">
                         <div class="col-3"></div>
                         <div class="col-4 mt-2">
-                            <button [disabled]=isDisabledCdtForm mat-raised-button color="primary" class="col-12" type="submit">Valider</button>                                                
+                            <button [disabled]=isDisabledCdtForm mat-raised-button color="primary" class="col-12" (click)='updateCandidat()'>Valider</button>                                                
                         </div>
                         <div class="text-start col-5 ps-1 pt-3">
                             <mat-slide-toggle [checked]="!slideCdtChecked" (change)="switchFormCdtEnable()">{{ sliderCdtTxt }}</mat-slide-toggle>

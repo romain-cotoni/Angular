@@ -9,6 +9,7 @@ import { Entretien } from '../models/Entretien';
 import { Experience } from '../models/Experience';
 import { Langue } from '../models/Langue';
 import { Projet } from '../models/Projet';
+import { Pays } from '../models/Pays';
 
 @Injectable({
     providedIn: 'root'
@@ -257,6 +258,14 @@ export class CandidatService
     {
         const url = this.BASE_PATH + '/projet/' + id.toString();
         return this.httpClient.delete<Projet>(url);
+    }
+
+    //---------------------------PAYS-------------------------------
+
+    getPays(): Observable<Pays[]>
+    {
+        const url = this.BASE_PATH + '/pays';
+        return this.httpClient.get<Pays[]>(url);
     }
 
     //-------------------------DOCUMENT-----------------------------

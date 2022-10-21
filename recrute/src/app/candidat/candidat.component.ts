@@ -21,6 +21,7 @@ export class CandidatComponent implements OnInit
 { 
     prenomsListe : String[] = [];
     nomsListe    : String[] = [];
+    nationsListe : String[] = [];
 
     formSearch! : FormGroup;
     formCdt!    : FormGroup;
@@ -175,6 +176,8 @@ export class CandidatComponent implements OnInit
 
         this.candidatService.getCandidatsPrenoms().subscribe(reponse => { this.prenomsListe = reponse; })
         this.candidatService.getCandidatsNoms().subscribe(reponse => { this.nomsListe = reponse; })
+        this.candidatService.getPays()
+        .subscribe(reponse => { reponse.forEach(element => {this.nationsListe.push(element.nationnalite) })});
     }
 
     //--------------------TAB CANDIDAT----------------------
@@ -261,11 +264,10 @@ export class CandidatComponent implements OnInit
         });
     }
 
-    saveCandidat(index: number)
-    {
-        
+    updateCandidat()
+    {        
         let idCandidat: number = this.formCdt.get('idCandidat')?.value;
-
+        
         let requete = {                        
             "prenom": this.formCdt.get('prenom2Cdt')?.value,
             "nom": this.formCdt.get('nom2Cdt')?.value,
@@ -312,8 +314,8 @@ export class CandidatComponent implements OnInit
             "disponible": this.formCdt.get('dispoCdt')?.value,
             "info": this.formCdt.get('textareaCdt')?.value,
         } 
-
-        //créer et sauvegarder experience
+        console.log("requete : " + JSON.stringify(requete));
+        //modifier et sauvegarder un candidat 
         if(idCandidat != null) 
         {               
             this.candidatService.updateCandidat(idCandidat, requete)
