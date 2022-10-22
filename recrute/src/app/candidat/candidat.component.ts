@@ -196,8 +196,16 @@ export class CandidatComponent implements OnInit
         let github = '';
         if(candidat.pseudos.length > 0)
         {            
-            linkedin = candidat.pseudos[0].pseudo;
-            github = candidat.pseudos[1].pseudo;
+            if(candidat.pseudos[0] != null) 
+            {
+                if(candidat.pseudos[0].reseau.reseau=="Linkedin")    linkedin = candidat.pseudos[0].pseudo;
+                else if(candidat.pseudos[0].reseau.reseau=="Github") github   = candidat.pseudos[0].pseudo;
+            }
+            if(candidat.pseudos[1] != null)
+            {
+                if(candidat.pseudos[1].reseau.reseau=="Linkedin")    linkedin = candidat.pseudos[1].pseudo;
+                else if(candidat.pseudos[1].reseau.reseau=="Github") github   = candidat.pseudos[1].pseudo;
+            }
         }
 
         let mobilite = 0;
@@ -205,6 +213,7 @@ export class CandidatComponent implements OnInit
         
         let nationnalite = '';
         if(candidat.pays != null) nationnalite = candidat.pays.nationnalite;
+
 
         return this.fb.group
         ({
@@ -290,8 +299,7 @@ export class CandidatComponent implements OnInit
             {
                 "zone": this.formCdt.get('mobiliteCdt')?.value,
             },
-            "pseudos": 
-            [
+            "pseudos": [
                 {                   
                     "pseudo": this.formCdt.get('linkedinCdt')?.value,
                     "reseau":{
@@ -314,7 +322,7 @@ export class CandidatComponent implements OnInit
             "disponible": this.formCdt.get('dispoCdt')?.value,
             "info": this.formCdt.get('textareaCdt')?.value,
         } 
-        console.log("requete : " + JSON.stringify(requete));
+       
         //modifier et sauvegarder un candidat 
         if(idCandidat != null) 
         {               
@@ -764,10 +772,10 @@ export class CandidatComponent implements OnInit
             let idCompetence : number = this.competences.at(index).get('idCompetence')?.value;
 
             let requete = {
-                "nom":  this.competences.at(index).get("Cmp")?.value,
-                "niveau": this.competences.at(index).get("Cmp")?.value,
-                "type": this.competences.at(index).get("Cmp")?.value,
-                "info": this.competences.at(index).get("Cmp")?.value
+                "nom"   :  this.competences.at(index).get("competenceCmp")?.value,
+                "niveau": this.competences.at(index).get("niveauCmp")?.value,
+                "type"  : this.competences.at(index).get("typeCmp")?.value,
+                "info"  : this.competences.at(index).get("textareaCmp")?.value
             }
             
             //créer et sauvegarder une competence
@@ -778,7 +786,7 @@ export class CandidatComponent implements OnInit
                 .subscribe
                 ({
                     next : (response) => { console.log(response); },
-                    error: (error)    => { console.log(error);    }
+                    error: (error)    => { console.log("erreur : "+error);    }
                 });
             }
             

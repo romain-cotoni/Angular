@@ -106,7 +106,6 @@ export class CandidatService
     deleteEducation(id: number)
     {
         const url = this.BASE_PATH + '/education/' + id.toString();
-        console.log(url);
         return this.httpClient.delete<Education>(url);
     }
 
@@ -181,7 +180,7 @@ export class CandidatService
     {
         const url   = this.BASE_PATH + '/candidat/' + id.toString() + '/langues';
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
-        let body    = JSON.stringify(Object.fromEntries(data)); 
+        let body    = data; 
         return this.httpClient.post<Langue>(url, body, {'headers':headers});
     }
 
@@ -190,7 +189,7 @@ export class CandidatService
     {
         const url   = this.BASE_PATH + '/langue/' + id.toString();
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
-        let body    = JSON.stringify(Object.fromEntries(data))
+        let body    = data;
         return this.httpClient.put<Langue>(url, body, {'headers':headers});
     }
 
@@ -280,7 +279,7 @@ export class CandidatService
     {
         const url   = this.BASE_PATH + '/candidat/' + id.toString() + '/documents';
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
-        let body    = JSON.stringify(Object.fromEntries(data)); 
+        let body    = data; 
         return this.httpClient.post<Document>(url, body, {'headers':headers});
     }
 
@@ -289,7 +288,7 @@ export class CandidatService
     {
         const url   = this.BASE_PATH + '/document/' + id.toString();
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
-        let body    = JSON.stringify(Object.fromEntries(data))
+        let body    = data;
         return this.httpClient.put<Document>(url, body, {'headers':headers});
     }
 
