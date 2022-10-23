@@ -322,7 +322,7 @@ export class CandidatComponent implements OnInit
             "disponible": this.formCdt.get('dispoCdt')?.value,
             "info": this.formCdt.get('textareaCdt')?.value,
         } 
-       
+       console.log("requete : "+ JSON.stringify(requete) );
         //modifier et sauvegarder un candidat 
         if(idCandidat != null) 
         {               
