@@ -11,6 +11,7 @@ import { Projet } from '../models/Projet';
 import { Entretien } from '../models/Entretien';
 import { Competence } from '../models/Competence';
 import { Langue } from '../models/Langue';
+import { MyEntity } from '../models/MyEntity';
 
 @Component({
   selector   : 'app-candidat',
@@ -19,6 +20,7 @@ import { Langue } from '../models/Langue';
 })
 export class CandidatComponent implements OnInit 
 { 
+    entity: MyEntity = new MyEntity(1,"label","level");
     prenomsListe : String[] = [];
     nomsListe    : String[] = [];
     nationsListe : String[] = [];

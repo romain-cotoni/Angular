@@ -1,3 +1,4 @@
+
 export interface Diplome
 {
     idDiplome   : number;

@@ -30,6 +30,12 @@ export class CandidatService
         return this.httpClient.get<Candidat[]>(url/*,{ withCredentials: true }*/);
     }
 
+    getCandidatsShort(): Observable<Candidat[]>
+    {
+        const url = this.BASE_PATH + '/candidatsShort';
+        return this.httpClient.get<Candidat[]>(url/*,{ withCredentials: true }*/);
+    }
+
 
     getCandidat(id: number): Observable<Candidat>
     {
