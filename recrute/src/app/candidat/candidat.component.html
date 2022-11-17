@@ -251,7 +251,7 @@
                         <div class="col-12 col-md-4 mt-2">
                             <button mat-raised-button color="primary" class="col-12" (click)='addEducationFormToList()'>Ajouter un diplôme</button>                                                
                         </div>
-                        <div class="text-center text-md-start col-12 col-md-5 ps-1 pt-3">
+                        <div class="text-center text-md-start col-12 col-md-5 ps-1 ps-md-3 pt-3">
                             <mat-slide-toggle  [checked]="!slideEduChecked" (change)="switchFormEduEnable()">{{sliderEduTxt}}</mat-slide-toggle>
                         </div>
                     </div>
@@ -264,7 +264,7 @@
 
     <mat-tab label="Expérience">
         <div class="row mx-0">
-            <div class="col-6 mx-auto">
+            <div class="col-12 col-md-6 mx-auto">
                 <h1 class="text-secondary text-center my-3">Expériences professionnelles</h1>
                 <form [formGroup]='formExp' novalidate class="text-center">
                     <div class="row mx-0 text-start ps-1 pb-3">
@@ -349,7 +349,7 @@
                         <div class="col-4 mt-2">
                             <button mat-raised-button color="primary" class="col-12" (click)='addExperienceFormToList()'>Ajouter une mission</button>                                                
                         </div>
-                        <div class="text-start col-5 ps-1 pt-3">
+                        <div class="text-center text-md-start col-12 col-md-5 ps-1 ps-md-3 pt-3">
                             <mat-slide-toggle  [checked]="!slideExpChecked" (change)="switchFormExpEnable()">{{sliderExpTxt}}</mat-slide-toggle>
                         </div>
                     </div>
@@ -362,7 +362,7 @@
 
     <mat-tab label="Compétence">
         <div class="row mx-0">
-            <div class="col-6 mx-auto">
+            <div class="col-12 col-md-6 mx-auto">
                 <h1 class="text-secondary text-center my-3">Compétences</h1>
                 <form [formGroup]='formCmp' novalidate class="text-center">
                     <div class="row mx-0 text-start ps-1 pb-3">
@@ -425,7 +425,7 @@
                         <div class="col-4 mt-2">
                             <button mat-raised-button color="primary" class="col-12" (click)='addCompetenceFormToList()'>Ajouter une compétence</button>                                                
                         </div>
-                        <div class="text-start col-5 ps-1 pt-3">
+                        <div class="text-center text-md-start col-12 col-md-5 ps-1 ps-md-3 pt-3">
                             <mat-slide-toggle  [checked]="!slideCmpChecked" (change)="switchFormCmpEnable()">{{sliderCmpTxt}}</mat-slide-toggle>
                         </div>
                     </div>
@@ -435,7 +435,7 @@
     </mat-tab>
     <mat-tab label="Langue">
         <div class="row mx-0">
-            <div class="col-6 mx-auto">
+            <div class="col-12 col-md-6 mx-auto">
                 <h1 class="text-secondary text-center my-3">Langues</h1>
                 <form [formGroup]='formLng' novalidate class="text-center">
                     <div class="row mx-0 text-start ps-1 pb-3">
@@ -499,7 +499,7 @@
                         <div class="col-4 mt-2">
                             <button mat-raised-button color="primary" class="col-12" (click)='addLangueFormToList()'>Ajouter une langue</button>
                         </div>
-                        <div class="text-start col-5 ps-1 pt-3">
+                        <div class="text-center text-md-start col-12 col-md-5 ps-1 ps-md-3 pt-3">
                             <mat-slide-toggle  [checked]="!slideLngChecked" (change)="switchFormLngEnable()">{{sliderLngTxt}}</mat-slide-toggle>
                         </div>
                     </div>
@@ -509,7 +509,7 @@
     </mat-tab>
     <mat-tab label="Entretien">
         <div class="row mx-0">
-            <div class="col-6 mx-auto">
+            <div class="col-12 col-md-6 mx-auto">
                 <h1 class="text-secondary text-center my-3">Entretiens</h1>
                 <form [formGroup]='formEtt' novalidate class="text-center">
                     <div class="row mx-0 text-start ps-1 pb-3">
@@ -588,7 +588,7 @@
                         <div class="col-4 mt-2">
                             <button mat-raised-button color="primary" class="col-12" (click)="addEntretienFormToList()">Ajouter un entretien</button>                                                
                         </div>
-                        <div class="text-start col-5 ps-1 pt-3">
+                        <div class="text-center text-md-start col-12 col-md-5 ps-1 ps-md-3 pt-3">
                             <mat-slide-toggle [checked]="!slideEttChecked" (change)="switchFormEttEnable()">{{sliderEttTxt}}</mat-slide-toggle>
                         </div>
                     </div>
@@ -598,7 +598,7 @@
     </mat-tab>
     <mat-tab label="Projet">
         <div class="row mx-0">
-            <div class="col-6 mx-auto">
+            <div class="col-12 col-md-6 mx-auto">
                 <h1 class="text-secondary text-center my-3">Projets</h1>
                 <form [formGroup]='formPrj' novalidate class="text-center">
                     <div class="row mx-0 text-start ps-1 pb-3">
@@ -669,7 +669,7 @@
                         <div class="col-4 mt-2">
                             <button mat-raised-button color="primary" class="col-12" (click)="addProjetFormToList()">Ajouter un projet</button>                                                
                         </div>
-                        <div class="text-start col-5 ps-1 pt-3">
+                        <div class="text-center text-md-start col-12 col-md-5 ps-1 ps-md-3 pt-3">
                             <mat-slide-toggle [checked]="!slidePrjChecked" (change)="switchFormPrjEnable()">{{sliderPrjTxt}}</mat-slide-toggle>
                         </div>
                     </div>
@@ -680,7 +680,7 @@
 
     <mat-tab label="Document">
         <div class="row mx-0">
-            <div class="col-4 mt-1 d-flex justify-content-center">              
+            <div class="col-12 col-md-4 mt-1 d-flex justify-content-center">              
                 <form [formGroup]='formDoc'>
                     <div class="row mx-0 mt-3">
                         <mat-form-field appearance="fill">
@@ -690,40 +690,43 @@
                         </mat-form-field>
                     </div>
                     <div class="row mx-0 mt-3">
-                    <mat-form-field appearance="fill">
-                        <mat-hint>Saisir une catégorie</mat-hint>
-                        <mat-label for="categorieDoc">Catégorie</mat-label>
-                        <select matNativeControl class="fs-6" formControlName="categorieDoc" id="categorieDoc" name="categorieDoc">
-                            <option value="1">Cv</option>
-                            <option value="2">Lettre de motivation</option>
-                            <option value="3">Lettre de recommandation</option>
-                            <option value="4">Diplôme</option>
-                            <option value="5">Certification</option>
-                            <option value="6">Habilitation</option>
-                            <option value="7">Pièce d'identité</option>
-                            <option value="8">Autre</option>
-                        </select>
-                    </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-hint>Saisir une catégorie</mat-hint>
+                            <mat-label for="categorieDoc">Catégorie</mat-label>
+                            <select matNativeControl class="fs-6" formControlName="categorieDoc" id="categorieDoc" name="categorieDoc">
+                                <option value="1">Cv</option>
+                                <option value="2">Lettre de motivation</option>
+                                <option value="3">Lettre de recommandation</option>
+                                <option value="4">Diplôme</option>
+                                <option value="5">Certification</option>
+                                <option value="6">Habilitation</option>
+                                <option value="7">Pièce d'identité</option>
+                                <option value="8">Autre</option>
+                            </select>
+                        </mat-form-field>
                     </div>
                     <div class="row mt-3">
                         <button class="mx-auto" mat-raised-button color="primary" (click)="addDocument()">Ajouter un document</button>
                     </div>
                 </form>
             </div>
-            <div class="col-8 row border-start border-secondary">
-                <div class="col-6 mx-auto pb-5">
-                    <h1 class="text-secondary text-center my-3">Documents</h1>
+            <div class="col-12 col-md-8 row mx-auto border-start border-secondary">
+                    <h1 class="text-secondary text-center me-5 my-3">Documents</h1>
                     <div *ngFor="let doc of documents">
-                        <h2 class="text-secondary text-start my-2">{{ doc[0] }}</h2>
+                        <h2 class="text-secondary text-start ms-5 my-3">{{ doc[0] }}</h2>
                         <div class="row mx-0 my-2 text-center" *ngFor="let nom of doc[1]; let j = index">
-                            <span>
-                                <span class="fw-light fs-5">{{ nom }}</span>
-                                <button class="col-3 ms-5 me-2" mat-raised-button color="primary" (click)="viewDocument(j)">Afficher</button>
-                                <button class="col-3 ms-2"      mat-raised-button color="primary" (click)="deleteDocument(j)">Effacer</button>
-                            </span>
+                            
+                                <div class="fw-light fs-5">{{ nom }}</div>
+                                <div class="col-12 mt-1">
+                                    <button mat-raised-button color="primary" (click)="viewDocument(j)">Afficher</button>
+                                </div>
+                                <div class="col-12 mt-1">
+                                    <button mat-raised-button color="primary" (click)="deleteDocument(j)">Effacer</button>
+                                </div>
+                            
                         </div>                    
                     </div>
-                </div>
+                
             </div>
         </div>
     </mat-tab>
