@@ -1,110 +1,94 @@
 <mat-tab-group>
 
     <!----------TAB INFO GENERALES---------->
-
     <mat-tab label="Général">
         <div class="row mx-0">
-            <div class="col-3 d-flex justify-content-center">
-                <form class="mt-5" [formGroup]="formSearch">                   
-                    <h2 class="text-secondary text-center mt-1">Recherche rapide de candidat</h2>
-                    <div class="row mx-0 mt-3">
+            <div class="d-none d-md-block col-md-3 d-flex justify-content-center border-bottom">
+                <form class="text-center mt-md-5" [formGroup]="formSearch">                   
+                    <h2 class="text-secondary mt-1">Recherche rapide de candidat</h2>
+                    <div class="mb-3">
                         <mat-form-field appearance="fill">
                             <mat-hint>Saisir un prénom</mat-hint>
-                            <mat-label class="col-6" for="prenom1Cdt">Prénom</mat-label>
-                            <input class="col-6 fs-6" formControlName="prenom1Cdt" matInput type="text" list="prenom1Cdt" name="prenom1Cdt" required/>
+                            <mat-label for="prenom1Cdt">Prénom</mat-label>
+                            <input formControlName="prenom1Cdt" matInput type="text" list="prenom1Cdt" name="prenom1Cdt" required/>
                             <mat-error>Il faut saisir un prénom</mat-error>
                             <datalist id="prenom1Cdt">
                                 <option *ngFor="let prenom of prenomsListe" value="{{ prenom }}">{{ prenom }}</option>
                             </datalist>
                         </mat-form-field>
                     </div>
-                    <div class="row mx-0 mt-3">
+                    <div class="mb-1">
                         <mat-form-field appearance="fill">
                             <mat-hint>Saisir un nom</mat-hint>
-                            <mat-label class="col-6" for="nom1Cdt">Nom</mat-label>
-                            <input class="col-6 fs-6" formControlName="nom1Cdt" matInput type="text" list="nom1Cdt" name="nom1Cdt" required/>
+                            <mat-label for="nom1Cdt">Nom</mat-label>
+                            <input formControlName="nom1Cdt" matInput type="text" list="nom1Cdt" name="nom1Cdt" required/>
                             <mat-error>Il faut saisir un nom</mat-error>
                             <datalist id="nom1Cdt">
                                 <option *ngFor="let nom of nomsListe" value="{{ nom }}">{{ nom }}</option>
                             </datalist>
                         </mat-form-field>
                     </div>
-                    <div class="row mx-0 mt-2">
-                        <div class=""></div>
-                        <button class="mt-2 mx-auto" mat-raised-button color="primary" (click)=chercher()>Rechercher</button>
-                    </div>
+                    <button class="my-2 mx-auto" mat-raised-button color="primary" (click)=chercher()>Rechercher</button>
                 </form>
             </div>
-            <div class="col-6 border-start border-secondary full-height-tab-custom">
-                <div class="row mx-0 my-3">
-                    <div class="col-2"></div>
-                    <h1 class="col-10 text-center text-secondary my-0">Informations Générales</h1>
-                </div>
-                <form class="mt-3 text-end" [formGroup]="formCdt">
-                    <div class="row mx-0 text-start ps-1 pb-3">
+
+            <div class="col-12 col-md-6 border-start border-secondary full-height-tab-custom">
+                <h1 class="text-center text-secondary my-2">Informations Générales</h1>          
+                <form class="mt-3 text-md-end" [formGroup]="formCdt">
+                    <div class="text-center col-12 my-1">
                         <mat-slide-toggle [checked]="!slideCdtChecked" (change)="switchFormCdtEnable()">{{ sliderCdtTxt }}</mat-slide-toggle>
                     </div>
                     <input [hidden]="true" formControlName="idCandidat" matInput id="idCandidat" name="idCandidat"/>
                     <div class="row mx-0 mt-3">
-                        <label class="col-2 ps-1 pe-3 pt-2" for="prenom2Cdt">Prénom</label>
-                        <div class="col-4 px-0">
+                        <label class="col-3 col-md-2 ps-1 pe-3 pt-2" for="prenom2Cdt">Prénom</label>
+                        <div class="col-9 col-md-4 px-0">
                             <input formControlName="prenom2Cdt" class="form-control ps-4" type="text" id="prenom2Cdt" name="prenom2Cdt" value=""/>
                         </div>
-                        <label class="col-2 ps-1 pe-3 pt-2" for="nom2Cdt">Nom</label>
-                        <div class="col-4 px-0">
+                        <label class="col-3 col-md-2 ps-1 pe-3 pt-3 pt-md-2" for="nom2Cdt">Nom</label>
+                        <div class="col-9 col-md-4 px-0 pt-2 pt-md-0">
                             <input formControlName="nom2Cdt" class="form-control ps-4" type="text" id="nom2Cdt" name="nom2Cdt"  value=""/>
                         </div>
                     </div>
                     <div class="row mx-0 mt-2">
-                        <label class="col-2 ps-1 pe-3 pt-2" for="telMobCdt">Téléphone</label>
-                        <div class="col-4 px-0">
+                        <label class="col-3 col-md-2 ps-1 pe-3 pt-2" for="telMobCdt">Téléphone</label>
+                        <div class="col-9 col-md-4 px-0">
                             <input formControlName="telMobCdt" class="form-control ps-4" type="text" id="telCdt" name="telCdt" value=""/>
                         </div>
-                        <label class="col-2 ps-1 pe-3 pt-2" for="emailCdt">Email</label>
-                        <div class="col-4 px-0">
+                        <label class="col-3 col-md-2 ps-1 pe-3 pt-3 pt-md-2" for="emailCdt">Email</label>
+                        <div class="col-9 col-md-4 px-0 pt-2 pt-md-0">
                             <input formControlName="emailCdt" class="form-control ps-4" type="text" id="emailCdt" name="emailCdt" value=""/>
                         </div>
                     </div>
                     <div class="row mx-0 mt-2">
-                        <label class="col-2 ps-1 pe-3 pt-2" for="adresseCdt">Adresse</label>
-                        <div class="col-4 px-0">
+                        <label class="col-3 col-md-2 ps-1 pe-3 pt-2" for="adresseCdt">Adresse</label>
+                        <div class="col-9 col-md-4 px-0">
                             <input formControlName="adresseCdt" class="form-control ps-4" type="text" id="adresseCdt" name="adresseCdt" value=""/>
                         </div>
-                        <label class="col-2 ps-1 pe-3 pt-0 pt-xxl-2" for="adresse2Cdt">Adresse (suite)</label>
-                        <div class="col-4 px-0">
+                        <label class="col-3 col-md-2 ps-1 pe-3 pt-2 pt-md-1 pt-xxl-2" for="adresse2Cdt">Adresse (suite)</label>
+                        <div class="col-9 col-md-4 px-0 pt-2 pt-md-0">
                             <input formControlName="adresse2Cdt" class="form-control ps-4" type="text" id="adresse2Cdt" name="adresse2Cdt" value=""/>
                         </div>
                     </div>
                     <div class="row mx-0 mt-2">
-                        <label class="col-2 ps-1 pe-3 pt-2" for="villeCdt">Ville</label>
-                        <div class="col-4 px-0">
+                        <label class="col-3 col-md-2 ps-1 pe-3 pt-2" for="villeCdt">Ville</label>
+                        <div class="col-9 col-md-4 px-0">
                             <input formControlName="villeCdt" class="form-control ps-4" type="text" id="villeCdt" name="villeCdt" value=""/>
                         </div>
-                        <label class="col-2 ps-1 pe-3 pt-2" for="postalCdt">Code postal</label>
-                        <div class="col-4 px-0">
+                        <label class="col-3 col-md-2 ps-1 pe-3 pt-3 pt-md-2" for="postalCdt">Code postal</label>
+                        <div class="col-9 col-md-4 px-0 pt-2 pt-md-0">
                             <input formControlName="postalCdt" class="form-control ps-4" type="text" id="postalCdt" name="postalCdt" value=""/>
                         </div>
                     </div>
                     <div class="row mx-0 mt-2">
-                        <label class=" col-2 ps-1 pe-3 pt-2" for="nationCdt">Nationnalité</label>
-                        <div class="col-4 px-0">
+                        <label class="col-3 col-md-2 ps-1 pe-3 pt-2" for="nationCdt">Nationnalité</label>
+                        <div class="col-9 col-md-4 px-0">
                             <input formControlName="nationCdt" list="nationCdt" class="form-control ps-4" type="text" name="nationCdt">
                             <datalist id="nationCdt">
-                                <option *ngFor="let nation of nationsListe" value="{{ nation }}">{{ nation }}</option>
-                                <!--<option>Française</option>
-                                <option>Italienne</option>
-                                <option>Britannique</option>
-                                <option>Espagnole</option>
-                                <option>Ukrainienne</option>
-                                <option>Allemand</option>
-                                <option>Marocain</option>
-                                <option>Algérien</option>
-                                <option>Sénégalais</option>
-                                <option>Américain</option>-->
+                                <option *ngFor="let nation of nationsListe" value="{{ nation }}">{{ nation }}</option>                                
                             </datalist>
                         </div>
-                        <label class="col-2 ps-1 pe-3 pt-0 pt-xxl-2" for="situationCdt">Situation familiale</label>
-                        <div class="col-4 px-0">
+                        <label class="col-3 col-md-2 ps-1 pe-3 pt-2 pt-md-0 pt-xxl-2" for="situationCdt">Situation familiale</label>
+                        <div class="col-9 col-md-4 px-0 pt-2 pt-md-0">
                             <select formControlName="situationCdt" class="form-select ps-4" id="situationCdt" name="situationCdt">
                                 <option value="1">Célibataire</option>
                                 <option value="2">Marié</option>
@@ -114,12 +98,12 @@
                         </div>
                     </div>
                     <div class="row mx-0 mt-2">
-                        <label class="col-2 ps-1 pe-3 pt-2" for="linkedinCdt">Linkedin</label>
-                        <div class="col-4 px-0">
+                        <label class="col-3 col-md-2 ps-1 pe-3 pt-2" for="linkedinCdt">Linkedin</label>
+                        <div class="col-9 col-md-4 px-0">
                             <input formControlName="linkedinCdt" class="form-control ps-4" type="text" id="linkedinCdt" name="linkedinCdt" value=""/>
                         </div>
-                        <label class="col-2 ps-1 pe-3 pt-2" for="mobiliteCdt">Mobilité</label>
-                        <div class="col-4 px-0">
+                        <label class="col-3 col-md-2 ps-1 pe-3 pt-3 pt-md-2" for="mobiliteCdt">Mobilité</label>
+                        <div class="col-9 col-md-4 px-0 pt-2 pt-md-0">
                             <select formControlName="mobiliteCdt" class="form-select ps-4" id="mobiliteCdt" name="mobiliteCdt">
                                 <option value="0"></option>
                                 <option value="1">pas de mobilité</option>
@@ -135,8 +119,8 @@
                         </div>
                     </div>
                     <div class="row mx-0 mt-2">
-                        <label class="col-2 ps-1 pe-3 pt-2" for="githubCdt">Github</label>
-                        <div class="col-4 px-0">
+                        <label class="col-3 col-md-2 ps-1 pe-3 pt-2" for="githubCdt">Github</label>
+                        <div class="col-9 col-md-4 px-0">
                             <input formControlName="githubCdt" class="form-control ps-4" type="text" id="githubCdt" name="githubCdt" value=""/>
                         </div>
                         <div class="col-2"></div>
@@ -149,8 +133,8 @@
                         <div class="col-4 px-0 text-start">
                             <mat-checkbox formControlName="handicapCdt" class="mt-2" id="handicapCdt" name="handicapCdt">Travailleur handicapé</mat-checkbox>
                         </div>
-                        <div class="col-2"></div>
-                        <div class="col-4 px-0 text-start">
+                        <div class="col-1 col-md-2"></div>
+                        <div class="col-5 col-md-4 px-0 text-start">
                             <mat-checkbox formControlName="permisCdt" class="mt-2" id="permisCdt" name="permisCdt">Permis de conduire</mat-checkbox>
                         </div>
                     </div>
@@ -159,32 +143,26 @@
                         <div class="col-4 px-0 text-start">
                             <mat-checkbox formControlName="teletravailCdt" class="mt-2" id="teletravailCdt" name="teletravailCdt">Télétravail</mat-checkbox>
                         </div>
-                        <div class="col-2"></div>
-                        <div class="col-4 px-0 text-start">
+                        <div class="col-1 col-md-2"></div>
+                        <div class="col-5 col-md-4 px-0 text-start">
                             <mat-checkbox formControlName="vehiculeCdt" class="mt-2" id="vehiculeCdt" name="vehiculeCdt">Véhiculé</mat-checkbox>
                         </div>
                     </div>                                        
                     <div class="row mx-0 mt-2">
-                        <label class="col-2 ps-1 pe-3 pt-2" for="textareaCdt">Détails</label>
-                        <div class="col-10 px-0">
+                        <label class="col-12 col-md-2 ps-1 pe-3 pt-2" for="textareaCdt">Détails</label>
+                        <div class="col-12 col-md-10 px-0">
                             <textarea formControlName="textareaCdt" class="form-control" id="textareaCdt" rows="3"></textarea>
                         </div>
-                    </div>                    
-                    <div class="row mx-0 my-2">
-                        <div class="col-3"></div>
-                        <div class="col-4 mt-2">
-                            <button [disabled]=isDisabledCdtForm mat-raised-button color="primary" class="col-12" (click)='updateCandidat()'>Valider</button>                                                
-                        </div>
-                        <div class="text-start col-5 ps-1 pt-3">
-                            <mat-slide-toggle [checked]="!slideCdtChecked" (change)="switchFormCdtEnable()">{{ sliderCdtTxt }}</mat-slide-toggle>
-                        </div>
-                    </div>                   
-                    <div class="row mx-0 my-2">
-                        <div class="col-4"></div>
+                    </div>                                        
+                    <div class="col-12 text-center mt-2 mx-auto">
+                        <button [disabled]=isDisabledCdtForm mat-raised-button color="primary" class="col-12" (click)='updateCandidat()'>Valider</button>                                                
                     </div>
+                    <div class="text-center col-12 ps-1 pt-3">
+                        <mat-slide-toggle [checked]="!slideCdtChecked" (change)="switchFormCdtEnable()">{{ sliderCdtTxt }}</mat-slide-toggle>
+                    </div>                                       
+                    <div class="my-2"></div><!--DO NOT REMOVE-->
                 </form>
-            </div>
-            <div class="col-3"></div>
+            </div>        
         </div>
     </mat-tab>
 
@@ -194,8 +172,8 @@
 
     <mat-tab label="Education">
         <div class="row mx-0">
-            <div class="col-3"></div>
-            <div class="col-6">
+            <div class="col-0 col-md-3"></div>
+            <div class="col-12 col-md-6">
                 <h1 class="text-secondary text-center my-3">Educations</h1>
                 <form [formGroup]='formEdu' novalidate class="text-center"> <!--(ngSubmit)='submit()'-->    
                     <div class="row mx-0 text-start ps-1 pb-3">
@@ -269,11 +247,11 @@
                         </div>
                     </div>
                     <div class="row mx-0 my-2">
-                        <div class="col-3"></div>
-                        <div class="col-4 mt-2">
+                        <div class="col-0 col-md-3"></div>
+                        <div class="col-12 col-md-4 mt-2">
                             <button mat-raised-button color="primary" class="col-12" (click)='addEducationFormToList()'>Ajouter un diplôme</button>                                                
                         </div>
-                        <div class="text-start col-5 ps-1 pt-3">
+                        <div class="text-center text-md-start col-12 col-md-5 ps-1 pt-3">
                             <mat-slide-toggle  [checked]="!slideEduChecked" (change)="switchFormEduEnable()">{{sliderEduTxt}}</mat-slide-toggle>
                         </div>
                     </div>

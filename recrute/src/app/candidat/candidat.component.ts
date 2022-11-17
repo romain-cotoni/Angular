@@ -301,7 +301,8 @@ export class CandidatComponent implements OnInit
             {
                 "zone": this.formCdt.get('mobiliteCdt')?.value,
             },
-            "pseudos": [
+            "pseudos": 
+            [
                 {                   
                     "pseudo": this.formCdt.get('linkedinCdt')?.value,
                     "reseau":{

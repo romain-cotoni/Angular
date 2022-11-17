@@ -1,98 +1,81 @@
 <div class="row mx-0">
-    <div class="col-3 col-xxl-4 row mx-0 text-center border border-primary">
-        <div class="col-12 col-xxl-8 mx-auto fs-6 fw-light">
-            <h3 class="mt-3 fw-bolder text-secondary">Liste des candidats</h3>
-            <div class="row mx-0 text-start border border-secondary">
-                <span class="col-6">Nom   </span>
-                <span class="col-6">Prénom</span>
-            </div>
-            <div class="max-height-screen-height scroll-height" *ngIf="candidats.length>0">
-                <div class="row mx-0 text-start candidat-card hover-color" *ngFor="let candidat of candidats" [routerLink]="['/candidat', candidat.idCandidat]">                    
-                    <span class="col-6">{{candidat.nom   }}</span>
-                    <span class="col-6">{{candidat.prenom}}</span>                                    
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-6 col-xxl-4 mx-0">
-        <div class="row mx-0">
-            <div class="col-2"></div>
-            <h1 class="col-10 text-center text-secondary my-3">Rechercher un profil candidat</h1>
-        </div>
-        <form class="mt-3 text-end" [formGroup]="formSearchCdt">
+    <div class="col-12 col-md-3 col-xxl-4"></div>
+    <div class="col-12 col-md-6 col-xxl-4 mx-0">
+        <h1 class="text-center text-secondary my-1">Rechercher un profil candidat</h1>
+        <form class="mt-1 mx-0 text-end" [formGroup]="formSearchCdt">
             <div class="row mx-0 mt-2">
-                <label class="col-2 ps-1 pe-3 pt-2" for="nomSearchCdt">Nom</label>
-                <div class="col-4 px-0">
+                <label class="col-3 col-md-2 ps-1 pe-3 pt-2" for="nomSearchCdt">Nom</label>
+                <div class="col-9 col-md-4 px-0">
                     <input formControlName="nomSearchCdt" class="form-control ps-4" type="text" id="nomSearchCdt" name="nomSearchCdt" value=""/>
                 </div>
-                <label class="col-2 ps-1 pe-3 pt-2" for="prenomSearchCdt">Prénom</label>
-                <div class="col-4 px-0">
+                <label class="col-3 col-md-2 ps-1 pe-3 pt-2 mt-1 mt-md-0" for="prenomSearchCdt">Prénom</label>
+                <div class="col-9 col-md-4 px-0 mt-1 mt-md-0">
                     <input formControlName="prenomSearchCdt" class="form-control ps-4" type="text" id="prenomSearchCdt" name="prenomSearchCdt" value=""/>                    
                 </div>
             </div>
 
             <div class="row mx-0 mt-1">
-                <label class="col-2 ps-1 pe-3 pt-2" for="telSearchCdt">Téléphone</label>
-                <div class="col-4 px-0">
+                <label class="col-3 col-md-2 ps-1 pe-3 pt-2" for="telSearchCdt">Téléphone</label>
+                <div class="col-9 col-md-4 px-0">
                     <input formControlName="telSearchCdt" class="form-control ps-4" type="text" id="telSearchCdt" name="telSearchCdt"/>
                 </div>
-                <label class="col-2 ps-1 pe-3 pt-2" for="emailSearchCdt">Email</label>
-                <div class="col-4 px-0">
+                <label class="col-3 col-md-2 ps-1 pe-3 pt-2 mt-1 mt-md-0" for="emailSearchCdt">Email</label>
+                <div class="col-9 col-md-4 px-0 mt-1 mt-md-0">
                     <input formControlName="emailSearchCdt" class="form-control ps-4" type="text" id="emailSearchCdt" name="emailSearchCdt"/>
                 </div>
             </div>
             <div class="row mx-0 mt-1">
-                <label class="col-2 ps-1 pe-3 pt-2" for="villeSearchCdt">Ville</label>
-                <div class="col-4 px-0">
+                <label class="col-3 col-md-2 ps-1 pe-3 pt-2" for="villeSearchCdt">Ville</label>
+                <div class="col-9 col-md-4 px-0">
                     <input formControlName="villeSearchCdt" class="form-control ps-4" type="text" id="villeSearchCdt" name="villeSearchCdt"/>
                 </div>
-                <label class="col-2 ps-1 pe-3 pt-2" for="linkedinSearchCdt">linkedin</label>
-                <div class="col-4 px-0">
+                <label class="col-3 col-md-2 ps-1 pe-3 pt-2 mt-1 mt-md-0" for="linkedinSearchCdt">linkedin</label>
+                <div class="col-9 col-md-4 px-0 mt-1 mt-md-0">
                     <input formControlName="linkedinSearchCdt" class="form-control ps-4" type="text" id="linkedinSearchCdt" name="linkedinSearchCdt"/>
                 </div>
             </div>
-            <div class="row mx-0 mt-3">
-                <label class="col-2 ps-1 pe-3 pt-2" for="diplomeSearchCdt">Diplômes</label>
-                <div class="col-4 px-0">
+            <div class="row mx-0 mt-1">
+                <label class="col-3 col-md-2 ps-1 pe-3 pt-2" for="diplomeSearchCdt">Diplômes</label>
+                <div class="col-9 col-md-4 px-0">
                     <input formControlName="diplomeSearchCdt" class="form-control ps-4" type="text" id="diplomeSearchCdt" name="diplomeSearchCdt" placeholder="diplome1, diplome2 ..."/>
                 </div>
-                <label class="col-2 ps-1 pe-3 pt-2" for="domaineSearchCdt">Domaines</label>
-                <div class="col-4 px-0">
+                <label class="col-3 col-md-2 ps-1 pe-3 pt-2 mt-1 mt-md-0" for="domaineSearchCdt">Domaines</label>
+                <div class="col-9 col-md-4 px-0 mt-1 mt-md-0">
                     <input formControlName="domaineSearchCdt" class="form-control ps-4" type="text" id="domaineSearchCdt" name="domaineSearchCdt" placeholder="domaine1, domaine2 ..."/>
                 </div>
             </div>            
             <div class="row mx-0 mt-1">
-                <label class="col-2 ps-1 pe-3 pt-2" for="competenceSearchCdt">Compétences</label>
-                <div class="col-10 px-0">
-                    <input formControlName="competenceSearchCdt" class="form-control ps-4" type="text" id="competenceSearchCdt" name="competenceSearchCdt" placeholder="compétence1 compétence2 ..."/>
+                <label class="col-3 col-md-2 px-0 ps-md-1 pe-md-3 pt-2 text-start" for="competenceSearchCdt">Compétences</label>
+                <div class="col-9 col-md-10 px-0">
+                    <input formControlName="competenceSearchCdt" class="form-control ps-4" type="text" id="competenceSearchCdt" name="competenceSearchCdt" placeholder="compétence1, compétence2 ..."/>
                 </div>                
             </div>
             <div class="row mx-0 mt-1">
-                <label class="col-2 ps-1 pe-3 pt-2" for="langueSearchCdt">Langues</label>
-                <div class="col-10 px-0">
+                <label class="col-3 col-md-2 ps-1 pe-3 pt-2" for="langueSearchCdt">Langues</label>
+                <div class="col-9 col-md-10 px-0">
                     <input formControlName="langueSearchCdt" class="form-control ps-4" type="text" id="langueSearchCdt" name="langueSearchCdt" placeholder="langue1 langue2 ..."/>
                 </div>                
             </div>
             <div class="row mx-0 mt-1">
-                <label class="col-2 ps-1 pe-3 pt-2" for="missionSearchCdt">Missions</label>
-                <div class="col-10 px-0">
+                <label class="col-3 col-md-2 ps-1 pe-3 pt-2" for="missionSearchCdt">Missions</label>
+                <div class="col-9 col-md-10 px-0">
                     <input formControlName="missionSearchCdt" class="form-control ps-4" type="text" id="missionSearchCdt"
                         name="missionSearchCdt" placeholder="mission1,mission2 ..." />
                 </div>
             </div>
             <div class="row mx-0 mt-1">
-                <label class="col-2 ps-1 pe-3 pt-2" for="entrepriseSearchCdt">Entreprises</label>
-                <div class="col-10 px-0">
+                <label class="col-3 col-md-2 ps-0 pe-3 pt-2" for="entrepriseSearchCdt">Entreprises</label>
+                <div class="col-9 col-md-10 px-0">
                     <input formControlName="entrepriseSearchCdt" class="form-control ps-4" type="text" id="entrepriseSearchCdt" name="entrepriseSearchCdt" placeholder="entreprise1, entreprise2 ..."/>
                 </div>                
             </div>
             <div class="row mx-0 mt-1">
-                <div class="col-1"></div>
-                <div class="col-5 text-start pt-1 ps-5">
+                <div class="col-6 pt-2 ps-md-5 text-start">
                     <mat-slide-toggle formControlName="teletravailSearchCdt" id="teletravailSearchCdt" name="teletravailSearchCdt">Télétravail</mat-slide-toggle>
                 </div>
-                <label class="col-2 ps-1 pe-3 pt-2" for="mobiliteSearchCdt">Mobilité</label>
-                <div class="col-4 px-0">
+                
+                <label class="col-2 px-0 pt-2 text-start" for="mobiliteSearchCdt">Mobilité</label>
+                <span class="col-4 px-0">                    
                     <select formControlName="mobiliteSearchCdt" class="form-select"  id="mobiliteSearchCdt" name="mobiliteSearchCdt" aria-label="Mobilite">
                         <option value="0"></option>
                         <option value="1">pas de mobilité</option>
@@ -105,21 +88,20 @@
                         <option value="8">monde</option>
                         <option value="9">Autre</option>
                     </select>
-                </div>
+                </span>
             </div>
-            <div class="row mx-0 mt-3">
-                <div class="col-1"></div>
-                <div class="col-5 text-start ps-5">
+            
+            <div class="row mx-0 mt-md-1">
+                <div class="col-12 col-md-5 ps-md-5 text-start">
                     <mat-slide-toggle formControlName="handicapeSearchCdt" id="handicapeSearchCdt" name="handicapeSearchCdt">Travailleur handicapé</mat-slide-toggle>
                 </div>
-                <div class="col-6 text-start ps-5">
+                <div class="col-12 col-md-6 ps-md-5 text-start">
                     <mat-slide-toggle formControlName="dispoSearchCdt" id="dispoSearchCdt" name="dispoSearchCdt">Disponible immédiatement</mat-slide-toggle>
                 </div>
             </div>            
            
             <div class="row mx-0 my-2">                
-                <div class="col-2"></div>
-                <button mat-raised-button color="primary" class="col-4 mx-auto" (click)=rechercher()>Rechercher</button>                
+                <button mat-raised-button color="primary" class="col-6 mx-auto" (click)=rechercher()>Rechercher</button>                
             </div>
             
             <div class="row mx-0 my-0">
@@ -127,5 +109,19 @@
             </div>
         </form>
     </div>
-    <!--<div class="col-3"></div>-->
+    <div class="col-12 col-md-3 col-xxl-4 row mx-0 text-center border-start">
+        <div class="col-12 col-xxl-8 mx-auto fs-6 fw-light">
+            <h3 class="mt-1 fw-bolder text-secondary">Liste des candidats</h3>
+            <div class="row mx-0 mb-1 text-start border">
+                <span class="col-6">Nom   </span>
+                <span class="col-6">Prénom</span>
+            </div>
+            <div class="max-height scroll-height" *ngIf="candidats.length>0">
+                <div class="row mx-0 text-start candidat-card hover-color" *ngFor="let candidat of candidats" [routerLink]="['/candidat', candidat.idCandidat]">                    
+                    <span class="col-6">{{candidat.nom   }}</span>
+                    <span class="col-6">{{candidat.prenom}}</span>                                    
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

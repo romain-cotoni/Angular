@@ -6,6 +6,6 @@
     overflow-y:auto;
  }
 
- .max-height-screen-height {
-    max-height: 100vh;
+ .max-height {
+    max-height: calc(70vh);
  }
