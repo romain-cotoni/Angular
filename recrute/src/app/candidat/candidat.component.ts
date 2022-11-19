@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Candidat } from '../models/Candidat';
 import { CandidatService } from '../services/candidat.service';
@@ -20,11 +20,12 @@ import { MyEntity } from '../models/MyEntity';
 })
 export class CandidatComponent implements OnInit 
 { 
+    
     entity: MyEntity = new MyEntity(1,"label","level");
     prenomsListe : String[] = [];
     nomsListe    : String[] = [];
     nationsListe : String[] = [];
-
+    
     formSearch! : FormGroup;
     formCdt!    : FormGroup;
     formEdu!    : FormGroup;
@@ -34,44 +35,44 @@ export class CandidatComponent implements OnInit
     formEtt!    : FormGroup
     formPrj!    : FormGroup
     formDoc!    : FormGroup
-
+    
     txt = 'formulaire modifiable';
-
+    
     candidat!         : Candidat;
     idCandidat!       : number;
     isDisabledCdtForm!: boolean;
     slideCdtChecked!  : boolean;
     sliderCdtTxt      = this.txt;
-
+    
     isDisabledEduForm!: boolean;
     slideEduChecked!  : boolean;
     sliderEduTxt      = this.txt;
-
+    
     isDisabledExpForm!: boolean;
     slideExpChecked!  : boolean;
     sliderExpTxt      = this.txt;
-
+    
     isDisabledCmpForm!: boolean;
     slideCmpChecked!  : boolean;
     sliderCmpTxt      = this.txt;
-
+    
     isDisabledLngForm!: boolean;
     slideLngChecked!  : boolean;
     sliderLngTxt      = this.txt;
-
+    
     isDisabledEttForm!: boolean;
     slideEttChecked!  : boolean;
     sliderEttTxt      = this.txt;
-
+    
     isDisabledPrjForm!: boolean;
     slidePrjChecked!  : boolean;
     sliderPrjTxt      = this.txt;
-
+    
     isDisabledDocForm!: boolean;
     slideDocChecked!  : boolean;
     sliderDocTxt      = this.txt;
-     
-
+    
+    
     constructor(private fb: FormBuilder, private candidatService: CandidatService, private route: ActivatedRoute, private router: Router) 
     { 
         
@@ -219,29 +220,29 @@ export class CandidatComponent implements OnInit
 
         return this.fb.group
         ({
-            prenom1Cdt    : '',
-            nom1Cdt       : '',
-            idCandidat    : candidat.idCandidat,
-            prenom2Cdt    : candidat.prenom,
-            nom2Cdt       : candidat.nom,
-            telMobCdt     : candidat.mob,
-            emailCdt      : candidat.email,
-            adresseCdt    : candidat.adresse,
-            adresse2Cdt   : candidat.adresse2,
-            villeCdt      : ville,
-            postalCdt     : postal,
-            salaireCdt    : candidat.salaire,
-            linkedinCdt   : linkedin,
-            githubCdt     : github,
-            mobiliteCdt   : mobilite,
-            nationCdt     : nationnalite,
-            situationCdt  : candidat.marital,
-            handicapCdt   : candidat.handicape,
-            teletravailCdt: candidat.teletravail,
-            permisCdt     : candidat.permis,
-            vehiculeCdt   : candidat.vehicule,
-            dispoCdt      : candidat.disponible,
-            textareaCdt   : candidat.info
+            prenom1Cdt    : [''                  , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ ]*$")]        ],
+            nom1Cdt       : [''                  , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ ]*$")]        ],
+            idCandidat    : [candidat.idCandidat , [Validators.required]                                                    ],
+            prenom2Cdt    : [candidat.prenom     , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ ]*$")]        ],
+            nom2Cdt       : [candidat.nom        , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ ]*$")]        ],
+            telMobCdt     : [candidat.mob        , [Validators.required, Validators.pattern("^[0-9\\-_ +()]*$")]            ],
+            emailCdt      : [candidat.email      , [Validators.required, Validators.pattern("^[0-9A-Za-z'\\-_ .@]*$")]      ],
+            adresseCdt    : [candidat.adresse    , [Validators.required, Validators.pattern("^[0-9A-Za-zÀ-ÿ'\\-_ ]*$")]     ],
+            adresse2Cdt   : [candidat.adresse2   , [Validators.required, Validators.pattern("^[0-9A-Za-zÀ-ÿ'\\-_ ]*$")]     ],
+            villeCdt      : [ville               , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ ]*$")]        ],
+            postalCdt     : [postal              , [Validators.required, Validators.pattern("^[0-9A-Za-z'\\-_ ]*$")]        ],
+            salaireCdt    : [candidat.salaire    , [Validators.required]                                                    ],
+            linkedinCdt   : [linkedin            , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ .]*$")]       ],
+            githubCdt     : [github              , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ .]*$")]       ],
+            mobiliteCdt   : [mobilite            , [Validators.required]                                                    ],
+            nationCdt     : [nationnalite        , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ ]*$")]        ],
+            situationCdt  : [candidat.marital    , [Validators.required]                                                    ],
+            handicapCdt   : [candidat.handicape  , [Validators.required]                                                    ],
+            teletravailCdt: [candidat.teletravail, [Validators.required]                                                    ],
+            permisCdt     : [candidat.permis     , [Validators.required]                                                    ],
+            vehiculeCdt   : [candidat.vehicule   , [Validators.required]                                                    ],
+            dispoCdt      : [candidat.disponible , [Validators.required]                                                    ],
+            textareaCdt   : [candidat.info       , [Validators.required, Validators.pattern("^[0-9A-Za-zÀ-ÿ'\\-_ ?!.+=]*$")]]
         });
     }
 
@@ -400,19 +401,18 @@ export class CandidatComponent implements OnInit
         (
             this.fb.group
             ({
-                idEducation : [education.idEducation     , Validators.required],
-                diplomeEdu  : [education.diplome.label   , Validators.required],
-                domaineEdu  : [education.specialite.label, Validators.required],
-                obtenuEdu   : [education.recu                                 ],
-                lieuEdu     : [education.lieu                                 ],
-                ecoleEdu    : [education.ecole                                ],
-                debutEdu    : [education.debut                                ],
-                finEdu      : [education.fin                                  ],
-                textareaEdu : [education.info                                 ]
+                idEducation : [ education.idEducation     , [Validators.required]                                                  ],
+                diplomeEdu  : [ education.diplome.label   , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ ]*$")]      ],
+                domaineEdu  : [ education.specialite.label, [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ ]*$")]      ],
+                obtenuEdu   : [ education.recu            , [Validators.required]                                                  ],
+                lieuEdu     : [ education.lieu            , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ ]*$")]      ],
+                ecoleEdu    : [ education.ecole           , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ ]*$")]      ],
+                debutEdu    : [ education.debut           , [Validators.required]                                                  ],
+                finEdu      : [ education.fin             , [Validators.required]                                                  ],
+                textareaEdu : [ education.info            , [Validators.required, Validators.pattern("^[0-9A-Za-zÀ-ÿ'\\-_ ?!.]*$")]]
             })
         )
     }
-        
     
     //retourne la liste des formulaires education
     get educations(): FormArray
@@ -473,6 +473,10 @@ export class CandidatComponent implements OnInit
                     error: (error)    => { console.log(error);    }
                 });
             }
+        }
+        else
+        {
+
         }
     }
 
@@ -580,13 +584,13 @@ export class CandidatComponent implements OnInit
         (
             this.fb.group
             ({
-                idExperience  : [experience.idExperience            , Validators.required],
-                debutExp      : [experience.debut                                        ],
-                finExp        : [experience.fin                                          ],
-                lieuExp       : [experience.lieu                                         ],
-                missionExp    : [experience.mission.profession      , Validators.required],
-                entrepriseExp : [experience.entreprise.raisonSociale, Validators.required],
-                textareaExp   : [experience.info                                         ]
+                idExperience  : [experience.idExperience            , [Validators.required]                                                  ],
+                debutExp      : [experience.debut                   , [Validators.required]                                                  ],
+                finExp        : [experience.fin                     , [Validators.required]                                                  ],
+                lieuExp       : [experience.lieu                    , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ ]*$")]      ],
+                missionExp    : [experience.mission.profession      , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ ]*$")]      ],
+                entrepriseExp : [experience.entreprise.raisonSociale, [Validators.required, Validators.pattern("^[0-9A-Za-z'\\-_ .]*$")]     ],
+                textareaExp   : [experience.info                    , [Validators.required, Validators.pattern("^[0-9A-Za-zÀ-ÿ'\\-_ ?!.]*$")]],
             })
         )
     }
@@ -751,11 +755,11 @@ export class CandidatComponent implements OnInit
         (
             this.fb.group
             ({
-                idCompetence : [competence.idCompetence, Validators.required],
-                competenceCmp: [competence.nom         , Validators.required],
-                niveauCmp    : [competence.niveau                           ],
-                typeCmp      : [competence.type                             ],
-                textareaCmp  : [competence.info                             ]
+                idCompetence : [competence.idCompetence, [Validators.required]                                                  ],
+                competenceCmp: [competence.nom         , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ ]*$")]      ],
+                niveauCmp    : [competence.niveau      , [Validators.required]                                                  ],
+                typeCmp      : [competence.type        , [Validators.required]                                                  ],
+                textareaCmp  : [competence.info        , [Validators.required, Validators.pattern("^[0-9A-Za-zÀ-ÿ'\\-_ ?!.]*$")]],
             })
         )
     }
@@ -899,11 +903,11 @@ export class CandidatComponent implements OnInit
         (
             this.fb.group
             ({
-                idLangue         : [langue.idLangue, Validators.required],
-                langueLng        : [langue.nom     , Validators.required],
-                niveauLng        : [langue.niveau                       ],
-                certificationLng : [langue.certification                ],
-                textareaLng      : [langue.info                         ]
+                idLangue         : [langue.idLangue     , [Validators.required]                                                  ],
+                langueLng        : [langue.nom          , [Validators.required, Validators.pattern('')]                          ],
+                niveauLng        : [langue.niveau       , [Validators.required]                                                  ],
+                certificationLng : [langue.certification, [Validators.required]                                                  ],
+                textareaLng      : [langue.info         , [Validators.required, Validators.pattern("^[0-9A-Za-zÀ-ÿ'\\-_ ?!.]*$")]],
             })
         )
     }
@@ -1050,14 +1054,14 @@ export class CandidatComponent implements OnInit
         (
             this.fb.group
             ({
-                idEntretien   : [entretien.idEntretien     , Validators.required],
-                dateEtt       : [entretien.date            , Validators.required],
-                lieuEtt       : [entretien.lieu                                 ],
-                nomRctrEtt    : [entretien.recruteur.nom   , Validators.required],
-                prenomRctrEtt : [entretien.recruteur.prenom, Validators.required],
-                missionEtt    : [entretien.poste                                ],
-                contratEtt    : [entretien.contrat                              ],
-                textareaEtt   : [entretien.resume                               ]
+                idEntretien   : [entretien.idEntretien     , [Validators.required]                                                  ],
+                dateEtt       : [entretien.date            , [Validators.required]                                                  ],
+                lieuEtt       : [entretien.lieu            , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ .]*$")]     ],
+                nomRctrEtt    : [entretien.recruteur.nom   , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ .]*$")]     ],
+                prenomRctrEtt : [entretien.recruteur.prenom, [Validators.required, Validators.pattern("^[0-9A-Za-zÀ-ÿ'\\-_ .]*$")]  ],
+                missionEtt    : [entretien.poste           , [Validators.required, Validators.pattern("^[0-9A-Za-zÀ-ÿ'\\-_ .]*$")]  ],
+                contratEtt    : [entretien.contrat         , [Validators.required]                                                  ],
+                textareaEtt   : [entretien.resume          , [Validators.required, Validators.pattern("^[0-9A-Za-zÀ-ÿ'\\-_ ?!.]*$")]],
             })
         )
     }
@@ -1216,13 +1220,13 @@ export class CandidatComponent implements OnInit
         (
             this.fb.group
             ({
-                idProjet      : [projet.idProjet, Validators.required],
-                nomPrj        : [projet.nom     , Validators.required],
-                typePrj       : [projet.type                         ],
-                domainePrj    : [projet.activite.nom                 ],
-                debutPrj      : [projet.debut                        ],            
-                finPrj        : [projet.fin                          ],                
-                textareaPrj   : [projet.info                         ]
+                idProjet      : [projet.idProjet    , [Validators.required]                                             ],
+                nomPrj        : [projet.nom         , [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ .]*$")]],
+                typePrj       : [projet.type        , [Validators.required]                                             ],
+                domainePrj    : [projet.activite.nom, [Validators.required, Validators.pattern("^[A-Za-zÀ-ÿ'\\-_ .]*$")]],
+                debutPrj      : [projet.debut       , [Validators.required]                                             ],            
+                finPrj        : [projet.fin         , [Validators.required]                                             ],
+                textareaPrj   : [projet.info        , [Validators.required, Validators.pattern("^[0-9A-Za-zÀ-ÿ'\\-_ ?!.]*$")]],
             })
         )
     }
@@ -1365,30 +1369,10 @@ export class CandidatComponent implements OnInit
     //--------------------TAB DOCUMENT----------------------
     
     documents: [string, string[]] [] = [
-        ["categorie 1",["document 1","document 2","document 3"]], 
-        ["categorie 2",["document 4","document 5","document 6"]],
-        ["categorie 3",["document 7","document 8","document 9"]]]
-    
-    organiseDocumentsByCategorie()
-    {
-        let resultats : string[][] = [
-            ["categorie 1","document 1"],
-            ["categorie 1","document 2"],
-            ["categorie 1","document 3"],
-            ["categorie 2","document 4"],
-            ["categorie 2","document 5"],
-            ["categorie 2","document 6"]];
-
-        var cat = "";
-        for(let i=0; i<resultats.length; i++)
-        {
-            if(cat != resultats[i][0]) 
-            {
-                this.documents[i].push(resultats[i][0]); console.log(resultats[i][0]);
-            }
-            //this.documents[i][1].push(resultats[i][1]); console.log(resultats[i][1]);
-        }
-    }
+        ["Cv",["cv n°1"]], 
+        ["Lettre de motivation",["lettre n°1"]],
+        ["Diplôme",["copie diplome n°1","copie diplome n°2","copie diplome n°3"]],
+        ["Pièce d'identité",["carte d'identité recto","carte d'identité verso"]]]
 
     //ajouter un document à la liste documents
     addDocument()

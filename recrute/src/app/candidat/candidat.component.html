@@ -152,10 +152,10 @@
                             <textarea formControlName="textareaCdt" class="form-control" id="textareaCdt" rows="3"></textarea>
                         </div>
                     </div>                                        
-                    <div class="col-12 text-center mt-2 mx-auto">
+                    <div class="col-12 text-center mt-2 mx-auto ms-md-5">
                         <button [disabled]=isDisabledCdtForm mat-raised-button color="primary" class="col-12" (click)='updateCandidat()'>Valider</button>                                                
                     </div>
-                    <div class="text-center col-12 ps-1 pt-3">
+                    <div class="text-center col-12 ps-1 pt-3 ms-md-5">
                         <mat-slide-toggle [checked]="!slideCdtChecked" (change)="switchFormCdtEnable()">{{ sliderCdtTxt }}</mat-slide-toggle>
                     </div>                                       
                     <div class="my-2"></div><!--DO NOT REMOVE-->
@@ -187,7 +187,8 @@
                                 <mat-form-field class="col-6" appearance="fill">
                                     <mat-hint>Saisir un diplôme</mat-hint>
                                     <mat-label for="diplomeEdu">Diplôme</mat-label>
-                                    <input class="fs-6" formControlName="diplomeEdu" matInput type="text" id="diplomeEdu" name="diplomeEdu"/>                            
+                                    <input class="fs-6" formControlName="diplomeEdu" matInput type="text" id="diplomeEdu" name="diplomeEdu"/>
+                                                      
                                 </mat-form-field>
                                 <mat-form-field class="col-6" appearance="fill">
                                     <mat-hint>Saisir un domaine</mat-hint>
@@ -711,22 +712,19 @@
                 </form>
             </div>
             <div class="col-12 col-md-8 row mx-auto border-start border-secondary">
-                    <h1 class="text-secondary text-center me-5 my-3">Documents</h1>
-                    <div *ngFor="let doc of documents">
-                        <h2 class="text-secondary text-start ms-5 my-3">{{ doc[0] }}</h2>
-                        <div class="row mx-0 my-2 text-center" *ngFor="let nom of doc[1]; let j = index">
-                            
-                                <div class="fw-light fs-5">{{ nom }}</div>
-                                <div class="col-12 mt-1">
-                                    <button mat-raised-button color="primary" (click)="viewDocument(j)">Afficher</button>
-                                </div>
-                                <div class="col-12 mt-1">
-                                    <button mat-raised-button color="primary" (click)="deleteDocument(j)">Effacer</button>
-                                </div>
-                            
-                        </div>                    
-                    </div>
-                
+                <h1 class="text-secondary text-center me-5 my-3">Documents</h1>
+                <div *ngFor="let doc of documents">
+                    <h2 class="text-secondary text-start ms-5 ps-5 my-0 py-0">{{ doc[0] }}</h2>
+                    <div class="row mx-0 text-center" *ngFor="let nom of doc[1]; let j = index">                
+                        <div class="fw-light fs-5">{{ nom }}</div>
+                        <div class="col-12 mt-1">
+                            <button mat-raised-button color="primary" (click)="viewDocument(j)">Afficher</button>
+                        </div>
+                        <div class="col-12 my-1">
+                            <button mat-raised-button color="primary" (click)="deleteDocument(j)">Effacer</button>
+                        </div>
+                    </div>                    
+                </div>
             </div>
         </div>
     </mat-tab>
