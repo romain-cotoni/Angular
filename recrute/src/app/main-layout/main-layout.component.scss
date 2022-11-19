@@ -1,10 +1,10 @@
 .parent {
-    min-height                   : 100vh;
-    display                          : grid;
+    min-height           : 100vh;
+    display              : grid;
     grid-template-columns: repeat(10, 10%);
-    grid-template-rows      : 50px repeat(5, 1fr) 50px;
-    grid-column-gap          : 0px;
-    grid-row-gap                : 0px;
+    grid-template-rows   : 50px repeat(5, 1fr) 50px;
+    grid-column-gap      : 0px;
+    grid-row-gap         : 0px;
 }
     
 header { grid-area: 1 / 1 / 2 / 11; }

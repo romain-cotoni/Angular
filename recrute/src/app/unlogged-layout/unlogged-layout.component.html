@@ -1,13 +1,18 @@
 <div class="parent">
-    <header class="custom-bg">
-        <p>Déconnecté</p>
+    <header class="custom-bg row mx-0">
+        <div class="col-6 my-auto">
+            <a href=""><img src="../../assets/logo.png" alt="" width="32" height="32"></a> 
+        </div>
+        <div class="col-6 my-auto text-end">
+            <!--<a *ngIf="!loggedIn" class="custom-navbar-text" [routerLink]="['/login']">Sign in</a>-->
+            <a class="custom-navbar-text" [routerLink]="['/login']">Sign Up</a>
+        </div>
     </header>
     <main>
         <div class="content">
             <router-outlet></router-outlet>
         </div>
     </main>
-    <footer class="custom-bg">      
-        <p>Déconnecté</p>
+    <footer class="custom-bg">
     </footer>
 </div>
