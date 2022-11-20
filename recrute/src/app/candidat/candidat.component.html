@@ -31,9 +31,9 @@
                 </form>
             </div>
             <div class="col-12 col-md-6 border-start border-secondary full-height-tab-custom">
-                <h1 class="text-center text-secondary my-2">Informations Générales</h1>          
+                <h1 class="text-center text-secondary my-2 ps-md-5 ms-md-5">Informations Générales</h1>          
                 <form class="mt-3 text-md-end" [formGroup]="formCdt">
-                    <div class="text-center col-12 my-1">
+                    <div class="text-center col-12 my-1 ms-md-5">
                         <mat-slide-toggle [checked]="!slideCdtChecked" (change)="switchFormCdtEnable()">{{ sliderCdtTxt }}</mat-slide-toggle>
                     </div>
                     <input [hidden]="true" formControlName="idCandidat" matInput id="idCandidat" name="idCandidat"/>
