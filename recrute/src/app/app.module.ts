@@ -31,6 +31,8 @@ import { MatNativeDateModule} from '@angular/material/core';
 import { MatCheckboxModule} from '@angular/material/checkbox';
 import { MatIconModule} from '@angular/material/icon'; 
 import { MatCardModule } from '@angular/material/card';
+import { InscriptionComponent } from './inscription/inscription.component';
+import { AccueilComponent } from './accueil/accueil.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { MatCardModule } from '@angular/material/card';
     EntrepriseRechercherComponent,
     OffreComponent,
     StatistiqueComponent,
+    InscriptionComponent,
+    AccueilComponent,
   ],
   imports: [
     BrowserModule,

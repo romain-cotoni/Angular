@@ -4,5 +4,5 @@ export interface User
     username    : string;
     password    : string;
     accessToken : string;
-	role        : string;
+	role        : string; 
 }

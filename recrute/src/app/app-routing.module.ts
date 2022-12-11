@@ -12,6 +12,8 @@ import { EntrepriseRechercherComponent } from './entreprise-rechercher/entrepris
 import { EntrepriseComponent }           from './entreprise/entreprise.component';
 import { OffreComponent }                from './offre/offre.component';
 import { StatistiqueComponent }          from './statistique/statistique.component';
+import { InscriptionComponent } from './inscription/inscription.component';
+import { AccueilComponent } from './accueil/accueil.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,7 @@ const routes: Routes = [
     children: 
     [
       { path: ''                     , component: CandidatComponent }            ,
+      { path: 'accueil'              , component: AccueilComponent }             ,
       { path: 'candidat'             , component: CandidatComponent }            ,
       { path: 'candidat-ajouter'     , component: CandidatAjouterComponent }     ,
       { path: 'candidat-rechercher'  , component: CandidatRechercherComponent }  ,
@@ -30,6 +33,7 @@ const routes: Routes = [
       { path: 'entreprise-rechercher', component: EntrepriseRechercherComponent },
       { path: 'offre'                , component: OffreComponent }               ,
       { path: 'statistique'          , component: StatistiqueComponent }         ,
+      { path: 'inscription'          , component: InscriptionComponent }         ,
     ]
   },
   {

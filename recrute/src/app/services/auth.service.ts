@@ -72,4 +72,11 @@ export class AuthService
     { 
         return this.subject.asObservable();
     }
+
+    createUser(body: any)
+    {
+        const url   = this.BASE_PATH + '/auth/createUser';
+        var headers = new HttpHeaders({ 'content-type': 'application/json'});
+        return this.httpClient.post(url, body, {'headers':headers});
+    }
 }

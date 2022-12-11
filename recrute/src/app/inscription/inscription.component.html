@@ -1,0 +1,70 @@
+<div class="d-flex flex-column justify-content-center align-items-center custom-height">
+    <div class="form">
+        <h1 class="text-center text-secondary my-2">Inscrire un nouvel utilisateur</h1>          
+        <div class="mx-0 mt-3 w-100 text-center">
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label for="username">Nom d'utilisateur</mat-label>
+                <input [(ngModel)]="username" matInput type="text" id="username"/>                            
+            </mat-form-field>
+        </div>
+        <div class="mx-0 mt-3 w-100 text-center">
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label for="password">Mot de passe</mat-label>
+                <input [(ngModel)]="password" matInput type="password" id="password"/>                            
+            </mat-form-field> 
+        </div>
+        <div class="mx-0 mt-3 w-100 text-center">
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label for="repassword">Confirmation mot de passe</mat-label>
+                <input [(ngModel)]="repassword" matInput type="password" id="repassword">                       
+            </mat-form-field> 
+        </div>
+        <div class="mx-0 mt-3 w-100 text-center">
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label for="role">Role d'accès</mat-label>
+                <input [(ngModel)]="role" matInput type="text" id="role"/>                            
+            </mat-form-field>
+        </div>
+        <div class="mx-0 mt-3 w-100 text-center">
+            <button mat-raised-button color="primary" class="w-100" (click)=addUtilisateur()>Ajouter</button>
+        </div>  
+    </div>
+</div>
+
+<!--<div class="d-flex flex-column justify-content-center align-items-center custom-height">
+    <h1 class="text-center text-secondary my-2">Inscrire un nouvel utilisateur</h1>
+    
+    <div class="mx-0 mt-3 w-100 text-center">
+        <mat-form-field class="col-6 col-md-3" appearance="fill" floatLabel="always">
+            <mat-label>Nom d'utilisateur</mat-label>
+            <input matInput type="text"  [(ngModel)]="username">
+        </mat-form-field>
+    </div>
+    <div class="mx-0 mt-3 w-100 text-center">
+        <mat-form-field class="col-6 col-md-3" appearance="fill" floatLabel="always">
+            <mat-label>Mot de passe</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" id="password" [(ngModel)]="password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <div class="mx-0 mt-3 w-100 text-center">
+        <mat-form-field class="col-6 col-md-3" appearance="fill" floatLabel="always">
+            <mat-label>Confirmation mot de passe</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" id="password" [(ngModel)]="repassword">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <div class="mx-0 mt-3 w-100 text-center">
+        <mat-form-field class="col-6 col-md-3" appearance="fill" floatLabel="always">
+            <mat-label>Privilège d'accès</mat-label>
+            <input matInput type="text"  [(ngModel)]="role">
+        </mat-form-field>
+    </div>
+    <div class="mx-0 mt-3 w-100 text-center">
+        <button class="col-6 col-md-3" mat-raised-button color="primary" (click)=addUtilisateur()>Ajouter</button>
+    </div>
+</div>-->

@@ -19,8 +19,7 @@ import { MyEntity } from '../models/MyEntity';
   styleUrls  : ['./candidat.component.scss']
 })
 export class CandidatComponent implements OnInit 
-{ 
-    
+{  
     entity: MyEntity = new MyEntity(1,"label","level");
     prenomsListe : String[] = [];
     nomsListe    : String[] = [];
@@ -337,7 +336,6 @@ export class CandidatComponent implements OnInit
                 error: (error)    => { console.log(error);    }
             });
         }
-        
     }
 
     chercher()

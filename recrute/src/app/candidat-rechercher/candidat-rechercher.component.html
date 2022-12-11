@@ -1,5 +1,5 @@
-<div class="row mx-0">
-    <div class="col-12 col-md-3 col-xxl-4"></div>
+<div class="row mx-0 my-0">
+    <div class="col-12 col-md-3 col-xxl-4 my-0"></div>
     <div class="col-12 col-md-6 col-xxl-4 mx-0">
         <h1 class="text-center text-secondary my-1">Rechercher un profil candidat</h1>
         <form class="mt-1 mx-0 text-end" [formGroup]="formSearchCdt">
@@ -69,7 +69,18 @@
                     <input formControlName="entrepriseSearchCdt" class="form-control ps-4" type="text" id="entrepriseSearchCdt" name="entrepriseSearchCdt" placeholder="entreprise1, entreprise2 ..."/>
                 </div>                
             </div>
-            <div class="row mx-0 mt-1">
+            <div class="row mx-0 mt-3 mb-1">
+                <div class="col-9 col-md-3 text-start">
+                    <mat-slide-toggle formControlName="teletravailSearchCdt" id="teletravailSearchCdt" name="teletravailSearchCdt">Télétravail</mat-slide-toggle>
+                </div>
+                <div class="col-9 col-md-4 text-start">
+                    <mat-slide-toggle formControlName="handicapeSearchCdt" id="handicapeSearchCdt" name="handicapeSearchCdt">Travailleur handicapé</mat-slide-toggle>
+                </div>
+                <div class="col-9 col-md-5 text-start">
+                    <mat-slide-toggle formControlName="dispoSearchCdt" id="dispoSearchCdt" name="dispoSearchCdt">Disponible immédiatement</mat-slide-toggle>
+                </div>
+            </div>
+            <!--<div class="row mx-0 mt-1">
                 <div class="col-6 pt-2 ps-md-5 text-start">
                     <mat-slide-toggle formControlName="teletravailSearchCdt" id="teletravailSearchCdt" name="teletravailSearchCdt">Télétravail</mat-slide-toggle>
                 </div>
@@ -89,16 +100,16 @@
                         <option value="9">Autre</option>
                     </select>
                 </span>
-            </div>
+            </div>-->
             
-            <div class="row mx-0 mt-md-1">
+            <!--<div class="row mx-0 mt-md-1">
                 <div class="col-12 col-md-5 ps-md-5 text-start">
                     <mat-slide-toggle formControlName="handicapeSearchCdt" id="handicapeSearchCdt" name="handicapeSearchCdt">Travailleur handicapé</mat-slide-toggle>
                 </div>
                 <div class="col-12 col-md-6 ps-md-5 text-start">
                     <mat-slide-toggle formControlName="dispoSearchCdt" id="dispoSearchCdt" name="dispoSearchCdt">Disponible immédiatement</mat-slide-toggle>
                 </div>
-            </div>            
+            </div>-->            
            
             <div class="row mx-0 my-2">                
                 <button mat-raised-button color="primary" class="col-6 mx-auto" (click)=rechercher()>Rechercher</button>                
@@ -109,7 +120,7 @@
             </div>
         </form>
     </div>
-    <div class="col-12 col-md-3 col-xxl-4 row mx-0 text-center border-start">
+    <div class="col-12 col-md-3 col-xxl-4 row mx-0 mb-5 mb-md-0 text-center border-start">
         <div class="col-12 col-xxl-8 mx-auto fs-6 fw-light">
             <h3 class="mt-1 fw-bolder text-secondary">Liste des candidats</h3>
             <div class="row mx-0 mb-1 text-start border">
