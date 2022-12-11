@@ -178,7 +178,7 @@
                         <mat-slide-toggle [checked]="!slideEduChecked" (change)="switchFormEduEnable()">{{sliderEduTxt}}</mat-slide-toggle>
                     </div>          
                     <div formArrayName="educations" *ngFor="let t of educations.controls; let i = index">
-                        <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
+                        <div [formGroupName]="i" class="mb-4 p-2 border border-primary rounded-3">
                             <div class="row mx-0">
                                 <p class="lead text-start">Education {{i+1}}</p>
                             </div>                           
@@ -272,7 +272,7 @@
                         <mat-slide-toggle [checked]="!slideExpChecked" (change)="switchFormExpEnable()">{{sliderExpTxt}}</mat-slide-toggle>
                     </div>
                     <div formArrayName="experiences" *ngFor="let t of experiences.controls; let i = index">
-                        <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
+                        <div [formGroupName]="i" class="mb-4 p-2 border border-primary rounded-3">
                             <div class="row mx-0">
                                 <p class="lead text-start">Expérience {{i+1}}</p>
                             </div>                       
@@ -370,7 +370,7 @@
                         <mat-slide-toggle [checked]="!slideCmpChecked" (change)="switchFormCmpEnable()">{{sliderCmpTxt}}</mat-slide-toggle>
                     </div>          
                     <div formArrayName="competences" *ngFor="let t of competences.controls; let i = index">
-                        <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
+                        <div [formGroupName]="i" class="mb-4 p-2 border border-primary rounded-3">
                             <div class="row mx-0">
                                 <p class="lead text-start">Compétence {{i+1}}</p>
                             </div>                           
@@ -443,7 +443,7 @@
                         <mat-slide-toggle [checked]="!slideLngChecked" (change)="switchFormLngEnable()">{{sliderLngTxt}}</mat-slide-toggle>
                     </div>          
                     <div formArrayName="langues" *ngFor="let t of langues.controls; let i = index">
-                        <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
+                        <div [formGroupName]="i" class="mb-4 p-2 border border-primary rounded-3">
                             <div class="row mx-0">
                                 <p class="lead text-start">Langues {{i+1}}</p>
                             </div>                            
@@ -517,7 +517,7 @@
                         <mat-slide-toggle [checked]="!slideEttChecked" (change)="switchFormEttEnable()">{{sliderEttTxt}}</mat-slide-toggle>
                     </div>
                     <div formArrayName="entretiens" *ngFor="let t of entretiens.controls; let i = index">
-                        <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
+                        <div [formGroupName]="i" class="mb-4 p-2 border border-primary rounded-3">
                             <div class="row mx-0">
                                 <p class="lead text-start">Entretien {{i+1}}</p>
                             </div>
@@ -606,7 +606,7 @@
                         <mat-slide-toggle [checked]="!slidePrjChecked" (change)="switchFormPrjEnable()">{{sliderPrjTxt}}</mat-slide-toggle>
                     </div>
                     <div formArrayName="projets" *ngFor="let t of projets.controls; let i = index">
-                        <div [formGroupName]="i" class="mb-4 p-2 border border-secondary">
+                        <div [formGroupName]="i" class="mb-4 p-2 border border-primary rounded-3">
                             <div class="row mx-0">
                                 <p class="lead text-start">Projet {{i+1}}</p>
                             </div>                            
