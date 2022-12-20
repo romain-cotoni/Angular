@@ -81,8 +81,7 @@ export class CandidatService
     {
         const url   = this.BASE_PATH + '/candidat/' + id.toString();
         var headers = new HttpHeaders({ 'content-type': 'application/json'});
-        let body    = data;
-        return this.httpClient.put<Candidat>(url, body, {'headers':headers});
+        return this.httpClient.put<Candidat>(url, data, {'headers':headers});
     }
 
     //-------------------------EDUCATION------------------------------

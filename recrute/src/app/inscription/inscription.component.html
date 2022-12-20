@@ -22,7 +22,11 @@
         <div class="mx-0 mt-3 w-100 text-center">
             <mat-form-field appearance="fill" class="w-100">
                 <mat-label for="role">Role d'accès</mat-label>
-                <input [(ngModel)]="role" matInput type="text" id="role"/>                            
+                <input [(ngModel)]="role" matInput type="text" list="role"/>
+                <datalist id="role">
+                    <option value="admin">admin</option>
+                    <option value="recruteur">recruteur</option>                                
+                </datalist>                           
             </mat-form-field>
         </div>
         <div class="mx-0 mt-3 w-100 text-center">
