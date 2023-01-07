@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit
         ({
             next: (response) => { this.invalidLogin = false; 
                                   this.loginSuccess = true; 
-                                  this.router.navigate(['/candidat-rechercher']);
+                                  this.router.navigate(['/accueil']);
                                 },
             error: (error)   => { this.invalidLogin = true;  
                                   this.loginSuccess = false; }
