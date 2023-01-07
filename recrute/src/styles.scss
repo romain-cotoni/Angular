@@ -61,8 +61,8 @@ input {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
 }*/
 .form-control:focus, .form-select:focus {
-  border-color: #2596be; //#005091
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(22, 139, 193, 0.5);
+  border-color:#42a5f5;//#005091;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(66, 165, 245, 0.5);
 }
 
 .mat-app-background {
@@ -74,7 +74,7 @@ input {
 }
 
 .custom-btn-color {
-  background:#2596be;
+  background:#42a5f5;//#2596be;
   color     :white  ;
 }
 

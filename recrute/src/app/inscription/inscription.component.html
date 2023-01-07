@@ -4,34 +4,38 @@
         <div class="mx-0 mt-3 w-100 text-center">
             <mat-form-field appearance="fill" class="w-100">
                 <mat-label for="username">Nom d'utilisateur</mat-label>
-                <input [(ngModel)]="username" matInput type="text" id="username"/>                            
+                <input [(ngModel)]="username" matInput type="text" id="username" required/>
+                <mat-error>Il faut saisir un nom d'utilisateur</mat-error>
             </mat-form-field>
         </div>
         <div class="mx-0 mt-3 w-100 text-center">
             <mat-form-field appearance="fill" class="w-100">
                 <mat-label for="password">Mot de passe</mat-label>
-                <input [(ngModel)]="password" matInput type="password" id="password"/>                            
-            </mat-form-field> 
+                <input [(ngModel)]="password" matInput type="password" id="password" required/>
+                <mat-error>Il faut saisir un mot de passe</mat-error>
+            </mat-form-field>
         </div>
         <div class="mx-0 mt-3 w-100 text-center">
             <mat-form-field appearance="fill" class="w-100">
                 <mat-label for="repassword">Confirmation mot de passe</mat-label>
-                <input [(ngModel)]="repassword" matInput type="password" id="repassword">                       
-            </mat-form-field> 
+                <input [(ngModel)]="repassword" matInput type="password" id="repassword" required>
+                <mat-error>Il faut confirmer le mot de passe</mat-error>
+            </mat-form-field>
         </div>
         <div class="mx-0 mt-3 w-100 text-center">
             <mat-form-field appearance="fill" class="w-100">
-                <mat-label for="role">Role d'accès</mat-label>
-                <input [(ngModel)]="role" matInput type="text" list="role"/>
+                <mat-label for="role">Rôle d'accès</mat-label>
+                <input [(ngModel)]="role" matInput type="text" list="role" required/>
                 <datalist id="role">
                     <option value="admin">admin</option>
-                    <option value="recruteur">recruteur</option>                                
-                </datalist>                           
+                    <option value="recruteur">recruteur</option>
+                </datalist>
+                <mat-error>Il faut saisir un rôle</mat-error>
             </mat-form-field>
         </div>
         <div class="mx-0 mt-3 w-100 text-center">
             <button mat-raised-button color="primary" class="w-100" (click)=addUtilisateur()>Ajouter</button>
-        </div>  
+        </div>
     </div>
 </div>
 
