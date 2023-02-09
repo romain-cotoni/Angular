@@ -4,6 +4,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 export class AuthGuardService implements CanActivate 
 {
     constructor(private router: Router) { }  
+    
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) 
     {
         if(sessionStorage.getItem("username"))

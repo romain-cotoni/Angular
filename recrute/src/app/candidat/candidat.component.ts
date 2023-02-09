@@ -87,8 +87,7 @@ export class CandidatComponent implements OnInit
         this.formLng    = this.fb.group({langues    : this.fb.array([ this.createEmptyLangueForm()     ])});
         this.formEtt    = this.fb.group({entretiens : this.fb.array([ this.createEmptyEntretienForm()  ])});
         this.formPrj    = this.fb.group({projets    : this.fb.array([ this.createEmptyProjetForm()     ])});
-        this.formDoc    = this.fb.group({'nomDoc':[''], 'categorieDoc':['']});
-        //this.formDoc    = this.fb.group({documents  : this.fb.array([ this.createEmptyDocForm()])});        
+        this.formDoc    = this.fb.group({'nomDoc':[''], 'categorieDoc':['']});        
     
         this.idCandidat = Number(this.route.snapshot.paramMap.get('id'))
         if(this.idCandidat !== 0)
@@ -337,15 +336,14 @@ export class CandidatComponent implements OnInit
         }
     }
 
-    chercher()
+    chercher() 
     {
         this.candidatService.getCandidatByName(this.formSearch.get('prenom1Cdt')?.value,this.formSearch.get('nom1Cdt')?.value)
         .subscribe
         ({ 
-            next     : (candidat) => { if(candidat!=null) this.router.navigate(['/candidat/' + candidat.idCandidat]).then(() => { window.location.reload(); });},
-            error    : ()         => {  },
-            complete : ()         => {  } 
-        })        
+            next : (candidat) => { if(candidat!=null) this.router.navigate(['/candidat/' + candidat.idCandidat]).then(() => { window.location.reload(); });},
+            error: (reponse)  => { console.log(reponse); }
+        }) 
     }
 
     switchFormCdtEnable(enabling?: boolean)

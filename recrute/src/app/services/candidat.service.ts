@@ -19,23 +19,13 @@ export class CandidatService
 {
     BASE_PATH = 'http://localhost:9000';
 
-    constructor(private httpClient: HttpClient)
-    { 
-        
-    }
+    constructor(private httpClient: HttpClient) { }
 
     getCandidats(): Observable<Candidat[]>
     {
         const url = this.BASE_PATH + '/candidats';
-        return this.httpClient.get<Candidat[]>(url/*,{ withCredentials: true }*/);
+        return this.httpClient.get<Candidat[]>(url);
     }
-
-    getCandidatsShort(): Observable<Candidat[]>
-    {
-        const url = this.BASE_PATH + '/candidatsShort';
-        return this.httpClient.get<Candidat[]>(url/*,{ withCredentials: true }*/);
-    }
-
 
     getCandidat(id: number): Observable<Candidat>
     {
@@ -55,6 +45,12 @@ export class CandidatService
         const url = this.BASE_PATH + '/candidats/rechercher/parametres';
         var body = data;
         return this.httpClient.post<Candidat[]>(url, body);
+    }
+
+    getCandidatsShort(): Observable<Candidat[]>
+    {
+        const url = this.BASE_PATH + '/candidatsShort';
+        return this.httpClient.get<Candidat[]>(url/*,{ withCredentials: true }*/);
     }
 
     getCandidatsPrenoms(): Observable<String[]>

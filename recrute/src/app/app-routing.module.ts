@@ -12,8 +12,8 @@ import { EntrepriseRechercherComponent } from './entreprise-rechercher/entrepris
 import { EntrepriseComponent }           from './entreprise/entreprise.component';
 import { OffreComponent }                from './offre/offre.component';
 import { StatistiqueComponent }          from './statistique/statistique.component';
-import { InscriptionComponent } from './inscription/inscription.component';
-import { AccueilComponent } from './accueil/accueil.component';
+import { InscriptionComponent }          from './inscription/inscription.component';
+import { AccueilComponent }              from './accueil/accueil.component';
 
 const routes: Routes = [
   {

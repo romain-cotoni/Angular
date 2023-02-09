@@ -28,7 +28,6 @@ export interface Candidat
     vehicule    : boolean;
     disponible  : boolean;
     info        : string;
-    
     ville       : Ville;
     pays        : Pays;
     mobilite    : Mobilite;
